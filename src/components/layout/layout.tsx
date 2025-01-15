@@ -1,14 +1,21 @@
 import { useState, useEffect } from "react";
 import { Layout as AntLayout, Button, Menu, Typography } from "antd";
 import { Outlet, useLocation, useNavigate } from "react-router-dom";
-import Title from "antd/es/typography/Title";
-import { RiHome6Line } from "react-icons/ri";
-import { LuSearch, LuUserRound } from "react-icons/lu";
+import { RiFileEditLine, RiHome6Line } from "react-icons/ri";
+import { LuUserRound } from "react-icons/lu";
 import { TbLogout2 } from "react-icons/tb";
+import { PiBuildingsLight, PiUsersLight } from "react-icons/pi";
+import { DashboardHeaderSearch, FilialsHeaderSearch } from "../headers";
 
-const { Header, Sider, Content } = AntLayout;
+const { Sider, Content } = AntLayout;
 
-export const Layout = () => {
+export const Layout = ({
+  totalPaymentFee,
+  totalPrice,
+}: {
+  totalPaymentFee: number;
+  totalPrice: number;
+}) => {
   const [collapsed] = useState(false);
   const navigate = useNavigate();
   const location = useLocation();
@@ -18,10 +25,12 @@ export const Layout = () => {
     const path = location.pathname;
     if (path === "/dashboard") {
       setSelectedKey("1");
-    } else if (path === "/customers") {
+    } else if (path === "/filials") {
       setSelectedKey("2");
-    } else if (path === "/reports") {
+    } else if (path === "/customers") {
       setSelectedKey("3");
+    } else if (path === "/reports") {
+      setSelectedKey("4");
     }
   }, [location]);
 
@@ -60,9 +69,9 @@ export const Layout = () => {
             },
             {
               key: "2",
-              icon: <RiHome6Line size={27} />,
-              label: "Customers",
-              onClick: () => navigate("/customers"),
+              icon: <PiBuildingsLight size={27} />,
+              label: "Filials",
+              onClick: () => navigate("/filials"),
               className:
                 selectedKey === "2"
                   ? "!text-[#FE5222] font-medium text-[25px] !bg-transparent"
@@ -70,12 +79,22 @@ export const Layout = () => {
             },
             {
               key: "3",
-              icon: <RiHome6Line size={27} />,
+              icon: <PiUsersLight size={27} />,
+              label: "Customers",
+              onClick: () => navigate("/customers"),
+              className:
+                selectedKey === "3"
+                  ? "!text-[#FE5222] font-medium text-[25px] !bg-transparent"
+                  : "font-medium text-[25px] !text-[#797979]",
+            },
+            {
+              key: "4",
+              icon: <RiFileEditLine size={26} />,
               label: "Reports",
               onClick: () => navigate("/reports"),
 
               className:
-                selectedKey === "3"
+                selectedKey === "4"
                   ? "!text-[#FE5222] font-medium text-[25px] !bg-transparent"
                   : "font-medium text-[25px] !text-[#797979]",
             },
@@ -94,28 +113,18 @@ export const Layout = () => {
         </div>
       </Sider>
       <AntLayout style={{ height: "100vh" }}>
-        <Header
-          style={{ padding: "0px 30px 15px 15px", background: "#FAFBFF " }}
-          className="h-28 flex items-end"
-        >
-          {/* <Button
-            type="text"
-            icon={collapsed ? <MenuUnfoldOutlined /> : <MenuFoldOutlined />}
-            onClick={() => setCollapsed(!collapsed)}
-            style={{
-              fontSize: "16px",
-              width: 64,
-              height: 64,
-            }}
-          /> */}
-
-          <div className="bg-white flex gap-4 items-center rounded-full 2xl:w-[90%] w-[95%] mb-1 h-14 px-5 shadow-[0px_0px_30px_-10px_rgba(34,60,80,0.38)]">
-            <LuSearch size={25} color="#FE5222" />
-            <Title level={4} className="!m-0">
-              Search
-            </Title>
-          </div>
-        </Header>
+        {location.pathname == "/dashboard" ? (
+          <>
+            <DashboardHeaderSearch
+              totalPaymentFee={totalPaymentFee}
+              totalPrice={totalPrice}
+            />
+          </>
+        ) : (
+          <>
+            <FilialsHeaderSearch />
+          </>
+        )}{" "}
         <Content
           className="overflow-auto"
           style={{

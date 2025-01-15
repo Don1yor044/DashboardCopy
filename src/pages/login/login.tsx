@@ -3,7 +3,7 @@ import { Form, Input, Button, Image, Layout, Card } from "antd";
 import { UserOutlined, LockOutlined } from "@ant-design/icons";
 import { toast, ToastContainer } from "react-toastify";
 import { useNavigate } from "react-router-dom";
-import axios, { AxiosError } from "axios";
+import { AxiosError } from "axios";
 import api from "../../utils/api";
 
 const { Content } = Layout;
@@ -38,14 +38,16 @@ export const LoginPage = () => {
   const [form] = Form.useForm();
 
   const onFinish = async (values: LoginFormData) => {
-    console.log(values, "values");
-
     setIsLoading(true);
     try {
-      const response = await axios.post(
-        "https://api.abusahiy.uz/api/service/user/login",
-        values
-      );
+      const response = await api.post("/api/service/user/login", values, {
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+          Connection: "keep-alive",
+          "ngrok-skip-browser-warning": "true",
+        },
+      });
       console.log(response.data);
 
       if (response.data?.access_token) {
@@ -54,7 +56,11 @@ export const LoginPage = () => {
         navigate("/dashboard");
       }
     } catch (err) {
-      console.log(err, "error");
+      const errorMessage =
+        err instanceof AxiosError
+          ? err.response?.data?.message || "Network error occurred"
+          : "Login failed";
+      toast.error(errorMessage);
     } finally {
       setIsLoading(false);
     }
@@ -72,7 +78,6 @@ export const LoginPage = () => {
               className="mb-4"
             />
           </div>
-
           <Form
             form={form}
             name="login"
@@ -105,7 +110,6 @@ export const LoginPage = () => {
                 className="rounded-lg"
               />
             </Form.Item>
-
             <Form.Item>
               <Button
                 // type="primary"
