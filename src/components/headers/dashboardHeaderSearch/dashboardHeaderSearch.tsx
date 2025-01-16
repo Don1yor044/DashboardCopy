@@ -48,11 +48,11 @@ export const DashboardHeaderSearch = observer(
             <div>Kargo to’lovlar </div>
             <div className="border-s ps-5 ">{totalPaymentFee}</div>
           </div>
-          <div className="bg-white rounded-2xl p-3 px-4 text-lg font-bold w-full flex gap-10 h-14 shadow-[0px_0px_30px_-10px_rgba(34,60,80,0.38)]">
+          <div className="bg-white rounded-2xl border-2 text-green-500 border-green-500 p-3 px-4 text-lg font-bold w-full flex gap-10 h-14 shadow-[0px_0px_30px_-10px_rgba(34,60,80,0.38)]">
             <div>To’langan summa </div>
             <div className="border-s ps-5 ">{totalPrice}</div>
           </div>{" "}
-          <div className="bg-white rounded-2xl p-3 px-4 text-lg font-bold w-full flex gap-10 h-14 shadow-[0px_0px_30px_-10px_rgba(34,60,80,0.38)]">
+          <div className="bg-white rounded-2xl border-2 text-red-500 border-red-500 p-3 px-4 text-lg font-bold w-full flex gap-10 h-14 shadow-[0px_0px_30px_-10px_rgba(34,60,80,0.38)]">
             <div>Qolgan summa</div>
             <div className="border-s ps-5 ">{paymentDifference}</div>
           </div>

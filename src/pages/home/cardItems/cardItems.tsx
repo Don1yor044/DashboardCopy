@@ -153,23 +153,21 @@ export const CardItems = ({
                 }`}
               >
                 <div className="border-b">ID:</div>
-                <div className="border-b">Name:</div>
-                <div className="border-b">Phone:</div>
-                <div className="border-b">Address:</div>
-                <div className="border-b">City:</div>
-                <div className="border-b">Weight:</div>
-                <div className="border-b">Status:</div>
-                <div className="border-b">Express_num:</div>
-                <div className="border-b">Payment Fee:</div>
-                <div className="border-b">Paid by_card:</div>
-                <div className="border-b">Paid by_cash:</div>
-                <div className="border-b">Paid by_payme:</div>
-                <div className="border-b">Discounted_fee:</div>
-                <div className="border-b">Order ID:</div>
-                <div className="border-b">Express_line Id:</div>
-                <div className="border-b">Comment:</div>
-                <div className="border-b">PurchaseTime:</div>
-                <div>Quantity:</div>
+                <div className="border-b">Ism:</div>
+                <div className="border-b">Telefon Raqam:</div>
+                <div className="border-b">Manzil:</div>
+                <div className="border-b">Shahar:</div>
+                <div className="border-b">Og'irligi:</div>
+                <div className="border-b">Track Number:</div>
+                <div className="border-b">To'lov summa:</div>
+                <div className="border-b">Karta to'lov:</div>
+                <div className="border-b">Naqt to'lov:</div>
+                <div className="border-b">Payme to'lov:</div>
+                <div className="border-b">Chegirma:</div>
+                <div className="border-b">Avto Kargo:</div>
+                <div className="border-b">Izoh:</div>
+                <div className="border-b">Xarid vaqt:</div>
+                <div>Miqdori:</div>
               </div>
               <div className="w-[65%] text-lg py-3 px-2 space-y-2">
                 <div className="border-b">{item.user_id || "—"}</div>
@@ -178,11 +176,16 @@ export const CardItems = ({
                 <div className="border-b">{item.address || "—"}</div>
                 <div className="border-b">{item.city || "—"}</div>
                 <div className="border-b">{item.weight || "—"}</div>
-                <div className="border-b">{item.status || "—"}</div>
                 <div className="border-b">{item.express_num || "—"}</div>
-                <div className="border-b">{item.payment_fee || "—"}</div>
-                <div className="border-b flex justify-between items-center">
-                  {item.paid_by_card || "—"}
+                <div className="border-b text-red-500 font-semibold">
+                  {item.payment_fee !== null && item.payment_fee !== undefined
+                    ? `${item.payment_fee} so'm`
+                    : "—"}
+                </div>
+                <div className="border-b flex justify-between items-center text-green-500 font-semibold">
+                  {item.paid_by_card === null || item.paid_by_card === 0
+                    ? "—"
+                    : `${item.paid_by_card} so'm`}
                   <Button
                     type="primary"
                     onClick={() => openModal(item, "card")}
@@ -190,8 +193,10 @@ export const CardItems = ({
                     icon={<HiOutlineCreditCard size={20} />}
                   />
                 </div>
-                <div className="border-b flex justify-between items-center">
-                  {item.paid_by_cash || "—"}
+                <div className="border-b flex text-green-500 font-semibold justify-between items-center">
+                  {item.paid_by_cash === null || item.paid_by_cash === 0
+                    ? "—"
+                    : `${item.paid_by_cash} so'm`}
                   <Button
                     type="primary"
                     onClick={() => openModal(item, "cash")}
@@ -199,8 +204,11 @@ export const CardItems = ({
                     icon={<BsCurrencyDollar size={19} />}
                   />
                 </div>
-                <div className="border-b flex justify-between items-center">
-                  {item.paid_by_payme || "—"}
+                <div className="border-b flex text-green-500 font-semibold justify-between items-center">
+                  {item.paid_by_payme === null || item.paid_by_payme === 0
+                    ? "—"
+                    : `${item.paid_by_payme} so'm`}
+
                   <Button
                     type="primary"
                     onClick={() => openModal(item, "payme")}
@@ -208,8 +216,11 @@ export const CardItems = ({
                     icon={<img src="./PaymeIconSvg.svg" alt="payme" />}
                   />
                 </div>
-                <div className="border-b flex justify-between items-center">
-                  {item.discounted_fee || "—"}
+                <div className="border-b flex justify-between text-green-500 font-semibold items-center">
+                  {item.discounted_fee === null || item.discounted_fee === 0
+                    ? "—"
+                    : `${item.discounted_fee} so'm`}
+
                   <Button
                     type="primary"
                     onClick={() => openModal(item, "discounted_fee")}
@@ -217,7 +228,6 @@ export const CardItems = ({
                     icon={<MdOutlineDiscount size={20} />}
                   />
                 </div>
-                <div className="border-b">{item.order_id || "—"}</div>
                 <div className="border-b">{item.express_line || "—"}</div>
                 <div className="border-b flex justify-between items-center">
                   {item.comment || "—"}
