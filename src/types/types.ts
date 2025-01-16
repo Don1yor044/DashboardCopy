@@ -13,6 +13,7 @@ export interface IDashboards {
   paid_by_cash?: null | number;
   paid_by_payme?: null | number;
   payment_fee?: number | null;
+  discounted_fee?: number | null;
   phone?: string;
   platform_sku?: string;
   purchase_time?: string;

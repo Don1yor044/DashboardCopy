@@ -4,11 +4,11 @@ import { UserOutlined, LockOutlined } from "@ant-design/icons";
 import { toast, ToastContainer } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 import { AxiosError } from "axios";
-import api from "../../utils/api";
+import baseURL from "../../utils/api";
 
 const { Content } = Layout;
 
-api.interceptors.request.use((config) => {
+baseURL.interceptors.request.use((config) => {
   const token = localStorage.getItem("token");
   if (token) {
     config.headers.Authorization = `Bearer ${token}`;
@@ -16,7 +16,7 @@ api.interceptors.request.use((config) => {
   return config;
 });
 
-api.interceptors.response.use(
+baseURL.interceptors.response.use(
   (response) => response,
   async (error: AxiosError) => {
     if (error.response?.status === 401) {
@@ -40,7 +40,7 @@ export const LoginPage = () => {
   const onFinish = async (values: LoginFormData) => {
     setIsLoading(true);
     try {
-      const response = await api.post("/api/service/user/login", values, {
+      const response = await baseURL.post("/api/service/user/login", values, {
         headers: {
           "Content-Type": "application/json",
           Accept: "application/json",
