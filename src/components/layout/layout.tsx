@@ -6,16 +6,12 @@ import { LuUserRound } from "react-icons/lu";
 import { TbLogout2 } from "react-icons/tb";
 import { PiBuildingsLight, PiUsersLight } from "react-icons/pi";
 import { DashboardHeaderSearch, FilialsHeaderSearch } from "../headers";
+import { ArxiveHeaderSearch } from "../headers/filialsHeaderSearch copy";
+import searchStore from "../../store/store";
 
 const { Sider, Content } = AntLayout;
 
-export const Layout = ({
-  totalPaymentFee,
-  totalPrice,
-}: {
-  totalPaymentFee: number;
-  totalPrice: number;
-}) => {
+export const Layout = () => {
   const [collapsed] = useState(false);
   const navigate = useNavigate();
   const location = useLocation();
@@ -27,10 +23,12 @@ export const Layout = ({
       setSelectedKey("1");
     } else if (path === "/filials") {
       setSelectedKey("2");
-    } else if (path === "/customers") {
+    } else if (path === "/arxive") {
       setSelectedKey("3");
-    } else if (path === "/reports") {
+    } else if (path === "/customers") {
       setSelectedKey("4");
+    } else if (path === "/reports") {
+      setSelectedKey("5");
     }
   }, [location]);
 
@@ -79,9 +77,9 @@ export const Layout = ({
             },
             {
               key: "3",
-              icon: <PiUsersLight size={27} />,
-              label: "Customers",
-              onClick: () => navigate("/customers"),
+              icon: <PiBuildingsLight size={27} />,
+              label: "Arxive",
+              onClick: () => navigate("/arxive"),
               className:
                 selectedKey === "3"
                   ? "!text-[#FE5222] font-medium text-[25px] !bg-transparent"
@@ -89,12 +87,21 @@ export const Layout = ({
             },
             {
               key: "4",
+              icon: <PiUsersLight size={27} />,
+              label: "Customers",
+              onClick: () => navigate("/customers"),
+              className:
+                selectedKey === "4"
+                  ? "!text-[#FE5222] font-medium text-[25px] !bg-transparent"
+                  : "font-medium text-[25px] !text-[#797979]",
+            },
+            {
+              key: "5",
               icon: <RiFileEditLine size={26} />,
               label: "Reports",
               onClick: () => navigate("/reports"),
-
               className:
-                selectedKey === "4"
+                selectedKey === "5"
                   ? "!text-[#FE5222] font-medium text-[25px] !bg-transparent"
                   : "font-medium text-[25px] !text-[#797979]",
             },
@@ -113,18 +120,23 @@ export const Layout = ({
         </div>
       </Sider>
       <AntLayout style={{ height: "100vh" }}>
-        {location.pathname == "/dashboard" ? (
+        {location.pathname === "/dashboard" ? (
           <>
             <DashboardHeaderSearch
-              totalPaymentFee={totalPaymentFee}
-              totalPrice={totalPrice}
+              totalPaymentFee={searchStore.totalPaymentFee}
+              totalPrice={searchStore.totalPrice}
             />
+          </>
+        ) : location.pathname === "/arxive" ? (
+          <>
+            <ArxiveHeaderSearch />
           </>
         ) : (
           <>
             <FilialsHeaderSearch />
           </>
-        )}{" "}
+        )}
+
         <Content
           className="overflow-auto"
           style={{

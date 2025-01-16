@@ -6,12 +6,12 @@ const dateFormatList = ["DD/MM/YYYY", "DD/MM/YY", "DD-MM-YYYY", "DD-MM-YY"];
 export const FilialsHeader = () => {
   return (
     <div className="flex justify-between items-center">
-      <div className="w-[350px] bg-[#FE5222] rounded-3xl p-5">
+      {/* <div className="w-[350px] bg-[#FE5222] rounded-3xl p-5">
         <Typography className="text-2xl font-bold">Jami</Typography>
         <Typography className="text-3xl font-bold text-white mt-2 ">
           566 595 999 <span className="text-2xl font-normal">so'm</span>
         </Typography>
-      </div>
+      </div> */}
 
       <div className="flex gap-5 h-14">
         <div className="p-3 pe-10 flex gap-5 items-center border-e">
