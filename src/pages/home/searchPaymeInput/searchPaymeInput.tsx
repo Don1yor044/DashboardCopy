@@ -19,6 +19,8 @@ export const SearchPaymeInput: React.FC<SearchPaymeInputProps> = ({
   fetchData,
   setSelectedItems,
 }) => {
+  const UserRole = localStorage.getItem("Role");
+
   const notifySuccess = () =>
     toast.success("Muvaffaqiyatli saqlandi !", {
       className: "text-xl",
@@ -149,7 +151,12 @@ export const SearchPaymeInput: React.FC<SearchPaymeInputProps> = ({
             </Form.Item>
           </div>
 
-          <Button type="primary" htmlType="submit" className="text-sm p-2">
+          <Button
+            type="primary"
+            htmlType="submit"
+            className="text-sm p-2 "
+            disabled={UserRole === "30" && true}
+          >
             Saqlash
           </Button>
         </div>

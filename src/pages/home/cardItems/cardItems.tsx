@@ -31,6 +31,7 @@ export const CardItems = observer(
     }>({});
     const [localData, setLocalData] = useState<IDashboards[]>(dataCourse);
     const [changedItems, setChangedItems] = useState<Set<number>>(new Set());
+    const UserRole = localStorage.getItem("Role");
 
     useEffect(() => {
       setLocalData(dataCourse);
@@ -254,6 +255,7 @@ export const CardItems = observer(
                   <Button
                     type="primary"
                     onClick={() => handleBackendSave(item.id)}
+                    disabled={UserRole == "30" && true}
                   >
                     Send
                   </Button>

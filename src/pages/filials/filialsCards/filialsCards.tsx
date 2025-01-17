@@ -29,6 +29,7 @@ export const FilialsCards = observer(
     const [dataCourse, setDataCourse] = useState<BranchData[]>([]);
     const [isLoading, setIsLoading] = useState(true);
     const [error, setError] = useState<string | null>(null);
+    console.log(dateFrom, dateTo);
 
     const fetchData = async () => {
       const token = localStorage.getItem("token");
@@ -89,8 +90,6 @@ export const FilialsCards = observer(
 
     return (
       <Row gutter={[20, 20]} className="mt-10">
-        <div>{dateFrom}</div>
-        <div>{dateTo}</div>
         {dataCourse.map((item) => (
           <Col xl={8} span={12} key={item.id || Math.random()}>
             <div className="rounded-3xl border-2 border-gray-300 hover:border-red-500">

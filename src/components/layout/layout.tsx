@@ -1,10 +1,10 @@
 import { useState, useEffect } from "react";
 import { Layout as AntLayout, Button, Menu, Typography } from "antd";
 import { Outlet, useLocation, useNavigate } from "react-router-dom";
-import { RiFileEditLine, RiHome6Line } from "react-icons/ri";
+import { RiHistoryFill, RiHome6Line } from "react-icons/ri";
 import { LuUserRound } from "react-icons/lu";
 import { TbLogout2 } from "react-icons/tb";
-import { PiBuildingsLight, PiUsersLight } from "react-icons/pi";
+import { PiBuildingsLight } from "react-icons/pi";
 import { DashboardHeaderSearch, FilialsHeaderSearch } from "../headers";
 import { ArxiveHeaderSearch } from "../headers/arxiveHeaderSearch";
 
@@ -22,10 +22,12 @@ export const Layout = ({
   const location = useLocation();
   const [selectedKey, setSelectedKey] = useState("1");
   const LocalStoregUserName = localStorage.getItem("User_Name");
+  const UserRole = localStorage.getItem("Role");
 
   const ClearStoreg = () => {
     localStorage.removeItem("token");
     localStorage.removeItem("User_Name");
+    localStorage.removeItem("Role");
     window.location.reload();
   };
 
@@ -37,10 +39,8 @@ export const Layout = ({
       setSelectedKey("2");
     } else if (path === "/arxive") {
       setSelectedKey("3");
-    } else if (path === "/customers") {
+    } else if (path === "/filters") {
       setSelectedKey("4");
-    } else if (path === "/reports") {
-      setSelectedKey("5");
     }
   }, [location]);
 
@@ -75,21 +75,25 @@ export const Layout = ({
               className:
                 selectedKey === "1"
                   ? "!text-[#FE5222] font-medium text-[25px] !bg-transparent"
-                  : "font-medium text-[25px] !text-[#797979] ",
-            },
-            {
-              key: "2",
-              icon: <PiBuildingsLight size={27} />,
-              label: "Filials",
-              onClick: () => navigate("/filials"),
-              className:
-                selectedKey === "2"
-                  ? "!text-[#FE5222] font-medium text-[25px] !bg-transparent"
                   : "font-medium text-[25px] !text-[#797979]",
             },
+            ...(UserRole !== "30"
+              ? [
+                  {
+                    key: "2",
+                    icon: <PiBuildingsLight size={27} />,
+                    label: "Filials",
+                    onClick: () => navigate("/filials"),
+                    className:
+                      selectedKey === "2"
+                        ? "!text-[#FE5222] font-medium text-[25px] !bg-transparent"
+                        : "font-medium text-[25px] !text-[#797979]",
+                  },
+                ]
+              : []),
             {
               key: "3",
-              icon: <PiBuildingsLight size={27} />,
+              icon: <RiHistoryFill size={27} />,
               label: "Arxive",
               onClick: () => navigate("/arxive"),
               className:
@@ -99,21 +103,11 @@ export const Layout = ({
             },
             {
               key: "4",
-              icon: <PiUsersLight size={27} />,
-              label: "Customers",
-              onClick: () => navigate("/customers"),
+              icon: <RiHistoryFill size={27} />,
+              label: "Filters",
+              onClick: () => navigate("/filters"),
               className:
                 selectedKey === "4"
-                  ? "!text-[#FE5222] font-medium text-[25px] !bg-transparent"
-                  : "font-medium text-[25px] !text-[#797979]",
-            },
-            {
-              key: "5",
-              icon: <RiFileEditLine size={26} />,
-              label: "Reports",
-              onClick: () => navigate("/reports"),
-              className:
-                selectedKey === "5"
                   ? "!text-[#FE5222] font-medium text-[25px] !bg-transparent"
                   : "font-medium text-[25px] !text-[#797979]",
             },
@@ -138,20 +132,16 @@ export const Layout = ({
       </Sider>
       <AntLayout style={{ height: "100vh" }}>
         {location.pathname === "/dashboard" ? (
-          <>
-            <DashboardHeaderSearch
-              totalPaymentFee={totalPaymentFee}
-              totalPrice={totalPrice}
-            />
-          </>
+          <DashboardHeaderSearch
+            totalPaymentFee={totalPaymentFee}
+            totalPrice={totalPrice}
+          />
         ) : location.pathname === "/arxive" ? (
-          <>
-            <ArxiveHeaderSearch />
-          </>
+          <ArxiveHeaderSearch />
+        ) : location.pathname === "/filials" ? ( // Fixed: add this condition
+          <FilialsHeaderSearch />
         ) : (
-          <>
-            <FilialsHeaderSearch />
-          </>
+          <></>
         )}
 
         <Content
