@@ -21,7 +21,7 @@ baseURL.interceptors.response.use(
   async (error: AxiosError) => {
     if (error.response?.status === 401) {
       localStorage.removeItem("token");
-      window.location.href = "/";
+      // toast.error("Unauthorized access! Please log in again.");
     }
     return Promise.reject(error);
   }
@@ -54,8 +54,8 @@ export const LoginPage = () => {
       }
 
       if (response.data?.access_token) {
+        toast.success("Dashboardga xush kelibsiz!");
         localStorage.setItem("token", response.data.access_token);
-        toast.success("Login successful!");
         navigate("/dashboard");
       }
     } catch (err) {

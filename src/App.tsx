@@ -5,6 +5,7 @@ import { Arxive } from "./pages/arxive";
 import { Provider } from "mobx-react";
 import searchStore from "../src/store/store";
 import { useState } from "react";
+import { NotFound } from "./components/NotFound";
 const App = () => {
   const [totalPaymentFee, setTotalPaymentFee] = useState(0);
   const [totalPrice, setTotalPrice] = useState(0);
@@ -13,6 +14,7 @@ const App = () => {
     <Provider searchStore={searchStore}>
       <Router>
         <Routes>
+          <Route path="*" element={<NotFound />} />
           <Route index path="/" element={<LoginPage />} />
           <Route
             element={
