@@ -2,8 +2,8 @@ import { makeAutoObservable } from "mobx";
 
 class SearchStore {
   searchDashboard = "";
-  totalPaymentFee = 0;
-  totalPrice = 0;
+  searchFilial = "";
+  searchArxive = "";
 
   constructor() {
     makeAutoObservable(this);
@@ -13,12 +13,12 @@ class SearchStore {
     this.searchDashboard = query;
   }
 
-  setTotalPaymentFee(fee: number) {
-    this.totalPaymentFee = fee;
+  setSearchFilial(query: string) {
+    this.searchFilial = query;
   }
 
-  setTotalPrice(price: number) {
-    this.totalPrice = price;
+  setSearchArxive(query: string) {
+    this.searchArxive = query;
   }
 }
 

@@ -6,16 +6,28 @@ import { LuUserRound } from "react-icons/lu";
 import { TbLogout2 } from "react-icons/tb";
 import { PiBuildingsLight, PiUsersLight } from "react-icons/pi";
 import { DashboardHeaderSearch, FilialsHeaderSearch } from "../headers";
-import { ArxiveHeaderSearch } from "../headers/filialsHeaderSearch copy";
-import searchStore from "../../store/store";
+import { ArxiveHeaderSearch } from "../headers/arxiveHeaderSearch";
 
 const { Sider, Content } = AntLayout;
 
-export const Layout = () => {
+export const Layout = ({
+  totalPaymentFee,
+  totalPrice,
+}: {
+  totalPaymentFee: number;
+  totalPrice: number;
+}) => {
   const [collapsed] = useState(false);
   const navigate = useNavigate();
   const location = useLocation();
   const [selectedKey, setSelectedKey] = useState("1");
+  const LocalStoregUserName = localStorage.getItem("User_Name");
+
+  const ClearStoreg = () => {
+    localStorage.removeItem("token");
+    localStorage.removeItem("User_Name");
+    window.location.reload();
+  };
 
   useEffect(() => {
     const path = location.pathname;
@@ -108,11 +120,16 @@ export const Layout = () => {
           ]}
         />
         <div className="absolute bottom-5 mx-8 border-t h-52 w-44">
-          <div className="mt-10 space-y-5">
-            <Button type="text" className="text-xl text-[#FE5222] flex gap-3">
-              <LuUserRound /> Valijon
+          <div className="mt-10 space-y-6 ">
+            <Button type="text" className="text-2xl text-[#FE5222] flex gap-3">
+              <LuUserRound />
+              {LocalStoregUserName || "User yo'q"}
             </Button>
-            <Button type="text" className="text-xl text-[#FE5222] flex gap-3">
+            <Button
+              type="text"
+              className="text-2xl text-[#FE5222] flex gap-3"
+              onClick={ClearStoreg}
+            >
               <TbLogout2 />
               Logout
             </Button>
@@ -123,8 +140,8 @@ export const Layout = () => {
         {location.pathname === "/dashboard" ? (
           <>
             <DashboardHeaderSearch
-              totalPaymentFee={searchStore.totalPaymentFee}
-              totalPrice={searchStore.totalPrice}
+              totalPaymentFee={totalPaymentFee}
+              totalPrice={totalPrice}
             />
           </>
         ) : location.pathname === "/arxive" ? (

@@ -48,7 +48,10 @@ export const LoginPage = () => {
           "ngrok-skip-browser-warning": "true",
         },
       });
-      console.log(response.data);
+      console.log(response.data.service_user.name);
+      if (response.data.service_user.name) {
+        localStorage.setItem("User_Name", response.data.service_user.name);
+      }
 
       if (response.data?.access_token) {
         localStorage.setItem("token", response.data.access_token);
