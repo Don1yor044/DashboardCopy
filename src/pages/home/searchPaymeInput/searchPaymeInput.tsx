@@ -65,7 +65,6 @@ export const SearchPaymeInput: React.FC<SearchPaymeInputProps> = ({
           {
             headers: {
               Authorization: `Bearer ${token}`,
-              "ngrok-skip-browser-warning": "true",
             },
           }
         );

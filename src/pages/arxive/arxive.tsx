@@ -34,7 +34,6 @@ export const Arxive = observer(() => {
           {
             headers: {
               Authorization: `Bearer ${token}`,
-              "ngrok-skip-browser-warning": "true",
             },
           }
         );
@@ -42,7 +41,6 @@ export const Arxive = observer(() => {
         res = await baseURL.get(`/api/client/dashboard/all/delivered/archive`, {
           headers: {
             Authorization: `Bearer ${token}`,
-            "ngrok-skip-browser-warning": "true",
           },
         });
       }

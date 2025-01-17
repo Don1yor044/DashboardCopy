@@ -13,14 +13,13 @@ interface BranchData {
   id: number;
   name: string;
   payment_fee: number;
-  deliveredOrders: number;
-  receivedOrders: number;
   paid_payment_fee: number;
   paid_by_card: number;
   paid_by_payme: number;
   paid_by_cash: number;
   delivered_item_counts: number;
   received_item_counts: number;
+  discounted_fee: number;
 }
 
 export const FilialsCards = observer(
@@ -43,7 +42,6 @@ export const FilialsCards = observer(
         const response = await baseURL.get(`/api/admin/pda/branch/show`, {
           headers: {
             Authorization: `Bearer ${token}`,
-            "ngrok-skip-browser-warning": "true",
           },
         });
         console.log(response.data.data);
@@ -95,7 +93,7 @@ export const FilialsCards = observer(
             <div className="rounded-3xl border-2 border-gray-300 hover:border-red-500">
               <div className="bg-[#FE5222] p-5 rounded-t-3xl">
                 <Typography.Title level={2} className="!text-white">
-                  {item.name || "Shota Rustaveli"}
+                  {item.name || ""}
                 </Typography.Title>
                 <div className="flex justify-between">
                   <div className="space-y-3">
@@ -175,7 +173,7 @@ export const FilialsCards = observer(
                       </Typography>
                     </div>
                     <Typography className="text-3xl font-bold text-black">
-                      {item.paid_by_cash}{" "}
+                      {item.discounted_fee}{" "}
                       <span className="text-xl text-[#797979]">so'm</span>
                     </Typography>
                   </div>

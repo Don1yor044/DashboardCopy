@@ -44,8 +44,6 @@ export const LoginPage = () => {
         headers: {
           "Content-Type": "application/json",
           Accept: "application/json",
-          Connection: "keep-alive",
-          "ngrok-skip-browser-warning": "true",
         },
       });
       console.log(response.data);

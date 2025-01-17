@@ -203,7 +203,6 @@ export const Cards = observer(
       Authorization: `Bearer ${token}`,
       "Content-Type": "application/json",
       Accept: "application/json",
-      "ngrok-skip-browser-warning": "true",
     });
 
     useEffect(() => {

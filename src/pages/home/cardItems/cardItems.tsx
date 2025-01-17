@@ -84,7 +84,6 @@ export const CardItems = observer(
           {
             headers: {
               Authorization: `Bearer ${token}`,
-              "ngrok-skip-browser-warning": "true",
             },
           }
         );
