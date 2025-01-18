@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { Layout as AntLayout, Button, Menu, Typography } from "antd";
 import { Outlet, useLocation, useNavigate } from "react-router-dom";
 import { RiHistoryFill, RiHome6Line } from "react-icons/ri";
-import { LuUserRound } from "react-icons/lu";
+import { LuFilter, LuUserRound } from "react-icons/lu";
 import { TbLogout2 } from "react-icons/tb";
 import { PiBuildingsLight } from "react-icons/pi";
 import { DashboardHeaderSearch, FilialsHeaderSearch } from "../headers";
@@ -37,7 +37,7 @@ export const Layout = ({
       setSelectedKey("1");
     } else if (path === "/filials") {
       setSelectedKey("2");
-    } else if (path === "/arxive") {
+    } else if (path === "/arxiv") {
       setSelectedKey("3");
     } else if (path === "/filters") {
       setSelectedKey("4");
@@ -54,7 +54,10 @@ export const Layout = ({
         className="!bg-[#FAFBFF] ps-5 relative"
       >
         <div className="demo-logo-vertical" />
-        <div className="my-10 px-8">
+        <div
+          className="my-10 px-8 cursor-pointer"
+          onClick={() => window.location.reload()}
+        >
           <Typography className="!text-black !m-0 font-bold text-4xl">
             Abu Sahiy
           </Typography>
@@ -94,8 +97,8 @@ export const Layout = ({
             {
               key: "3",
               icon: <RiHistoryFill size={27} />,
-              label: "Arxive",
-              onClick: () => navigate("/arxive"),
+              label: "Arxiv",
+              onClick: () => navigate("/arxiv"),
               className:
                 selectedKey === "3"
                   ? "!text-[#FE5222] font-medium text-[25px] !bg-transparent"
@@ -103,7 +106,7 @@ export const Layout = ({
             },
             {
               key: "4",
-              icon: <RiHistoryFill size={27} />,
+              icon: <LuFilter size={25} />,
               label: "Filters",
               onClick: () => navigate("/filters"),
               className:
@@ -136,7 +139,7 @@ export const Layout = ({
             totalPaymentFee={totalPaymentFee}
             totalPrice={totalPrice}
           />
-        ) : location.pathname === "/arxive" ? (
+        ) : location.pathname === "/arxiv" ? (
           <ArxiveHeaderSearch />
         ) : location.pathname === "/filials" ? ( // Fixed: add this condition
           <FilialsHeaderSearch />

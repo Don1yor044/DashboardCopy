@@ -173,7 +173,8 @@ export const FilialsCards = observer(
                       </Typography>
                     </div>
                     <Typography className="text-3xl font-bold text-black">
-                      {item.discounted_fee}{" "}
+                      {item.discounted_fee
+                      }{" "}
                       <span className="text-xl text-[#797979]">so'm</span>
                     </Typography>
                   </div>

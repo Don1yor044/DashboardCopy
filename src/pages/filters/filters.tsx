@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { Col, Row, Select, message } from "antd";
+import { Button, Col, Empty, Row, Select, Spin, message } from "antd";
 import baseURL from "../../utils/api";
 import { useNavigate } from "react-router-dom";
 
@@ -22,14 +22,14 @@ interface Item {
   purchase_time: string;
   quantity: number | null;
 }
+
 export const Filters = () => {
   const [region, setRegion] = useState<string>("Region");
   const [data, setData] = useState<Item[]>([]);
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
 
-  const handleChange = async (value: string) => {
-    setRegion(value);
+  const fetchData = async (endpoint: string) => {
     setLoading(true);
     const token = localStorage.getItem("token");
     if (!token) {
@@ -39,14 +39,11 @@ export const Filters = () => {
     }
 
     try {
-      const response = await baseURL.get(
-        `/api/admin/pda/item/sort/by/region/${value}`,
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      );
+      const response = await baseURL.get(endpoint, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
 
       console.log("API Response:", response.data.data.data);
       const dashboard = response.data?.data?.data || [];
@@ -60,9 +57,43 @@ export const Filters = () => {
     }
   };
 
+  const handleRegionChange = (value: string) => {
+    setRegion(value);
+    fetchData(`/api/admin/pda/item/sort/by/region/${value}`);
+  };
+
+  const handleDateSort = () => {
+    fetchData(`/api/admin/pda/item/sort/by/date/desc`);
+  };
+
+  const handlePaymeSort = () => {
+    fetchData(`/api/admin/pda/item/sort/by/payment/`);
+  };
+
+  const handleCountSort = () => {
+    fetchData(`/api/admin/pda/item/sort/by/count`);
+  };
+
   useEffect(() => {
-    handleChange("1");
+    handleRegionChange("1");
   }, []);
+  if (!data || data.length === 0) {
+    return (
+      <div className="flex justify-center p-8">
+        <div className="mt-10 w-full ">
+          <Empty image={Empty.PRESENTED_IMAGE_SIMPLE} className="text-xl" />
+        </div>
+      </div>
+    );
+  }
+
+  if (loading) {
+    return (
+      <div className="flex justify-center mt-28 text-4xl">
+        <Spin size="large" />
+      </div>
+    );
+  }
 
   return (
     <>
@@ -71,7 +102,7 @@ export const Filters = () => {
           defaultValue="Region"
           value={region}
           style={{ width: 120 }}
-          onChange={handleChange}
+          onChange={handleRegionChange}
           options={[
             { value: "1", label: "Toshkent" },
             { value: "2", label: "Andijon" },
@@ -89,12 +120,12 @@ export const Filters = () => {
             { value: "14", label: "Qoraqalpog'iston" },
           ]}
         />
+        <Button onClick={handleDateSort}>date</Button>
+        <Button onClick={handlePaymeSort}>Payme</Button>
+        <Button onClick={handleCountSort}>Count</Button>
       </div>
       <Row gutter={[20, 20]} className="mt-5">
-        {loading ? (
-          <div>Loading...</div>
-        ) : (
-          Array.isArray(data) &&
+        {Array.isArray(data) &&
           data.map((item) => (
             <Col span={8} key={item.id}>
               <div className="bg-white rounded-xl border-2">
@@ -159,8 +190,7 @@ export const Filters = () => {
                 </div>
               </div>
             </Col>
-          ))
-        )}
+          ))}
       </Row>
     </>
   );

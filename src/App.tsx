@@ -35,7 +35,7 @@ const App = () => {
               }
             />
             <Route path="/filials" element={<Filials />} />
-            <Route path="/arxive" element={<Arxive />} />
+            <Route path="/arxiv" element={<Arxive />} />
             <Route path="/filters" element={<Filters />} />
           </Route>
         </Routes>
