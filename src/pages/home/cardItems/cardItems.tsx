@@ -170,6 +170,7 @@ export const CardItems = observer(
                   <div className="border-b">Shahar:</div>
                   <div className="border-b">Og'irligi:</div>
                   <div className="border-b">Track Number:</div>
+                  <div className="border-b">To'langan Vaqti:</div>
                   <div className="border-b">To'lov summa:</div>
                   <div className="border-b">Karta to'lov:</div>
                   <div className="border-b">Naqt to'lov:</div>
@@ -188,6 +189,7 @@ export const CardItems = observer(
                   <div className="border-b">{item.city || "—"}</div>
                   <div className="border-b">{item.weight || "—"}</div>
                   <div className="border-b">{item.express_num || "—"}</div>
+                  <div className="border-b">{item.paid_at || "—"}</div>
                   <div className="border-b text-red-500 font-semibold">
                     {item.payment_fee !== null && item.payment_fee !== undefined
                       ? `${priceFormatter(item.payment_fee)} so'm`

@@ -50,7 +50,6 @@ export const Arxive = observer(() => {
       }
 
       if (res?.data?.data?.dashboards) {
-        console.log(res.data.data.dashboards);
         const dashboards = res.data.data.dashboards;
         setData(Array.isArray(dashboards) ? dashboards : []);
       } else {
@@ -104,6 +103,7 @@ export const Arxive = observer(() => {
                           <div className="border-b">Shahar:</div>
                           <div className="border-b">Og'irligi:</div>
                           <div className="border-b">Track Number:</div>
+                          <div className="border-b">To'langan Vaqti:</div>
                           <div className="border-b">To'lov summa:</div>
                           <div className="border-b">Karta to'lov:</div>
                           <div className="border-b">Naqt to'lov:</div>
@@ -127,7 +127,8 @@ export const Arxive = observer(() => {
                           </div>
                           <div className="border-b">
                             {item.express_num || "—"}
-                          </div>
+                          </div>{" "}
+                          <div className="border-b">{item.paid_at || "—"}</div>
                           <div className="border-b text-red-500 font-semibold">
                             {item.payment_fee !== null &&
                             item.payment_fee !== undefined

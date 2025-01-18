@@ -45,7 +45,6 @@ export const FilialsCards = observer(
             Authorization: `Bearer ${token}`,
           },
         });
-        console.log(response.data.data);
 
         if (Array.isArray(response.data.data)) {
           setDataCourse(response.data.data);
