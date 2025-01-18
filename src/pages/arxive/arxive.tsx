@@ -5,6 +5,7 @@ import { IDashboards } from "../../types/types";
 import searchStore from "../../store/store";
 import { observer } from "mobx-react-lite";
 import { useNavigate } from "react-router-dom";
+import { priceFormatter } from "../../components/priceFormat/priceFormat";
 const kgFormatter = (weight: number) => {
   const kg = weight / 1000;
   return `${new Intl.NumberFormat("uz-UZ").format(kg)} kg`;
@@ -130,32 +131,40 @@ export const Arxive = observer(() => {
                           <div className="border-b text-red-500 font-semibold">
                             {item.payment_fee !== null &&
                             item.payment_fee !== undefined
-                              ? `${item.payment_fee} so'm`
+                              ? `${priceFormatter(item.payment_fee)} so'm`
                               : "—"}
                           </div>
                           <div className="border-b  text-green-500 font-semibold">
                             {item.paid_by_card === null ||
                             item.paid_by_card === 0
                               ? "—"
-                              : `${item.paid_by_card} so'm`}
+                              : `${priceFormatter(
+                                  Number(item.paid_by_card)
+                                )} so'm`}
                           </div>
                           <div className="border-b  text-green-500 font-semibold ">
                             {item.paid_by_cash === null ||
                             item.paid_by_cash === 0
                               ? "—"
-                              : `${item.paid_by_cash} so'm`}
+                              : `${priceFormatter(
+                                  Number(item.paid_by_cash)
+                                )} so'm`}
                           </div>
                           <div className="border-b  text-green-500 font-semibold ">
                             {item.paid_by_payme === null ||
                             item.paid_by_payme === 0
                               ? "—"
-                              : `${item.paid_by_payme} so'm`}
+                              : `${priceFormatter(
+                                  Number(item.paid_by_payme)
+                                )} so'm`}
                           </div>
                           <div className="border-b  text-green-500 font-semibold ">
                             {item.discounted_fee === null ||
                             item.discounted_fee === 0
                               ? "—"
-                              : `${item.discounted_fee} so'm`}
+                              : `${priceFormatter(
+                                  Number(item.discounted_fee)
+                                )} so'm`}
                           </div>
                           <div className="border-b">
                             {item.express_line || "—"}

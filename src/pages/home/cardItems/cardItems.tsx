@@ -10,6 +10,7 @@ import baseURL from "../../../utils/api";
 import { MdOutlineDiscount } from "react-icons/md";
 import PaymentModals from "../../paymentModals/paymentModals";
 import { observer } from "mobx-react-lite";
+import { priceFormatter } from "../../../components/priceFormat/priceFormat";
 type ModalType = "card" | "cash" | "payme" | "comment" | "discounted_fee";
 
 export const CardItems = observer(
@@ -189,13 +190,13 @@ export const CardItems = observer(
                   <div className="border-b">{item.express_num || "—"}</div>
                   <div className="border-b text-red-500 font-semibold">
                     {item.payment_fee !== null && item.payment_fee !== undefined
-                      ? `${item.payment_fee} so'm`
+                      ? `${priceFormatter(item.payment_fee)} so'm`
                       : "—"}
                   </div>
                   <div className="border-b flex justify-between items-center text-green-500 font-semibold">
                     {item.paid_by_card === null || item.paid_by_card === 0
                       ? "—"
-                      : `${item.paid_by_card} so'm`}
+                      : `${priceFormatter(Number(item.paid_by_card))} so'm`}
                     <Button
                       type="primary"
                       onClick={() => openModal(item, "card")}
@@ -206,7 +207,7 @@ export const CardItems = observer(
                   <div className="border-b flex text-green-500 font-semibold justify-between items-center">
                     {item.paid_by_cash === null || item.paid_by_cash === 0
                       ? "—"
-                      : `${item.paid_by_cash} so'm`}
+                      : `${priceFormatter(Number(item.paid_by_cash))} so'm`}
                     <Button
                       type="primary"
                       onClick={() => openModal(item, "cash")}
@@ -217,7 +218,7 @@ export const CardItems = observer(
                   <div className="border-b flex text-green-500 font-semibold justify-between items-center">
                     {item.paid_by_payme === null || item.paid_by_payme === 0
                       ? "—"
-                      : `${item.paid_by_payme} so'm`}
+                      : `${priceFormatter(Number(item.paid_by_payme))} so'm`}
 
                     <Button
                       type="primary"
@@ -229,7 +230,7 @@ export const CardItems = observer(
                   <div className="border-b flex justify-between text-green-500 font-semibold items-center">
                     {item.discounted_fee === null || item.discounted_fee === 0
                       ? "—"
-                      : `${item.discounted_fee} so'm`}
+                      : `${priceFormatter(Number(item.discounted_fee))} so'm`}
 
                     <Button
                       type="primary"
