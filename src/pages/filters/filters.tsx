@@ -115,7 +115,7 @@ export const Filters = () => {
 
   return (
     <>
-      <div className="flex gap-3 mt-10 bg-gray-200 p-4 rounded-lg justify-between">
+      <div className="flex gap-3 mt-10 bg-gray-100 p-4 rounded-lg justify-between">
         <div className="px-5">
           <Typography className=" !text-lg font-semibold">
             Viloyat bo'yicha
