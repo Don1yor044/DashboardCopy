@@ -33,10 +33,10 @@ export const SearchPaymeInput: React.FC<SearchPaymeInputProps> = ({
     toast.warning(`To'lanadigan summa miqdori: ${data} so'm `, {
       className: "text-lg w-[400px]",
     });
-  const notifyAlreadyPaid = () =>
-    toast.info("Bu tovar allaqachon to'langan!", {
-      className: "text-2xl p-3 w-[500px] flex justify-center h-32",
-    });
+  // const notifyAlreadyPaid = () =>
+  //   toast.info("Bu tovar allaqachon to'langan!", {
+  //     className: "text-2xl p-3 w-[500px] flex justify-center h-32",
+  //   });
 
   const [form] = Form.useForm();
 
@@ -77,8 +77,6 @@ export const SearchPaymeInput: React.FC<SearchPaymeInputProps> = ({
           setTimeout(() => {
             fetchData();
           }, 1000);
-        } else if (response.data.msg == "NO ORDERS FOUND") {
-          notifyAlreadyPaid();
         } else {
           notifyWarning(response.data.data);
         }

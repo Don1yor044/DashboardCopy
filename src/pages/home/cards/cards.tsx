@@ -9,6 +9,7 @@ import { observer } from "mobx-react-lite";
 import { IDashboards } from "../../../types/types";
 import { SearchPaymeInput } from "../searchPaymeInput/searchPaymeInput";
 import { useNavigate } from "react-router-dom";
+import { priceFormatter } from "../../../components/priceFormat/priceFormat";
 
 export const Cards = observer(
   ({
@@ -225,15 +226,21 @@ export const Cards = observer(
             <div className="flex gap-3 items-center bg-white rounded-xl p-4 shadow-[0px_0px_30px_-10px_rgba(34,60,80,0.38)]">
               <div className="w-[33%] text-2xl font-bold ps-5 border-r flex gap-10">
                 <div>Karta orqali to'lovlar</div>
-                <div className="border-s ps-5">{totalPaidByCard}</div>
+                <div className="border-s ps-5">
+                  {priceFormatter(totalPaidByCard)}
+                </div>
               </div>
               <div className="w-[33%] text-2xl font-bold ps-5 border-r flex gap-10">
                 <div>Naqd orqali to'lovlar</div>
-                <div className="border-s ps-5">{totalPaidByCash}</div>
+                <div className="border-s ps-5">
+                  {priceFormatter(totalPaidByCash)}
+                </div>
               </div>
               <div className="w-[33%] text-2xl font-bold ps-5 flex gap-10">
                 <div>Payme orqali to'lovlar</div>
-                <div className="border-s ps-5">{totalPaidByPayme}</div>
+                <div className="border-s ps-5">
+                  {priceFormatter(totalPaidByPayme)}
+                </div>
               </div>
             </div>
           </>

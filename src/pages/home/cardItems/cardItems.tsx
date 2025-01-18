@@ -49,10 +49,10 @@ export const CardItems = observer(
       toast.warning(`To'lanadigan summa miqdori: ${data} so'm `, {
         className: "text-lg w-[400px]",
       });
-    const notifyAlreadyPaid = () =>
-      toast.info("Bu tovar allaqachon to'langan!", {
-        className: "text-2xl p-3 w-[500px] flex justify-center h-32",
-      });
+    // const notifyAlreadyPaid = () =>
+    //   toast.info("Bu tovar allaqachon to'langan!", {
+    //     className: "text-2xl p-3 w-[500px] flex justify-center h-32",
+    //   });
     const handleLocalSave = (id: number, values: Partial<IDashboards>) => {
       setLocalData((prevData) =>
         prevData.map((item) => (item.id === id ? { ...item, ...values } : item))
@@ -71,6 +71,8 @@ export const CardItems = observer(
         return;
       }
 
+      console.log(item, "doni");
+
       try {
         const response = await baseURL.put(
           `/api/client/dashboard/${id}`,
@@ -87,6 +89,7 @@ export const CardItems = observer(
             },
           }
         );
+        console.log(response.data);
 
         if (response.data.ret === -1) {
           notifyError();
@@ -109,10 +112,10 @@ export const CardItems = observer(
     };
 
     const openModal = (item: IDashboards, type: ModalType) => {
-      if (item.paid_at !== null) {
-        notifyAlreadyPaid();
-        return;
-      }
+      // if (item.paid_at !== null) {
+      //   notifyAlreadyPaid();
+      //   return;
+      // }
       setModalOpen((prev) => ({ ...prev, [item.id]: { type, open: true } }));
     };
 

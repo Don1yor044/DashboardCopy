@@ -85,7 +85,7 @@ export const Layout = ({
                   {
                     key: "2",
                     icon: <PiBuildingsLight size={27} />,
-                    label: "Filials",
+                    label: "Filiallar",
                     onClick: () => navigate("/filials"),
                     className:
                       selectedKey === "2"
@@ -107,7 +107,7 @@ export const Layout = ({
             {
               key: "4",
               icon: <LuFilter size={25} />,
-              label: "Filters",
+              label: "Filter",
               onClick: () => navigate("/filters"),
               className:
                 selectedKey === "4"

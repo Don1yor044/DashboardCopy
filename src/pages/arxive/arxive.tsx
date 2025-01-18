@@ -5,7 +5,10 @@ import { IDashboards } from "../../types/types";
 import searchStore from "../../store/store";
 import { observer } from "mobx-react-lite";
 import { useNavigate } from "react-router-dom";
-
+const kgFormatter = (weight: number) => {
+  const kg = weight / 1000;
+  return `${new Intl.NumberFormat("uz-UZ").format(kg)} kg`;
+};
 export const Arxive = observer(() => {
   const [data, setData] = useState<IDashboards[]>([]);
   const [isLoading, setIsloading] = useState(false);
@@ -46,6 +49,7 @@ export const Arxive = observer(() => {
       }
 
       if (res?.data?.data?.dashboards) {
+        console.log(res.data.data.dashboards);
         const dashboards = res.data.data.dashboards;
         setData(Array.isArray(dashboards) ? dashboards : []);
       } else {
@@ -117,7 +121,9 @@ export const Arxive = observer(() => {
                           <div className="border-b">{item.phone || "—"}</div>
                           <div className="border-b">{item.address || "—"}</div>
                           <div className="border-b">{item.city || "—"}</div>
-                          <div className="border-b">{item.weight || "—"}</div>
+                          <div className="border-b">
+                            {kgFormatter(Number(item.weight)) || "—"}
+                          </div>
                           <div className="border-b">
                             {item.express_num || "—"}
                           </div>

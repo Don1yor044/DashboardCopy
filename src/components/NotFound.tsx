@@ -36,7 +36,7 @@ export function NotFound({
             type="primary"
             onClick={() => (onBack && onBack()) || navigate("/")}
           >
-            {"Home Sahifaga qaytish"}
+            {"Login Sahifaga qaytish"}
           </Button>
         }
       />

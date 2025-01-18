@@ -9,6 +9,7 @@ import { useEffect, useState } from "react";
 import { MdOutlineDiscount } from "react-icons/md";
 import { observer } from "mobx-react-lite";
 import { useNavigate } from "react-router-dom";
+import { priceFormatter } from "../../../components/priceFormat/priceFormat";
 interface BranchData {
   id: number;
   name: string;
@@ -98,18 +99,19 @@ export const FilialsCards = observer(
                 <div className="flex justify-between">
                   <div className="space-y-3">
                     <Typography className="text-xl font-bold text-white">
-                      Payment Fee
+                      Qolgan summa
                     </Typography>
                     <Typography className="text-xl font-bold text-white">
-                      Paid Payment Fee
+                      To'langan to'lov
                     </Typography>
                   </div>
                   <div className="flex flex-col items-end">
                     <Typography className="text-3xl font-bold text-white">
-                      {item.payment_fee} <span className="text-lg">so'm</span>
+                      {priceFormatter(item.payment_fee)}{" "}
+                      <span className="text-lg">so'm</span>
                     </Typography>
                     <Typography className="text-3xl font-bold text-white">
-                      {item.paid_payment_fee}{" "}
+                      {priceFormatter(item.paid_payment_fee)}{" "}
                       <span className="text-lg">so'm</span>
                     </Typography>
                   </div>
@@ -127,7 +129,7 @@ export const FilialsCards = observer(
                       </Typography>
                     </div>
                     <Typography className="text-3xl font-bold text-black">
-                      {item.paid_by_card}{" "}
+                      {priceFormatter(item.paid_by_card)}{" "}
                       <span className="text-xl text-[#797979]">so'm</span>
                     </Typography>
                   </div>
@@ -145,7 +147,7 @@ export const FilialsCards = observer(
                       </Typography>
                     </div>
                     <Typography className="text-3xl font-bold text-black">
-                      {item.paid_by_payme}{" "}
+                      {priceFormatter(item.paid_by_payme)}{" "}
                       <span className="text-xl text-[#797979]">so'm</span>
                     </Typography>
                   </div>
@@ -159,7 +161,7 @@ export const FilialsCards = observer(
                       </Typography>
                     </div>
                     <Typography className="text-3xl font-bold text-black">
-                      {item.paid_by_cash}{" "}
+                      {priceFormatter(item.paid_by_cash)}{" "}
                       <span className="text-xl text-[#797979]">so'm</span>
                     </Typography>
                   </div>
@@ -173,8 +175,7 @@ export const FilialsCards = observer(
                       </Typography>
                     </div>
                     <Typography className="text-3xl font-bold text-black">
-                      {item.discounted_fee
-                      }{" "}
+                      {priceFormatter(item.discounted_fee)}{" "}
                       <span className="text-xl text-[#797979]">so'm</span>
                     </Typography>
                   </div>
