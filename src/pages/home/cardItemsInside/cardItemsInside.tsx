@@ -5,7 +5,8 @@ import { HiOutlineCreditCard } from "react-icons/hi";
 import { MdOutlineDiscount } from "react-icons/md";
 import { IDashboards } from "../../../types/types";
 import { ModalType } from "../cardItems/cardItems";
-import { CiEdit } from "react-icons/ci";
+import { CiDeliveryTruck, CiEdit } from "react-icons/ci";
+import { kgFormatter } from "../../../components";
 
 export const CardItemsInside = ({
   item,
@@ -76,8 +77,10 @@ export const CardItemsInside = ({
             <div className="border-b">{item.phone || "—"}</div>
             <div className="border-b">{item.address || "—"}</div>
             <div className="border-b">{item.city || "—"}</div>
-            <div className="border-b">{item.weight || "—"}</div>
             <div className="border-b">
+              {kgFormatter(Number(item.weight)) || "—"}
+            </div>
+            <div className="border-b flex justify-between">
               {(() => {
                 switch (item.status) {
                   case 1:
@@ -96,6 +99,12 @@ export const CardItemsInside = ({
                     return "—";
                 }
               })()}
+              <div
+                className="bg-[#1677ff] text-white rounded-full p-[4px] cursor-pointer h-8 mt-[-3px]"
+                onClick={() => openModal(item, "status")}
+              >
+                <CiDeliveryTruck size={23} />
+              </div>
             </div>
             <div className="border-b">{item.express_num || "—"}</div>
             <div className="border-b">{item.paid_at || "—"}</div>

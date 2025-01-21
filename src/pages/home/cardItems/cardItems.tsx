@@ -11,7 +11,8 @@ export type ModalType =
   | "cash"
   | "payme"
   | "comment"
-  | "discounted_fee";
+  | "discounted_fee"
+  | "status";
 
 export const CardItems = observer(
   ({
@@ -70,6 +71,7 @@ export const CardItems = observer(
             paid_by_payme: item.paid_by_payme,
             discounted_fee: item.discounted_fee,
             comment: item.comment,
+            status: item.status,
           },
           {
             headers: {

@@ -1,5 +1,5 @@
 import React from "react";
-import { Modal, Form, Input, Button } from "antd";
+import { Modal, Form, Input, Button, Typography, Radio } from "antd";
 import { IDashboards } from "../../../types/types";
 import { ModalType } from "../cardItems/cardItems";
 
@@ -19,6 +19,54 @@ const PaymentModals: React.FC<PaymentModalProps> = ({
   handleLocalSave,
 }) => {
   const modalsConfig = [
+    {
+      type: "status",
+      title: "Olib ketish usuli",
+      fieldName: "status",
+      isRadio: true,
+      options: [
+        {
+          value: 2,
+          label: (
+            <div className="flex justify-between gap-5 ps-5 w-full items-center">
+              <Typography className="text-xl">Mijoz olib ketti</Typography>
+            </div>
+          ),
+        },
+        {
+          value: 3,
+          label: (
+            <div className="flex justify-between gap-5 ps-5 w-full items-center">
+              <Typography className="text-xl">Pochata orqali</Typography>
+            </div>
+          ),
+        },
+        {
+          value: 4,
+          label: (
+            <div className="flex justify-between gap-5 ps-5 w-full items-center">
+              <Typography className="text-xl">Postamat orqali</Typography>
+            </div>
+          ),
+        },
+        {
+          value: 5,
+          label: (
+            <div className="flex justify-between gap-5 ps-5 w-full items-center">
+              <Typography className="text-xl">Curier orqali</Typography>
+            </div>
+          ),
+        },
+        {
+          value: 6,
+          label: (
+            <div className="flex justify-between gap-5 ps-5 w-full items-center">
+              <Typography className="text-xl">Yandex orqali</Typography>
+            </div>
+          ),
+        },
+      ],
+    },
     {
       type: "card",
       title: "Karta orqali to'lov kiritish",
@@ -72,7 +120,17 @@ const PaymentModals: React.FC<PaymentModalProps> = ({
             onFinish={(values) => handleLocalSave(item.id, values)}
           >
             <Form.Item name={config.fieldName}>
-              {config.isTextArea ? (
+              {config.isRadio ? (
+                <Radio.Group
+                  style={{
+                    display: "flex",
+                    flexDirection: "column",
+                    gap: "16px",
+                    width: "full",
+                  }}
+                  options={config.options}
+                />
+              ) : config.isTextArea ? (
                 <TextArea
                   className="max-h-20 !min-h-20"
                   placeholder={config.placeholder}
