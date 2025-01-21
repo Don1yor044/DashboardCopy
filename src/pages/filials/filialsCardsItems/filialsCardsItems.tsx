@@ -85,7 +85,7 @@ export const FilialsCardsItems = ({ item }: { item: IfilialsCardsData }) => {
                 <span className="text-xl text-[#797979]">so'm</span>
               </Typography>
             </div>
-            <div className="flex border-b-2 justify-between py-2">
+            <div className="flex justify-between py-2">
               <div className="flex gap-3 items-center">
                 <div className="bg-[#FE5222] h-9 w-9 rounded-full flex justify-center items-center">
                   <MdOutlineDiscount size={22} color="white" />
@@ -99,7 +99,7 @@ export const FilialsCardsItems = ({ item }: { item: IfilialsCardsData }) => {
                 <span className="text-xl text-[#797979]">so'm</span>
               </Typography>
             </div>{" "}
-            <div className="flex border-b-2 justify-between py-2">
+            <div className="flex border-b-2 justify-between py-2 mt-4">
               <div className="flex gap-3 items-center">
                 <div className="bg-[#FE5222] h-9 w-9 rounded-full flex justify-center items-center">
                   <CiDeliveryTruck size={22} color="white" />

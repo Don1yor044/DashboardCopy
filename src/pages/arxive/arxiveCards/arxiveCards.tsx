@@ -43,15 +43,15 @@ export const ArxiveCards = ({ item }: { item: IDashboards }) => {
                 {(() => {
                   switch (item.status) {
                     case 1:
-                      return "Mijoz olib ketti";
-                    case 2:
                       return "Punkda";
+                    case 2:
+                      return "Mijoz o'zi olib ketti";
                     case 3:
-                      return "Pochta orqali yetkazildi";
+                      return "Pochatadan yuborildi";
                     case 4:
-                      return "Postamatda";
+                      return "Postomatga olib ketildi";
                     case 5:
-                      return "Curier";
+                      return "Kuryer orqali yetkazildi";
                     case 6:
                       return "Yandex orqali yetkazildi";
                     default:
