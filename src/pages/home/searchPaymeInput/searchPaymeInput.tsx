@@ -81,6 +81,7 @@ export const SearchPaymeInput: React.FC<SearchPaymeInputProps> = ({
             total_paid_by_payme: Number(paidByPayme),
             total_discounted_fee: Number(discountedFee),
             total_dashboard_ids: isSelected,
+            status: value,
           },
           {
             headers: {
@@ -137,6 +138,7 @@ export const SearchPaymeInput: React.FC<SearchPaymeInputProps> = ({
 
   const onChange = (e: RadioChangeEvent) => {
     setValue(e.target.value);
+    console.log(e.target.value, "Radio number");
   };
   return (
     <>
@@ -173,7 +175,7 @@ export const SearchPaymeInput: React.FC<SearchPaymeInputProps> = ({
             }}
             options={[
               {
-                value: 1,
+                value: 2,
                 label: (
                   <div className="flex justify-between gap-5 ps-5 w-full items-center">
                     <Typography className="text-xl">
@@ -183,7 +185,7 @@ export const SearchPaymeInput: React.FC<SearchPaymeInputProps> = ({
                 ),
               },
               {
-                value: 2,
+                value: 3,
                 label: (
                   <div className="flex justify-between gap-5 ps-5 w-full items-center">
                     <Typography className="text-xl">Pochata orqali</Typography>
@@ -191,7 +193,7 @@ export const SearchPaymeInput: React.FC<SearchPaymeInputProps> = ({
                 ),
               },
               {
-                value: 3,
+                value: 4,
                 label: (
                   <div className="flex justify-between gap-5 ps-5 w-full items-center">
                     <Typography className="text-xl">Postamat orqali</Typography>
@@ -199,7 +201,7 @@ export const SearchPaymeInput: React.FC<SearchPaymeInputProps> = ({
                 ),
               },
               {
-                value: 4,
+                value: 5,
                 label: (
                   <div className="flex justify-between gap-5 ps-5 w-full items-center">
                     <Typography className="text-xl">Curier orqali</Typography>
@@ -207,7 +209,7 @@ export const SearchPaymeInput: React.FC<SearchPaymeInputProps> = ({
                 ),
               },
               {
-                value: 5,
+                value: 6,
                 label: (
                   <div className="flex justify-between gap-5 ps-5 w-full items-center">
                     <Typography className="text-xl">Yandex orqali</Typography>
