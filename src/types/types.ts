@@ -1,3 +1,5 @@
+import { Dispatch, SetStateAction } from "react";
+
 export interface IDashboards {
   address?: string;
   city?: string;
@@ -30,6 +32,7 @@ export interface IfiltersData {
   phone: string;
   address: string;
   city: string;
+  status: number;
   weight: string;
   express_num: string;
   paid_at: number;
@@ -42,4 +45,13 @@ export interface IfiltersData {
   comment: string;
   purchase_time: string;
   quantity: number | null;
+}
+export interface SearchPaymeInputProps {
+  isSelected: number[];
+  userId: number;
+  fetchData: () => void;
+  setSelectedItems: Dispatch<SetStateAction<number[]>>;
+  dataCourse: IDashboards[];
+  residual: number;
+  searchId: string;
 }
