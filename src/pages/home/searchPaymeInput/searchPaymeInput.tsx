@@ -1,16 +1,22 @@
-import { Button, Form, Input } from "antd";
+import { Button, Form, Input, Typography } from "antd";
 import { BsCurrencyDollar } from "react-icons/bs";
 import { HiOutlineCreditCard } from "react-icons/hi";
 import { MdOutlineDiscount } from "react-icons/md";
 import baseURL from "../../../utils/api";
-import { toast, ToastContainer } from "react-toastify";
-import { Dispatch, SetStateAction } from "react";
+import { toast } from "react-toastify";
+import { Dispatch, SetStateAction, useEffect, useState } from "react";
+import { errorToast, successToast } from "../../../components/toastManager";
+import { IDashboards } from "../../../types/types";
+import { priceFormatter } from "../../../components/priceFormat/priceFormat";
 
 interface SearchPaymeInputProps {
   isSelected: number[];
-  userId: number; // userId must always be a number
+  userId: number;
   fetchData: () => void;
   setSelectedItems: Dispatch<SetStateAction<number[]>>;
+  dataCourse: IDashboards[];
+  residual: number;
+  searchId: string;
 }
 
 export const SearchPaymeInput: React.FC<SearchPaymeInputProps> = ({
@@ -18,27 +24,53 @@ export const SearchPaymeInput: React.FC<SearchPaymeInputProps> = ({
   userId,
   fetchData,
   setSelectedItems,
+  dataCourse,
+  residual,
+  searchId,
 }) => {
+  const [totalPaid, setTotalPaid] = useState(0);
   const UserRole = localStorage.getItem("Role");
 
-  const notifySuccess = () =>
-    toast.success("Muvaffaqiyatli saqlandi !", {
-      className: "text-xl",
-    });
-  const notifyError = () =>
-    toast.error("Xatolik qaytadan urinib ko'ring !", {
-      className: "text-lg",
-    });
+  const notifySuccess = () => successToast("Muvaffaqiyatli saqlandi !");
+  const notifyError = () => errorToast("Xatolik qaytadan urinib ko'ring !");
   const notifyWarning = (data: string) =>
     toast.warning(`To'lanadigan summa miqdori: ${data} so'm `, {
       className: "text-lg w-[400px]",
     });
-  // const notifyAlreadyPaid = () =>
-  //   toast.info("Bu tovar allaqachon to'langan!", {
-  //     className: "text-2xl p-3 w-[500px] flex justify-center h-32",
-  //   });
 
   const [form] = Form.useForm();
+
+  const handleInputChange = () => {
+    const paidByCard: number =
+      parseFloat(form.getFieldValue("kartaTolov")) || 0;
+    const paidByCash: number = parseFloat(form.getFieldValue("naqdTolov")) || 0;
+    const paidByPayme: number =
+      parseFloat(form.getFieldValue("paymeTolov")) || 0;
+    const discountedFee: number =
+      parseFloat(form.getFieldValue("chegirmaTolov")) || 0;
+
+    console.log("Values:", {
+      paidByCard,
+      paidByCash,
+      paidByPayme,
+      discountedFee,
+    });
+
+    const total = paidByCard + paidByCash + paidByPayme + discountedFee;
+    console.log("Total:", total);
+
+    setTotalPaid(total);
+  };
+
+  useEffect(() => {
+    form.setFieldsValue({
+      kartaTolov: 0,
+      naqdTolov: 0,
+      paymeTolov: 0,
+      chegirmaTolov: 0,
+    });
+    setTotalPaid(0);
+  }, [form]);
 
   const handleSubmit = async () => {
     const token = localStorage.getItem("token");
@@ -53,8 +85,9 @@ export const SearchPaymeInput: React.FC<SearchPaymeInputProps> = ({
       const discountedFee: number = form.getFieldValue("chegirmaTolov");
 
       try {
+        const idToUse = userId === 0 ? searchId : userId;
         const response = await baseURL.put(
-          `/api/client/dashboard/all/${userId}`,
+          `/api/client/dashboard/all/${idToUse}`,
           {
             total_paid_by_card: Number(paidByCard),
             total_paid_by_cash: paidByCash,
@@ -87,13 +120,29 @@ export const SearchPaymeInput: React.FC<SearchPaymeInputProps> = ({
     }
   };
 
+  const handleSelectAll = () => {
+    const allIds = dataCourse.map((item) => item.id);
+
+    if (allIds.every((id) => isSelected.includes(id))) {
+      setSelectedItems((prevSelected) =>
+        prevSelected.filter((id) => !allIds.includes(id))
+      );
+    } else {
+      setSelectedItems((prevSelected) => {
+        const newSelection = [...new Set([...prevSelected, ...allIds])];
+        return newSelection;
+      });
+    }
+  };
+
   return (
     <>
       <Form
         form={form}
         className="bg-white rounded-xl p-3 shadow-[0px_0px_30px_-10px_rgba(34,60,80,0.38)]"
         layout="inline"
-        onFinish={handleSubmit} // Trigger handleSubmit when form is submitted
+        onFinish={handleSubmit}
+        onValuesChange={handleInputChange}
       >
         <div className="flex gap-1 items-center justify-around w-full">
           <div className="flex gap-2 items-center">
@@ -108,7 +157,6 @@ export const SearchPaymeInput: React.FC<SearchPaymeInputProps> = ({
               />
             </Form.Item>
           </div>
-
           <div className="flex gap-2 items-center">
             <div className="bg-gray-200 p-1 rounded-lg">
               <BsCurrencyDollar size={24} />
@@ -121,8 +169,7 @@ export const SearchPaymeInput: React.FC<SearchPaymeInputProps> = ({
               />
             </Form.Item>
           </div>
-
-          <div className="flex gap-2 items-center">
+          <div className="flex gap-2 items-center ">
             <div className="bg-gray-200 p-1 rounded-lg">
               <img src="./PaymeIconSvg.svg" className="h-7 w-8" alt="payme" />
             </div>
@@ -134,8 +181,7 @@ export const SearchPaymeInput: React.FC<SearchPaymeInputProps> = ({
               />
             </Form.Item>
           </div>
-
-          <div className="flex gap-2 items-center">
+          <div className="flex gap-2 items-center ">
             <div className="bg-gray-200 p-2 rounded-lg">
               <MdOutlineDiscount size={20} />
             </div>
@@ -147,28 +193,36 @@ export const SearchPaymeInput: React.FC<SearchPaymeInputProps> = ({
               />
             </Form.Item>
           </div>
-
-          <Button
-            type="primary"
-            htmlType="submit"
-            className="text-sm p-2 "
-            disabled={UserRole === "30" && true}
-          >
-            Saqlash
-          </Button>
+          <div className="flex gap-2 border border-red-500 p-3 rounded-lg items-center">
+            <div className="border-e px-2">
+              <Typography className="text-lg font-semibold">
+                Qolgan summa
+              </Typography>
+            </div>
+            <div>
+              <Typography className="text-lg">
+                {priceFormatter(residual - totalPaid || 0)}
+              </Typography>
+            </div>
+          </div>
+          <div className="flex gap-3">
+            <Button
+              onClick={handleSelectAll}
+              className="text-sm bg-green-500 p-4 text-white"
+            >
+              All
+            </Button>
+            <Button
+              type="primary"
+              htmlType="submit"
+              className="text-sm p-2"
+              disabled={UserRole === "30" && true}
+            >
+              Olib kettish
+            </Button>{" "}
+          </div>
         </div>
       </Form>
-      <ToastContainer
-        position="top-center"
-        autoClose={2000}
-        hideProgressBar={false}
-        newestOnTop={false}
-        closeOnClick
-        rtl={false}
-        pauseOnFocusLoss
-        draggable
-        pauseOnHover
-      />
     </>
   );
 };

@@ -1,10 +1,10 @@
 import { useState } from "react";
 import { Form, Input, Button, Image, Layout, Card } from "antd";
 import { UserOutlined, LockOutlined } from "@ant-design/icons";
-import { toast, ToastContainer } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 import { AxiosError } from "axios";
 import baseURL from "../../utils/api";
+import { errorToast, successToast } from "../../components/toastManager";
 
 const { Content } = Layout;
 
@@ -21,7 +21,6 @@ baseURL.interceptors.response.use(
   async (error: AxiosError) => {
     if (error.response?.status === 401) {
       localStorage.removeItem("token");
-      // toast.error("Unauthorized access! Please log in again.");
     }
     return Promise.reject(error);
   }
@@ -53,16 +52,16 @@ export const LoginPage = () => {
       }
 
       if (response.data?.access_token) {
-        toast.success("Dashboardga xush kelibsiz!");
+        successToast("Dashboardga xush kelibsiz!");
         localStorage.setItem("token", response.data.access_token);
         navigate("/dashboard");
       }
     } catch (err) {
       const errorMessage =
         err instanceof AxiosError
-          ? err.response?.data?.message || "Network error occurred"
+          ? err.response?.data?.message || "Xatolik Iltimos qaytanda kiriting !"
           : "Login failed";
-      toast.error(errorMessage);
+      errorToast(errorMessage);
     } finally {
       setIsLoading(false);
     }
@@ -90,12 +89,15 @@ export const LoginPage = () => {
             <Form.Item
               name="phone"
               rules={[
-                { required: true, message: "Please input your phone number!" },
+                {
+                  required: true,
+                  message: "Iltimos Telefon Nomerizni kiritng !",
+                },
               ]}
             >
               <Input
                 prefix={<UserOutlined />}
-                placeholder="Phone Number"
+                placeholder="Iltimos Telefon Nomerizni kiritng"
                 className="rounded-lg"
               />
             </Form.Item>
@@ -103,29 +105,27 @@ export const LoginPage = () => {
             <Form.Item
               name="password"
               rules={[
-                { required: true, message: "Please input your password!" },
+                { required: true, message: "Iltimos kodingizni kiritng!" },
               ]}
             >
               <Input.Password
                 prefix={<LockOutlined />}
-                placeholder="Password"
+                placeholder="Iltimos kodingizni kiritng"
                 className="rounded-lg"
               />
             </Form.Item>
             <Form.Item>
               <Button
-                // type="primary"
                 htmlType="submit"
                 loading={isLoading}
-                className="w-full h-12 bg-[#fd521c] hover:bg-[#e64816] rounded-lg text-white"
+                className="w-full h-12 bg-[#fd521c] hover:bg-[#e64816] rounded-lg text-white font-semibold"
               >
-                {isLoading ? "Logging in..." : "Login"}
+                {isLoading ? "Tizimga kirish..." : "Tizimga kirish"}
               </Button>
             </Form.Item>
           </Form>
         </Card>
       </Content>
-      <ToastContainer />
     </Layout>
   );
 };

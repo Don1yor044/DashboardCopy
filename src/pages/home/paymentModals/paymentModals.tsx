@@ -1,12 +1,13 @@
 import React from "react";
 import { Modal, Form, Input, Button } from "antd";
-import { IDashboards } from "../../types/types";
+import { IDashboards } from "../../../types/types";
+import { ModalType } from "../cardItems/cardItems";
 
 const { TextArea } = Input;
 
 interface PaymentModalProps {
-  item: any;
-  modalOpen: Record<string, any>;
+  item: IDashboards;
+  modalOpen: { [key: number]: { type: ModalType; open: boolean } };
   closeModal: (id: number) => void;
   handleLocalSave: (id: number, values: Partial<IDashboards>) => void;
 }
@@ -32,7 +33,7 @@ const PaymentModals: React.FC<PaymentModalProps> = ({
     },
     {
       type: "discounted_fee",
-      title: "Discounted orqali kiritish",
+      title: "Chegirma orqali kiritish",
       fieldName: "discounted_fee",
       placeholder: "Chegirma bilan to'lov",
     },
@@ -66,7 +67,7 @@ const PaymentModals: React.FC<PaymentModalProps> = ({
           <Form
             className="mt-10"
             initialValues={{
-              [config.fieldName]: item[config.fieldName],
+              [config.fieldName]: item[config.fieldName as keyof IDashboards],
             }}
             onFinish={(values) => handleLocalSave(item.id, values)}
           >

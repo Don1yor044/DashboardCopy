@@ -1,23 +1,27 @@
 /** @jsxImportSource @emotion/react */
 import { Empty, Pagination, Spin } from "antd";
 import { Dispatch, SetStateAction, useEffect, useState } from "react";
-import { css } from "@emotion/react";
 import { CardItems } from "../cardItems/cardItems";
 import baseURL from "../../../utils/api";
-import searchStore from "../../../store/store";
+import searchStore from "../../../store/searchStore";
 import { observer } from "mobx-react-lite";
 import { IDashboards } from "../../../types/types";
 import { SearchPaymeInput } from "../searchPaymeInput/searchPaymeInput";
 import { useNavigate } from "react-router-dom";
 import { priceFormatter } from "../../../components/priceFormat/priceFormat";
+import { paginationStyle } from "../../../components/paginationStyles/paginationStyles";
+import { handleSelect } from "../../../utils/dashboardFunctions/selectUtils";
+import { resetTotals } from "../../../utils/dashboardFunctions/totalUtils";
 
 export const Cards = observer(
   ({
     setTotalPaymentFee,
     setTotalPrice,
+    residual,
   }: {
     setTotalPaymentFee: Dispatch<SetStateAction<number>>;
     setTotalPrice: Dispatch<SetStateAction<number>>;
+    residual: number;
   }) => {
     const [loading, setLoading] = useState(true);
     const [dataCourse, setDataCourse] = useState<IDashboards[]>([]);
@@ -34,52 +38,23 @@ export const Cards = observer(
 
     const navigate = useNavigate();
 
-    const handleSelect = (id: number) => {
-      const newSelectedItems = selectedItems.includes(id)
-        ? selectedItems.filter((item) => item !== id)
-        : [...selectedItems, id];
-
-      setSelectedItems(newSelectedItems);
-
-      if (newSelectedItems.length > 0) {
-        const selectedDashboards = dataCourse.filter((item) =>
-          newSelectedItems.includes(item.id)
-        );
-
-        const newTotalPaidByCard = selectedDashboards.reduce(
-          (acc: number, dashboard) => acc + (dashboard.paid_by_card ?? 0),
-          0
-        );
-        const newTotalPaidByCash = selectedDashboards.reduce(
-          (acc: number, dashboard) => acc + (dashboard.paid_by_cash ?? 0),
-          0
-        );
-        const newTotalPaidByPayme = selectedDashboards.reduce(
-          (acc: number, dashboard) => acc + (dashboard.paid_by_payme ?? 0),
-          0
-        );
-        const newTotalPaymentFee = selectedDashboards.reduce(
-          (acc: number, dashboard) => acc + (dashboard.payment_fee ?? 0),
-          0
-        );
-
-        const newTotalPaidByDiscount = selectedDashboards.reduce(
-          (acc: number, dashboard) => acc + (dashboard.discounted_fee ?? 0),
-          0
-        );
-        setTotalPaidByCard(newTotalPaidByCard);
-        setTotalPaidByCash(newTotalPaidByCash);
-        setTotalPaidByPayme(newTotalPaidByPayme);
-        setTotalPaymentFee(newTotalPaymentFee);
-        setTotalPaidByDiscount(newTotalPaidByDiscount);
-      } else {
-        resetTotals();
-      }
+    const handleItemsSelect = (id: number) => {
+      handleSelect(
+        id,
+        selectedItems,
+        setSelectedItems,
+        dataCourse,
+        setTotalPaidByCard,
+        setTotalPaidByCash,
+        setTotalPaidByPayme,
+        setTotalPaymentFee,
+        setTotalPaidByDiscount,
+        setTotalPrice
+      );
     };
     const handlePageChange = (page: number) => {
       setCurrentPage(page);
     };
-
     useEffect(() => {
       setTotalPrice(
         totalPaidByCard +
@@ -119,20 +94,35 @@ export const Cards = observer(
     };
     const fetchSearchResults = async (token: string) => {
       setIsHeaderInput(true);
-      const response = await baseURL.get(
-        `/api/client/dashboard/all/${search}`,
-        {
-          headers: getHeaders(token),
-          timeout: 10000,
+      try {
+        const response = await baseURL.get(
+          `/api/client/dashboard/all/${search}`,
+          {
+            headers: getHeaders(token),
+            timeout: 10000,
+          }
+        );
+
+        if (
+          !response.data?.data?.data?.dashboards ||
+          response.data.data.data.dashboards.length === 0
+        ) {
+          setDataCourse([]);
+          setTotalItems(0);
+          setAggregatedTotals([]);
+          return;
         }
-      );
 
-      const dashboards = response.data.data.dashboards;
-
-      setDataCourse(dashboards);
-      setTotalItems(response.data.total_items ?? 0);
-
-      setAggregatedTotals(dashboards);
+        const dashboards = response.data.data.data.dashboards;
+        setDataCourse(dashboards);
+        setTotalItems(response.data.total_items ?? 0);
+        setAggregatedTotals(dashboards);
+      } catch (error) {
+        console.error("Search error:", error);
+        setDataCourse([]);
+        setTotalItems(0);
+        setAggregatedTotals([]);
+      }
     };
     const fetchDashboardData = async (token: string) => {
       setIsHeaderInput(false);
@@ -145,7 +135,7 @@ export const Cards = observer(
       setDataCourse(response.data.data.dashboards);
       setTotalItems(response.data.total_items ?? 0);
 
-      resetTotals();
+      handleDeselectAll();
     };
     const setAggregatedTotals = (dashboards: IDashboards[]) => {
       if (!Array.isArray(dashboards) || dashboards.length === 0) {
@@ -191,13 +181,15 @@ export const Cards = observer(
         )
       );
     };
-    const resetTotals = () => {
-      setTotalPaidByCard(0);
-      setTotalPaidByCash(0);
-      setTotalPaidByPayme(0);
-      setTotalPaymentFee(0);
-      setTotalPrice(0);
-      setTotalPaidByDiscount(0);
+    const handleDeselectAll = () => {
+      resetTotals(
+        setTotalPaidByCard,
+        setTotalPaidByCash,
+        setTotalPaidByPayme,
+        setTotalPaymentFee,
+        setTotalPrice,
+        setTotalPaidByDiscount
+      );
     };
     const getHeaders = (token: string) => ({
       Authorization: `Bearer ${token}`,
@@ -217,7 +209,10 @@ export const Cards = observer(
               isSelected={selectedItems}
               setSelectedItems={setSelectedItems}
               userId={userId}
+              searchId={search}
               fetchData={fetchData}
+              dataCourse={dataCourse}
+              residual={residual}
             />
           </>
         ) : (
@@ -266,7 +261,7 @@ export const Cards = observer(
                     dataCourse={dataCourse}
                     fetchData={fetchData}
                     isSelected={selectedItems}
-                    onSelect={handleSelect}
+                    onSelect={handleItemsSelect}
                     setUserId={setUserId}
                   />
                 </div>
@@ -278,6 +273,7 @@ export const Cards = observer(
                     total={totalItems}
                     pageSize={20}
                     onChange={handlePageChange}
+                    showSizeChanger={false}
                   />
                 </div>
               </>
@@ -288,27 +284,3 @@ export const Cards = observer(
     );
   }
 );
-const paginationStyle = css`
-  .ant-pagination-item {
-    background-color: white;
-    color: #000;
-  }
-
-  .ant-pagination-item-active {
-    background-color: #fe5222 !important;
-    color: white !important;
-    border: none !important;
-    outline: none !important;
-  }
-  .ant-pagination-item-active a {
-    color: white !important;
-  }
-
-  .ant-pagination-item:hover {
-    background-color: #ffecdc;
-    color: #fe5222;
-  }
-  .ant-select {
-    display: none;
-  }
-`;

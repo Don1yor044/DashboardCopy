@@ -13,9 +13,11 @@ const { Sider, Content } = AntLayout;
 export const Layout = ({
   totalPaymentFee,
   totalPrice,
+  residual,
 }: {
   totalPaymentFee: number;
   totalPrice: number;
+  residual: number;
 }) => {
   const [collapsed] = useState(false);
   const navigate = useNavigate();
@@ -138,6 +140,7 @@ export const Layout = ({
           <DashboardHeaderSearch
             totalPaymentFee={totalPaymentFee}
             totalPrice={totalPrice}
+            residual={residual}
           />
         ) : location.pathname === "/arxiv" ? (
           <ArxiveHeaderSearch />

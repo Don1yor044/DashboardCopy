@@ -23,3 +23,23 @@ export interface IDashboards {
   user_id?: number;
   weight?: number | null;
 }
+export interface IfiltersData {
+  id: string;
+  user_id: string;
+  full_name: string;
+  phone: string;
+  address: string;
+  city: string;
+  weight: string;
+  express_num: string;
+  paid_at: number;
+  payment_fee: number | null;
+  paid_by_card: number | null;
+  paid_by_cash: number | null;
+  paid_by_payme: number | null;
+  discounted_fee: number | null;
+  express_line: string;
+  comment: string;
+  purchase_time: string;
+  quantity: number | null;
+}

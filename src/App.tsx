@@ -1,15 +1,20 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import { Filials, Home, LoginPage } from "./pages";
+import { Arxive, Filials, Filters, Home, LoginPage } from "./pages";
 import { ErrorBoundarayContainer, Layout } from "./components";
-import { Arxive } from "./pages/arxive";
 import { Provider } from "mobx-react";
-import searchStore from "../src/store/store";
-import { useState } from "react";
-import { NotFound } from "./components/NotFound";
-import { Filters } from "./pages/filters";
+import { useEffect, useState } from "react";
+import { NotFound } from "./components/NotFound/NotFound";
+import { ToastContainer } from "react-toastify";
+import searchStore from "./store/searchStore";
+
 const App = () => {
   const [totalPaymentFee, setTotalPaymentFee] = useState(0);
   const [totalPrice, setTotalPrice] = useState(0);
+  const [residual, setResidual] = useState(0);
+
+  useEffect(() => {
+    setResidual(totalPaymentFee - totalPrice);
+  }, [totalPaymentFee, totalPrice]);
 
   return (
     <ErrorBoundarayContainer>
@@ -23,6 +28,7 @@ const App = () => {
                 <Layout
                   totalPaymentFee={totalPaymentFee}
                   totalPrice={totalPrice}
+                  residual={residual}
                 />
               }
             >
@@ -32,6 +38,7 @@ const App = () => {
                   <Home
                     setTotalPaymentFee={setTotalPaymentFee}
                     setTotalPrice={setTotalPrice}
+                    residual={residual}
                   />
                 }
               />
@@ -41,6 +48,17 @@ const App = () => {
             </Route>
           </Routes>
         </Router>
+        <ToastContainer
+          position="top-center"
+          autoClose={2000}
+          hideProgressBar={false}
+          newestOnTop={false}
+          closeOnClick
+          rtl={false}
+          pauseOnFocusLoss
+          draggable
+          pauseOnHover
+        />
       </Provider>
     </ErrorBoundarayContainer>
   );

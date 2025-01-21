@@ -1,8 +1,8 @@
 import { Input } from "antd";
 import { Header } from "antd/es/layout/layout";
 import { LuSearch } from "react-icons/lu";
-import searchStore from "../../../store/store";
 import { observer } from "mobx-react-lite";
+import searchStore from "../../../store/searchStore";
 
 export const ArxiveHeaderSearch = observer(() => {
   const handleChange = (event: string) => {
