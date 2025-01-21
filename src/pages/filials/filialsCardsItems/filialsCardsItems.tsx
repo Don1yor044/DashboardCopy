@@ -6,6 +6,7 @@ import { TbCashBanknote } from "react-icons/tb";
 import { HiOutlineCreditCard } from "react-icons/hi";
 import { IfilialsCardsData } from "../filialsCards/filialsCards";
 import { BsBoxSeam } from "react-icons/bs";
+import { kgFormatter } from "../../../components";
 
 export const FilialsCardsItems = ({ item }: { item: IfilialsCardsData }) => {
   return (
@@ -108,8 +109,7 @@ export const FilialsCardsItems = ({ item }: { item: IfilialsCardsData }) => {
                 </Typography>
               </div>
               <Typography className="text-3xl font-bold text-black">
-                {priceFormatter(item.delivered_weight)}{" "}
-                <span className="text-xl text-[#797979]">so'm</span>
+                {kgFormatter(item.delivered_weight)}{" "}
               </Typography>
             </div>{" "}
             <div className="flex  justify-between py-2">
@@ -122,8 +122,7 @@ export const FilialsCardsItems = ({ item }: { item: IfilialsCardsData }) => {
                 </Typography>
               </div>
               <Typography className="text-3xl font-bold text-black">
-                {priceFormatter(item.received_weight)}{" "}
-                <span className="text-xl text-[#797979]">so'm</span>
+                {kgFormatter(item.received_weight)}{" "}
               </Typography>
             </div>
           </div>

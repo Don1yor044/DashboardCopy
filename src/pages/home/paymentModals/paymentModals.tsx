@@ -29,7 +29,7 @@ const PaymentModals: React.FC<PaymentModalProps> = ({
           value: 2,
           label: (
             <div className="flex justify-between gap-5 ps-5 w-full items-center">
-              <Typography className="text-xl">Mijoz olib ketti</Typography>
+              <Typography className="text-xl">Mijoz o'zi olib ketti</Typography>
             </div>
           ),
         },
@@ -37,7 +37,7 @@ const PaymentModals: React.FC<PaymentModalProps> = ({
           value: 3,
           label: (
             <div className="flex justify-between gap-5 ps-5 w-full items-center">
-              <Typography className="text-xl">Pochata orqali</Typography>
+              <Typography className="text-xl">Pochatadan yuborildi</Typography>
             </div>
           ),
         },
@@ -45,7 +45,9 @@ const PaymentModals: React.FC<PaymentModalProps> = ({
           value: 4,
           label: (
             <div className="flex justify-between gap-5 ps-5 w-full items-center">
-              <Typography className="text-xl">Postamat orqali</Typography>
+              <Typography className="text-xl">
+                Postomatga olib ketildi
+              </Typography>
             </div>
           ),
         },
@@ -53,7 +55,7 @@ const PaymentModals: React.FC<PaymentModalProps> = ({
           value: 5,
           label: (
             <div className="flex justify-between gap-5 ps-5 w-full items-center">
-              <Typography className="text-xl">Curier orqali</Typography>
+              <Typography className="text-xl">Kuryer olib ketdi</Typography>
             </div>
           ),
         },
@@ -61,7 +63,7 @@ const PaymentModals: React.FC<PaymentModalProps> = ({
           value: 6,
           label: (
             <div className="flex justify-between gap-5 ps-5 w-full items-center">
-              <Typography className="text-xl">Yandex orqali</Typography>
+              <Typography className="text-xl">Yandexdan yuborildi</Typography>
             </div>
           ),
         },

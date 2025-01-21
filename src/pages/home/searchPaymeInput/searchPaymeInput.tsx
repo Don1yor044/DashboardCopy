@@ -179,7 +179,7 @@ export const SearchPaymeInput: React.FC<SearchPaymeInputProps> = ({
                 label: (
                   <div className="flex justify-between gap-5 ps-5 w-full items-center">
                     <Typography className="text-xl">
-                      Mijoz olib ketti
+                      Mijoz o'zi olib ketti
                     </Typography>
                   </div>
                 ),
@@ -188,7 +188,9 @@ export const SearchPaymeInput: React.FC<SearchPaymeInputProps> = ({
                 value: 3,
                 label: (
                   <div className="flex justify-between gap-5 ps-5 w-full items-center">
-                    <Typography className="text-xl">Pochata orqali</Typography>
+                    <Typography className="text-xl">
+                      Pochatadan yuborildi
+                    </Typography>
                   </div>
                 ),
               },
@@ -196,7 +198,9 @@ export const SearchPaymeInput: React.FC<SearchPaymeInputProps> = ({
                 value: 4,
                 label: (
                   <div className="flex justify-between gap-5 ps-5 w-full items-center">
-                    <Typography className="text-xl">Postamat orqali</Typography>
+                    <Typography className="text-xl">
+                      Postomatga olib ketildi
+                    </Typography>
                   </div>
                 ),
               },
@@ -204,7 +208,9 @@ export const SearchPaymeInput: React.FC<SearchPaymeInputProps> = ({
                 value: 5,
                 label: (
                   <div className="flex justify-between gap-5 ps-5 w-full items-center">
-                    <Typography className="text-xl">Curier orqali</Typography>
+                    <Typography className="text-xl">
+                      Kuryer olib ketdi
+                    </Typography>
                   </div>
                 ),
               },
@@ -212,7 +218,9 @@ export const SearchPaymeInput: React.FC<SearchPaymeInputProps> = ({
                 value: 6,
                 label: (
                   <div className="flex justify-between gap-5 ps-5 w-full items-center">
-                    <Typography className="text-xl">Yandex orqali</Typography>
+                    <Typography className="text-xl">
+                      Yandexdan yuborildi
+                    </Typography>
                   </div>
                 ),
               },
