@@ -57,6 +57,7 @@ export const CardItemsInside = ({
             <div className="border-b">Manzil:</div>
             <div className="border-b">Shahar:</div>
             <div className="border-b">Og'irligi:</div>
+            <div className="border-b">Status:</div>
             <div className="border-b">Track Number:</div>
             <div className="border-b">To'langan Vaqti:</div>
             <div className="border-b">To'lov summa:</div>
@@ -76,6 +77,26 @@ export const CardItemsInside = ({
             <div className="border-b">{item.address || "—"}</div>
             <div className="border-b">{item.city || "—"}</div>
             <div className="border-b">{item.weight || "—"}</div>
+            <div className="border-b">
+              {(() => {
+                switch (item.status) {
+                  case 1:
+                    return "Mijoz olib ketti";
+                  case 2:
+                    return "Punkda";
+                  case 3:
+                    return "Pochta orqali yetkazildi";
+                  case 4:
+                    return "Postamatda";
+                  case 5:
+                    return "Curier";
+                  case 6:
+                    return "Yandex orqali yetkazildi";
+                  default:
+                    return "—";
+                }
+              })()}
+            </div>
             <div className="border-b">{item.express_num || "—"}</div>
             <div className="border-b">{item.paid_at || "—"}</div>
             <div className="border-b text-red-500 font-semibold">

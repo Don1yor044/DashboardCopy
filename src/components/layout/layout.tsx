@@ -130,7 +130,7 @@ export const Layout = ({
               onClick={ClearStoreg}
             >
               <TbLogout2 />
-              Logout
+              Chiqish
             </Button>
           </div>
         </div>

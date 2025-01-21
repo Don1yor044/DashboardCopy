@@ -84,17 +84,45 @@ export const FilialsCardsItems = ({ item }: { item: IfilialsCardsData }) => {
                 <span className="text-xl text-[#797979]">so'm</span>
               </Typography>
             </div>
-            <div className="flex justify-between py-2">
+            <div className="flex border-b-2 justify-between py-2">
               <div className="flex gap-3 items-center">
                 <div className="bg-[#FE5222] h-9 w-9 rounded-full flex justify-center items-center">
                   <MdOutlineDiscount size={22} color="white" />
                 </div>
                 <Typography className="text-lg font-semibold">
-                  Discounted
+                  Chegirma orqali
                 </Typography>
               </div>
               <Typography className="text-3xl font-bold text-black">
                 {priceFormatter(item.discounted_fee)}{" "}
+                <span className="text-xl text-[#797979]">so'm</span>
+              </Typography>
+            </div>{" "}
+            <div className="flex border-b-2 justify-between py-2">
+              <div className="flex gap-3 items-center">
+                <div className="bg-[#FE5222] h-9 w-9 rounded-full flex justify-center items-center">
+                  <CiDeliveryTruck size={22} color="white" />
+                </div>
+                <Typography className="text-lg font-semibold">
+                  Yetkazib berilgan Og'irligi
+                </Typography>
+              </div>
+              <Typography className="text-3xl font-bold text-black">
+                {priceFormatter(item.delivered_weight)}{" "}
+                <span className="text-xl text-[#797979]">so'm</span>
+              </Typography>
+            </div>{" "}
+            <div className="flex  justify-between py-2">
+              <div className="flex gap-3 items-center">
+                <div className="bg-[#FE5222] h-9 w-9 rounded-full flex justify-center items-center">
+                  <BsBoxSeam size={20} color="white" />
+                </div>
+                <Typography className="text-lg font-semibold">
+                  Qabul qilingan Og'irligi
+                </Typography>
+              </div>
+              <Typography className="text-3xl font-bold text-black">
+                {priceFormatter(item.received_weight)}{" "}
                 <span className="text-xl text-[#797979]">so'm</span>
               </Typography>
             </div>
@@ -106,7 +134,7 @@ export const FilialsCardsItems = ({ item }: { item: IfilialsCardsData }) => {
                   <CiDeliveryTruck size={25} color="white" />
                 </div>
                 <Typography className="text-lg font-semibold">
-                  Deliveryed orders
+                  Yetkazib berilgan buyurtmalar
                 </Typography>
               </div>
               <Typography className="text-4xl font-bold text-black">
@@ -122,7 +150,7 @@ export const FilialsCardsItems = ({ item }: { item: IfilialsCardsData }) => {
                   <BsBoxSeam size={22} color="white" />
                 </div>
                 <Typography className="text-lg font-semibold">
-                  Received orders
+                  Qabul qilingan buyurtmalar
                 </Typography>
               </div>
               <Typography className="text-4xl font-bold text-black">

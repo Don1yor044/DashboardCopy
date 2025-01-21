@@ -1,23 +1,10 @@
-import { Button, Form, Input, Typography } from "antd";
-import { BsCurrencyDollar } from "react-icons/bs";
-import { HiOutlineCreditCard } from "react-icons/hi";
-import { MdOutlineDiscount } from "react-icons/md";
+import { Form, Modal, Radio, RadioChangeEvent, Typography } from "antd";
 import baseURL from "../../../utils/api";
 import { toast } from "react-toastify";
-import { Dispatch, SetStateAction, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { errorToast, successToast } from "../../../components/toastManager";
-import { IDashboards } from "../../../types/types";
-import { priceFormatter } from "../../../components/priceFormat/priceFormat";
-
-interface SearchPaymeInputProps {
-  isSelected: number[];
-  userId: number;
-  fetchData: () => void;
-  setSelectedItems: Dispatch<SetStateAction<number[]>>;
-  dataCourse: IDashboards[];
-  residual: number;
-  searchId: string;
-}
+import { SearchPaymeInputItems } from "../searchPaymeInputItems/searchPaymeInputItems";
+import { SearchPaymeInputProps } from "../../../types/types";
 
 export const SearchPaymeInput: React.FC<SearchPaymeInputProps> = ({
   isSelected,
@@ -29,7 +16,8 @@ export const SearchPaymeInput: React.FC<SearchPaymeInputProps> = ({
   searchId,
 }) => {
   const [totalPaid, setTotalPaid] = useState(0);
-  const UserRole = localStorage.getItem("Role");
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [value, setValue] = useState(1);
 
   const notifySuccess = () => successToast("Muvaffaqiyatli saqlandi !");
   const notifyError = () => errorToast("Xatolik qaytadan urinib ko'ring !");
@@ -57,17 +45,16 @@ export const SearchPaymeInput: React.FC<SearchPaymeInputProps> = ({
     });
 
     const total = paidByCard + paidByCash + paidByPayme + discountedFee;
-    console.log("Total:", total);
 
     setTotalPaid(total);
   };
 
   useEffect(() => {
     form.setFieldsValue({
-      kartaTolov: 0,
-      naqdTolov: 0,
-      paymeTolov: 0,
-      chegirmaTolov: 0,
+      kartaTolov: "",
+      naqdTolov: "",
+      paymeTolov: "",
+      chegirmaTolov: "",
     });
     setTotalPaid(0);
   }, [form]);
@@ -90,9 +77,9 @@ export const SearchPaymeInput: React.FC<SearchPaymeInputProps> = ({
           `/api/client/dashboard/all/${idToUse}`,
           {
             total_paid_by_card: Number(paidByCard),
-            total_paid_by_cash: paidByCash,
-            total_paid_by_payme: paidByPayme,
-            total_discounted_fee: discountedFee,
+            total_paid_by_cash: Number(paidByCash),
+            total_paid_by_payme: Number(paidByPayme),
+            total_discounted_fee: Number(discountedFee),
             total_dashboard_ids: isSelected,
           },
           {
@@ -135,6 +122,22 @@ export const SearchPaymeInput: React.FC<SearchPaymeInputProps> = ({
     }
   };
 
+  const showModal = () => {
+    setIsModalOpen(true);
+  };
+
+  const handleOk = () => {
+    handleSubmit();
+    setIsModalOpen(false);
+  };
+
+  const handleCancel = () => {
+    setIsModalOpen(false);
+  };
+
+  const onChange = (e: RadioChangeEvent) => {
+    setValue(e.target.value);
+  };
   return (
     <>
       <Form
@@ -144,84 +147,76 @@ export const SearchPaymeInput: React.FC<SearchPaymeInputProps> = ({
         onFinish={handleSubmit}
         onValuesChange={handleInputChange}
       >
-        <div className="flex gap-1 items-center justify-around w-full">
-          <div className="flex gap-2 items-center">
-            <div className="bg-gray-200 p-1 rounded-lg">
-              <HiOutlineCreditCard size={25} />
-            </div>
-            <Form.Item name="kartaTolov" className="m-0">
-              <Input
-                placeholder="Karta to'lovni kiriting"
-                className="h-12 text-base"
-                type="number"
-              />
-            </Form.Item>
-          </div>
-          <div className="flex gap-2 items-center">
-            <div className="bg-gray-200 p-1 rounded-lg">
-              <BsCurrencyDollar size={24} />
-            </div>
-            <Form.Item name="naqdTolov" className="m-0">
-              <Input
-                placeholder="Naqd to'lovni kiriting"
-                className="h-12 text-base"
-                type="number"
-              />
-            </Form.Item>
-          </div>
-          <div className="flex gap-2 items-center ">
-            <div className="bg-gray-200 p-1 rounded-lg">
-              <img src="./PaymeIconSvg.svg" className="h-7 w-8" alt="payme" />
-            </div>
-            <Form.Item name="paymeTolov" className="m-0">
-              <Input
-                placeholder="Payme to'lovni kiriting"
-                className="h-12 text-base"
-                type="number"
-              />
-            </Form.Item>
-          </div>
-          <div className="flex gap-2 items-center ">
-            <div className="bg-gray-200 p-2 rounded-lg">
-              <MdOutlineDiscount size={20} />
-            </div>
-            <Form.Item name="chegirmaTolov" className="m-0">
-              <Input
-                placeholder="Chegirma to'lovni kiriting"
-                className="h-12 text-base"
-                type="number"
-              />
-            </Form.Item>
-          </div>
-          <div className="flex gap-2 border border-red-500 p-3 rounded-lg items-center">
-            <div className="border-e px-2">
-              <Typography className="text-lg font-semibold">
-                Qolgan summa
-              </Typography>
-            </div>
-            <div>
-              <Typography className="text-lg">
-                {priceFormatter(residual - totalPaid || 0)}
-              </Typography>
-            </div>
-          </div>
-          <div className="flex gap-3">
-            <Button
-              onClick={handleSelectAll}
-              className="text-sm bg-green-500 p-4 text-white"
-            >
-              All
-            </Button>
-            <Button
-              type="primary"
-              htmlType="submit"
-              className="text-sm p-2"
-              disabled={UserRole === "30" && true}
-            >
-              Olib kettish
-            </Button>{" "}
-          </div>
-        </div>
+        <SearchPaymeInputItems
+          handleSelectAll={handleSelectAll}
+          totalPaid={totalPaid}
+          residual={residual}
+          showModal={showModal}
+        />
+        <Modal
+          title={
+            <div className="text-3xl font-semibold">Olib ketish usuli</div>
+          }
+          open={isModalOpen}
+          onOk={handleOk}
+          onCancel={handleCancel}
+        >
+          <Radio.Group
+            onChange={onChange}
+            value={value}
+            style={{
+              display: "flex",
+              flexDirection: "column",
+              gap: "16px",
+              marginTop: "30px",
+              width: "full",
+            }}
+            options={[
+              {
+                value: 1,
+                label: (
+                  <div className="flex justify-between gap-5 ps-5 w-full items-center">
+                    <Typography className="text-xl">
+                      Mijoz olib ketti
+                    </Typography>
+                  </div>
+                ),
+              },
+              {
+                value: 2,
+                label: (
+                  <div className="flex justify-between gap-5 ps-5 w-full items-center">
+                    <Typography className="text-xl">Pochata orqali</Typography>
+                  </div>
+                ),
+              },
+              {
+                value: 3,
+                label: (
+                  <div className="flex justify-between gap-5 ps-5 w-full items-center">
+                    <Typography className="text-xl">Postamat orqali</Typography>
+                  </div>
+                ),
+              },
+              {
+                value: 4,
+                label: (
+                  <div className="flex justify-between gap-5 ps-5 w-full items-center">
+                    <Typography className="text-xl">Curier orqali</Typography>
+                  </div>
+                ),
+              },
+              {
+                value: 5,
+                label: (
+                  <div className="flex justify-between gap-5 ps-5 w-full items-center">
+                    <Typography className="text-xl">Yandex orqali</Typography>
+                  </div>
+                ),
+              },
+            ]}
+          />
+        </Modal>
       </Form>
     </>
   );

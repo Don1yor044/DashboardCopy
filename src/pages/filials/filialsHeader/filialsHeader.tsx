@@ -30,7 +30,7 @@ export const FilialsHeader = ({
     <div className="flex justify-between items-center">
       <div className="flex gap-5 h-14">
         <div className="p-3 pe-10 flex gap-5 items-center border-e">
-          <Typography className="text-2xl">From</Typography>
+          <Typography className="text-2xl">Dan</Typography>
           <DatePicker
             // showTime // Vaqtni tanlash uchun
             value={fromDate} // Holatdan o'qiladi
@@ -40,7 +40,7 @@ export const FilialsHeader = ({
           />
         </div>
         <div className="p-3 flex gap-5 items-center">
-          <Typography className="text-2xl">To</Typography>
+          <Typography className="text-2xl">gacha</Typography>
           <DatePicker
             showTime // Vaqtni tanlash uchun
             value={toDate} // Holatdan o'qiladi

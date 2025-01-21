@@ -15,6 +15,8 @@ export interface IfilialsCardsData {
   delivered_item_counts: number;
   received_item_counts: number;
   discounted_fee: number;
+  delivered_weight: number;
+  received_weight: number;
 }
 
 export const FilialsCards = observer(
