@@ -102,9 +102,10 @@ export const Cards = observer(
             timeout: 10000,
           }
         );
+        console.log(response.data.data, "Dashboard search data");
 
         if (
-          !response.data?.data?.data?.dashboards ||
+          !response.data?.data.data?.dashboards ||
           response.data.data.data.dashboards.length === 0
         ) {
           setDataCourse([]);
@@ -115,7 +116,7 @@ export const Cards = observer(
 
         const dashboards = response.data.data.data.dashboards;
         setDataCourse(dashboards);
-        setTotalItems(response.data.total_items ?? 0);
+        setTotalItems(response.data.data.total_items ?? 0);
         setAggregatedTotals(dashboards);
       } catch (error) {
         console.error("Search error:", error);

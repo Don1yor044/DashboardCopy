@@ -85,8 +85,8 @@ export const FilialsCards = observer(
 
     return (
       <Row gutter={[20, 20]} className="mt-10">
-        {dataCourse.map((item) => (
-          <Col xl={8} span={12} key={item.id}>
+        {dataCourse.map((item, index) => (
+          <Col xl={8} span={12} key={index}>
             <FilialsCardsItems item={item} />
           </Col>
         ))}

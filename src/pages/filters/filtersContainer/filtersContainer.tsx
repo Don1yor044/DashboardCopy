@@ -40,6 +40,7 @@ export const FiltersContainer = () => {
       );
 
       const dashboard = response.data?.data?.data || [];
+
       setTotalItems(response.data.data.total);
       setData(dashboard);
     } catch (error) {
