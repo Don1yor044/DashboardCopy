@@ -98,15 +98,6 @@ export const FiltersContainer = () => {
       </div>
     );
   }
-  if (!data || data.length === 0) {
-    return (
-      <div className="flex justify-center p-8">
-        <div className="mt-10 w-full ">
-          <Empty image={Empty.PRESENTED_IMAGE_SIMPLE} className="text-xl" />
-        </div>
-      </div>
-    );
-  }
 
   return (
     <>
@@ -119,16 +110,30 @@ export const FiltersContainer = () => {
         region={region}
         activeButton={activeButton}
       />
-      <FiltersCards data={data} />
-      <div className="flex justify-center mt-5" css={paginationStyle}>
-        <Pagination
-          current={currentPage}
-          total={totalItems}
-          pageSize={pageSize}
-          onChange={handlePageChange}
-          showSizeChanger={false}
-        />
-      </div>
+      {loading ? (
+        <div className="flex justify-center mt-28 text-4xl">
+          <Spin size="large" />
+        </div>
+      ) : data && data.length > 0 ? (
+        <>
+          <FiltersCards data={data} />
+          <div className="flex justify-center mt-5" css={paginationStyle}>
+            <Pagination
+              current={currentPage}
+              total={totalItems}
+              pageSize={pageSize}
+              onChange={handlePageChange}
+              showSizeChanger={false}
+            />
+          </div>
+        </>
+      ) : (
+        <div className="flex justify-center p-8">
+          <div className="mt-10 w-full ">
+            <Empty image={Empty.PRESENTED_IMAGE_SIMPLE} className="text-xl" />
+          </div>
+        </div>
+      )}
     </>
   );
 };

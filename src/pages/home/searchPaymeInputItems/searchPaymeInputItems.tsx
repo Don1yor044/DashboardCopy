@@ -93,7 +93,7 @@ export const SearchPaymeInputItems = ({
             className="text-sm p-2"
             disabled={UserRole === "30" && true}
           >
-            Olib kettish
+            Olib ketish
           </Button>{" "}
         </div>
       </div>
