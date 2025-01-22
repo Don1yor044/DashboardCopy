@@ -37,7 +37,7 @@ const PaymentModals: React.FC<PaymentModalProps> = ({
           value: 3,
           label: (
             <div className="flex justify-between gap-5 ps-5 w-full items-center">
-              <Typography className="text-xl">Pochatadan yuborildi</Typography>
+              <Typography className="text-xl">Pochtadan yuborildi</Typography>
             </div>
           ),
         },

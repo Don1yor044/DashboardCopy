@@ -189,7 +189,7 @@ export const SearchPaymeInput: React.FC<SearchPaymeInputProps> = ({
                 label: (
                   <div className="flex justify-between gap-5 ps-5 w-full items-center">
                     <Typography className="text-xl">
-                      Pochatadan yuborildi
+                      Pochtadan yuborildi
                     </Typography>
                   </div>
                 ),

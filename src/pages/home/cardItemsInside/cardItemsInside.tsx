@@ -88,7 +88,7 @@ export const CardItemsInside = ({
                   case 2:
                     return "Mijoz o'zi olib ketti";
                   case 3:
-                    return "Pochatadan yuborildi";
+                    return "Pochtadan yuborildi";
                   case 4:
                     return "Postomatga olib ketildi";
                   case 5:
