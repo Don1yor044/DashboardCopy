@@ -6,8 +6,8 @@ export const FiltersCards = ({ data }: { data: IfiltersData[] }) => {
     <>
       <Row gutter={[20, 20]} className="mt-5">
         {Array.isArray(data) &&
-          data.map((item) => (
-            <Col span={8} key={item.id}>
+          data.map((item, index) => (
+            <Col span={8} key={index}>
               <div className="bg-white rounded-xl border-2">
                 <div className="rounded-lg shadow-[0px_0px_30px_-10px_rgba(34,60,80,0.38)] relative">
                   <div className="flex gap-2 w-full">

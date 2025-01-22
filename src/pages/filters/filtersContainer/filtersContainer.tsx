@@ -14,9 +14,9 @@ export const FiltersContainer = () => {
   const [loading, setLoading] = useState(false);
   const [activeButton, setActiveButton] = useState<string>("");
 
-  const [currentPage, setCurrentPage] = useState(1); // Current page state
-  const [totalItems, setTotalItems] = useState(0); // Total items for pagination
-  const pageSize = 10; // Items per page
+  const [currentPage, setCurrentPage] = useState(1);
+  const [totalItems, setTotalItems] = useState(0);
+  const pageSize = 10;
 
   const navigate = useNavigate();
 

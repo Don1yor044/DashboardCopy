@@ -1,5 +1,5 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import { Arxive, Filials, Filters, Home, LoginPage } from "./pages";
+import { Arxive, Discounted, Filials, Filters, Home, LoginPage } from "./pages";
 import { ErrorBoundarayContainer, Layout } from "./components";
 import { Provider } from "mobx-react";
 import { useEffect, useState } from "react";
@@ -45,6 +45,7 @@ const App = () => {
               <Route path="/filials" element={<Filials />} />
               <Route path="/arxiv" element={<Arxive />} />
               <Route path="/filters" element={<Filters />} />
+              <Route path="/discounted" element={<Discounted />} />
             </Route>
           </Routes>
         </Router>

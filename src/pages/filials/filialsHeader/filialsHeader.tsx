@@ -1,8 +1,6 @@
 import { DatePicker, Typography } from "antd";
-import dayjs from "dayjs";
+import dayjs, { Dayjs } from "dayjs";
 import { useState } from "react";
-
-// const dateFormatList = ["DD/MM/YYYY", "DD/MM/YY", "DD-MM-YYYY", "DD-MM-YY"];
 
 export const FilialsHeader = ({
   setDateFrom,
@@ -11,16 +9,18 @@ export const FilialsHeader = ({
   setDateFrom: (date: string) => void;
   setDateTo: (date: string) => void;
 }) => {
-  const [fromDate, setFromDate] = useState(dayjs().startOf("day"));
-  const [toDate, setToDate] = useState(dayjs().endOf("day"));
+  const [fromDate, setFromDate] = useState<Dayjs | null>(
+    dayjs().startOf("day")
+  );
+  const [toDate, setToDate] = useState<Dayjs | null>(dayjs().endOf("day"));
 
-  const handleFromDateChange = (date: any) => {
+  const handleFromDateChange = (date: Dayjs | null) => {
     const formattedDate = date ? date.format("YYYY-MM-DD HH:mm:ss") : "";
     setFromDate(date);
     setDateFrom(formattedDate);
   };
 
-  const handleToDateChange = (date: any) => {
+  const handleToDateChange = (date: Dayjs | null) => {
     const formattedDate = date ? date.format("YYYY-MM-DD HH:mm:ss") : "";
     setToDate(date);
     setDateTo(formattedDate);
@@ -32,7 +32,6 @@ export const FilialsHeader = ({
         <div className="p-3 pe-10 flex gap-5 items-center border-e">
           <Typography className="text-2xl">Dan</Typography>
           <DatePicker
-            // showTime // Vaqtni tanlash uchun
             value={fromDate} // Holatdan o'qiladi
             onChange={handleFromDateChange} // O'zgartirishni boshqaradi
             format="YYYY-MM-DD HH:mm:ss" // So'rov formati

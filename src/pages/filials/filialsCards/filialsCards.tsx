@@ -25,7 +25,6 @@ export const FilialsCards = observer(
     const [dataCourse, setDataCourse] = useState<IfilialsCardsData[]>([]);
     const [isLoading, setIsLoading] = useState(true);
     const [error, setError] = useState<string | null>(null);
-    console.log(dateFrom, dateTo);
 
     const fetchData = async () => {
       const token = localStorage.getItem("token");
@@ -93,7 +92,13 @@ export const FilialsCards = observer(
     return (
       <Row gutter={[20, 20]} className="mt-10">
         {dataCourse.map((item, index) => (
-          <Col xl={8} span={12} key={index}>
+          <Col
+            xl={8}
+            span={12}
+            key={index}
+            onClick={() => navigate("/discounted")}
+            className="cursor-pointer"
+          >
             <FilialsCardsItems item={item} />
           </Col>
         ))}

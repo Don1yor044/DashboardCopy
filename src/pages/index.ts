@@ -3,3 +3,4 @@ export * from "./filials";
 export * from "./filters";
 export * from "./home";
 export * from "./login";
+export * from "./discounted";
