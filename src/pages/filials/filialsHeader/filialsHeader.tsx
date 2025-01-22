@@ -42,7 +42,6 @@ export const FilialsHeader = ({
         <div className="p-3 flex gap-5 items-center">
           <Typography className="text-2xl">gacha</Typography>
           <DatePicker
-            showTime // Vaqtni tanlash uchun
             value={toDate} // Holatdan o'qiladi
             onChange={handleToDateChange} // O'zgartirishni boshqaradi
             format="YYYY-MM-DD HH:mm:ss" // So'rov formati

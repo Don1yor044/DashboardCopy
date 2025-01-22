@@ -53,12 +53,12 @@ export const Arxive = observer(() => {
         );
       }
 
-      console.log(res.data.data.data, "Arxive Data");
+      console.log(res.data.data, "Arxive Data");
       if (res?.data?.data.data?.dashboards) {
         const dashboards = res.data.data.data?.dashboards;
 
         setData(Array.isArray(dashboards) ? dashboards : []);
-        setTotalItems(res.data.total_items);
+        setTotalItems(res.data.data.total_items);
       } else {
         setData([]);
         setTotalItems(0);

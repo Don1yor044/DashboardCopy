@@ -36,11 +36,18 @@ export const FilialsCards = observer(
         return;
       }
       try {
-        const response = await baseURL.get(`/api/admin/pda/branch/show`, {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        });
+        const response = await baseURL.get(
+          `/api/admin/pda/branch/show/?from=${dateFrom}&to=${dateTo}`,
+          {
+            params: {
+              from: dateFrom,
+              to: dateTo,
+            },
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        );
         console.log(response.data.data, "FilialDAta");
 
         if (Array.isArray(response.data.data)) {
@@ -59,7 +66,7 @@ export const FilialsCards = observer(
     };
     useEffect(() => {
       fetchData();
-    }, []);
+    }, [dateFrom, dateTo]);
 
     if (isLoading) {
       return (
