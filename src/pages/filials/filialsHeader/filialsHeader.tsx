@@ -21,9 +21,15 @@ export const FilialsHeader = ({
   };
 
   const handleToDateChange = (date: Dayjs | null) => {
-    const formattedDate = date ? date.format("YYYY-MM-DD HH:mm:ss") : "";
-    setToDate(date);
-    setDateTo(formattedDate);
+    if (date) {
+      const updatedDate = date.add(3, "hour"); // 3 soat qo'shish
+      const formattedDate = updatedDate.format("YYYY-MM-DD HH:mm:ss");
+      setToDate(updatedDate);
+      setDateTo(formattedDate);
+    } else {
+      setToDate(null);
+      setDateTo("");
+    }
   };
 
   return (
