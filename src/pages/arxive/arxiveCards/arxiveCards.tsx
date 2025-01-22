@@ -43,7 +43,7 @@ export const ArxiveCards = ({ item }: { item: IDashboards }) => {
                 {(() => {
                   switch (item.status) {
                     case 1:
-                      return "Punkda";
+                      return "Punktda";
                     case 2:
                       return "Mijoz o'zi olib ketti";
                     case 3:
