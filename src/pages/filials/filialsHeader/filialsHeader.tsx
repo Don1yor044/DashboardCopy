@@ -38,7 +38,7 @@ export const FilialsHeader = ({
         <div className="p-3 pe-10 flex gap-5 items-center border-e">
           <Typography className="text-2xl">Dan</Typography>
           <DatePicker
-            value={fromDate} // Holatdan o'qiladi
+            value={fromDate}
             onChange={handleFromDateChange} // O'zgartirishni boshqaradi
             format="YYYY-MM-DD HH:mm:ss" // So'rov formati
             className="h-12 w-48 rounded-lg text-xl"

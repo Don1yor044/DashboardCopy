@@ -63,6 +63,7 @@ export const FilialsCards = observer(
         setIsLoading(false);
       }
     };
+
     useEffect(() => {
       fetchData();
     }, [dateFrom, dateTo]);
