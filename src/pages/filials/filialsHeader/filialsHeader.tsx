@@ -22,7 +22,7 @@ export const FilialsHeader = ({
 
   const handleToDateChange = (date: Dayjs | null) => {
     if (date) {
-      const updatedDate = date.add(3, "hour"); // 3 soat qo'shish
+      const updatedDate = date.add(3, "hour");
       const formattedDate = updatedDate.format("YYYY-MM-DD HH:mm:ss");
       setToDate(updatedDate);
       setDateTo(formattedDate);
@@ -39,17 +39,17 @@ export const FilialsHeader = ({
           <Typography className="text-2xl">Dan</Typography>
           <DatePicker
             value={fromDate}
-            onChange={handleFromDateChange} // O'zgartirishni boshqaradi
-            format="YYYY-MM-DD HH:mm:ss" // So'rov formati
+            onChange={handleFromDateChange}
+            format="YYYY-MM-DD HH:mm:ss"
             className="h-12 w-48 rounded-lg text-xl"
           />
         </div>
         <div className="p-3 flex gap-5 items-center">
           <Typography className="text-2xl">gacha</Typography>
           <DatePicker
-            value={toDate} // Holatdan o'qiladi
-            onChange={handleToDateChange} // O'zgartirishni boshqaradi
-            format="YYYY-MM-DD HH:mm:ss" // So'rov formati
+            value={toDate}
+            onChange={handleToDateChange}
+            format="YYYY-MM-DD HH:mm:ss"
             className="h-12 w-48 rounded-lg text-xl"
           />
         </div>

@@ -9,7 +9,7 @@ import { FiltersCards } from "../filtersCards/filtersCards";
 import { paginationStyle } from "../../../components/paginationStyles/paginationStyles";
 
 export const FiltersContainer = () => {
-  const [region, setRegion] = useState<string>("Region");
+  const [region, setRegion] = useState<string>("1");
   const [data, setData] = useState<IfiltersData[]>([]);
   const [loading, setLoading] = useState(false);
   const [activeButton, setActiveButton] = useState<string>("");
@@ -40,6 +40,7 @@ export const FiltersContainer = () => {
       );
 
       const dashboard = response.data?.data?.data || [];
+      console.log(dashboard, "filter Data");
 
       setTotalItems(response.data.data.total);
       setData(dashboard);
@@ -74,7 +75,7 @@ export const FiltersContainer = () => {
   const handlePaymeSort = () => {
     setActiveButton("payme");
     setCurrentPage(1);
-    fetchData(`/api/admin/pda/item/sort/by/payment/`);
+    fetchData(`/api/admin/pda/item/sort/by/payment`);
   };
 
   const handleCountSort = () => {
@@ -84,7 +85,7 @@ export const FiltersContainer = () => {
   };
 
   useEffect(() => {
-    fetchData(`/api/admin/pda/item/sort/by/region/1`);
+    fetchData(`/api/admin/pda/item/sort/by/region/${currentPage}`);
   }, [currentPage]);
 
   const handlePageChange = (page: number) => {
