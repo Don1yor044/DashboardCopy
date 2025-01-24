@@ -1,11 +1,20 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import { Arxive, Discounted, Filials, Filters, Home, LoginPage } from "./pages";
+import {
+  Arxive,
+  Discounted,
+  Filials,
+  Filters,
+  Home,
+  LoginPage,
+  Postomat,
+} from "./pages";
 import { ErrorBoundarayContainer, Layout } from "./components";
 import { Provider } from "mobx-react";
 import { useEffect, useState } from "react";
 import { NotFound } from "./components/NotFound/NotFound";
 import { ToastContainer } from "react-toastify";
 import searchStore from "./store/searchStore";
+import { PostomatDepartments } from "./pages/postomat/postomatDepartments/postomatDepartments";
 
 const App = () => {
   const [totalPaymentFee, setTotalPaymentFee] = useState(0);
@@ -46,6 +55,8 @@ const App = () => {
               <Route path="/arxiv" element={<Arxive />} />
               <Route path="/filters" element={<Filters />} />
               <Route path="/discounted" element={<Discounted />} />
+              <Route path="/postomat" element={<Postomat />} />{" "}
+              <Route path="/departments" element={<PostomatDepartments />} />
             </Route>
           </Routes>
         </Router>

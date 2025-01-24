@@ -24,7 +24,9 @@ export const Discounted = () => {
         { headers: { "ngrok-skip-browser-warning": "true" } }
       );
       console.log(res.data.data);
-      setData(res.data.data.data.dashboards);
+      if (res.data.data.data?.dashboards) {
+        setData(res.data.data.data.dashboards);
+      }
       setTotalItems(res.data.data.total_items);
     } catch (error) {
       console.log(error);

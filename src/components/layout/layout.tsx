@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { Layout as AntLayout, Button, Menu, Typography } from "antd";
 import { Outlet, useLocation, useNavigate } from "react-router-dom";
-import { RiHistoryFill, RiHome6Line } from "react-icons/ri";
+import { RiBuilding4Line, RiHistoryFill, RiHome6Line } from "react-icons/ri";
 import { LuFilter, LuUserRound } from "react-icons/lu";
 import { TbLogout2 } from "react-icons/tb";
 import { PiBuildingsLight } from "react-icons/pi";
@@ -39,10 +39,16 @@ export const Layout = ({
       setSelectedKey("1");
     } else if (path === "/filials") {
       setSelectedKey("2");
-    } else if (path === "/arxiv") {
+    } else if (path === "/postomat") {
       setSelectedKey("3");
-    } else if (path === "/filters") {
+    } else if (path === "/arxiv") {
       setSelectedKey("4");
+    } else if (path === "/filters") {
+      setSelectedKey("5");
+    } else if (path === "/discounted") {
+      setSelectedKey("2");
+    } else if (path === "/departments") {
+      setSelectedKey("3");
     }
   }, [location]);
 
@@ -98,9 +104,9 @@ export const Layout = ({
               : []),
             {
               key: "3",
-              icon: <RiHistoryFill size={27} />,
-              label: "Arxiv",
-              onClick: () => navigate("/arxiv"),
+              icon: <RiBuilding4Line size={27} />,
+              label: "Postomat",
+              onClick: () => navigate("/postomat"),
               className:
                 selectedKey === "3"
                   ? "!text-[#FE5222] font-medium text-[25px] !bg-transparent"
@@ -108,11 +114,21 @@ export const Layout = ({
             },
             {
               key: "4",
+              icon: <RiHistoryFill size={27} />,
+              label: "Arxiv",
+              onClick: () => navigate("/arxiv"),
+              className:
+                selectedKey === "4"
+                  ? "!text-[#FE5222] font-medium text-[25px] !bg-transparent"
+                  : "font-medium text-[25px] !text-[#797979]",
+            },
+            {
+              key: "5",
               icon: <LuFilter size={25} />,
               label: "Filter",
               onClick: () => navigate("/filters"),
               className:
-                selectedKey === "4"
+                selectedKey === "5"
                   ? "!text-[#FE5222] font-medium text-[25px] !bg-transparent"
                   : "font-medium text-[25px] !text-[#797979]",
             },
