@@ -33,7 +33,7 @@ export const FiltersHeader = ({
     dateFrom ? dayjs(dateFrom) : null
   );
   const [toDate, setToDate] = useState<Dayjs | null>(
-    dateTo ? dayjs(dateTo) : null
+    dateTo ? dayjs(dateTo).subtract(1, "day") : null
   );
 
   const handleFromDateChange = (date: Dayjs | null) => {
@@ -44,9 +44,10 @@ export const FiltersHeader = ({
 
   const handleToDateChange = (date: Dayjs | null) => {
     if (date) {
-      const updatedDate = date.add(3, "hour");
+      const updatedDate = date.add(1, "day").add(3, "hour");
+      const displayDate = date;
       const formattedDate = updatedDate.format("YYYY-MM-DD HH:mm:ss");
-      setToDate(updatedDate);
+      setToDate(displayDate);
       setDateTo(formattedDate);
     } else {
       setToDate(null);
