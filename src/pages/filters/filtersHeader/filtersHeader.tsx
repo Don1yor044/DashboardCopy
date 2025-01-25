@@ -1,4 +1,6 @@
-import { Button, Select, Typography } from "antd";
+import { Button, DatePicker, Select, Typography } from "antd";
+import dayjs, { Dayjs } from "dayjs";
+import { useState } from "react";
 
 export const FiltersHeader = ({
   handleCountSort,
@@ -8,6 +10,11 @@ export const FiltersHeader = ({
   handleRegionChange,
   region,
   activeButton,
+  setDateFrom,
+  setDateTo,
+  handleDateRangeFilter,
+  dateFrom,
+  dateTo,
 }: {
   handleCountSort: () => void;
   handlePaymeSort: () => void;
@@ -16,7 +23,36 @@ export const FiltersHeader = ({
   handleRegionChange: (value: string) => void;
   region: string;
   activeButton: string;
+  setDateFrom: (date: string) => void;
+  setDateTo: (date: string) => void;
+  handleDateRangeFilter: () => void;
+  dateFrom: string;
+  dateTo: string;
 }) => {
+  const [fromDate, setFromDate] = useState<Dayjs | null>(
+    dateFrom ? dayjs(dateFrom) : null
+  );
+  const [toDate, setToDate] = useState<Dayjs | null>(
+    dateTo ? dayjs(dateTo) : null
+  );
+
+  const handleFromDateChange = (date: Dayjs | null) => {
+    const formattedDate = date ? date.format("YYYY-MM-DD HH:mm:ss") : "";
+    setFromDate(date);
+    setDateFrom(formattedDate);
+  };
+
+  const handleToDateChange = (date: Dayjs | null) => {
+    if (date) {
+      const updatedDate = date.add(3, "hour");
+      const formattedDate = updatedDate.format("YYYY-MM-DD HH:mm:ss");
+      setToDate(updatedDate);
+      setDateTo(formattedDate);
+    } else {
+      setToDate(null);
+      setDateTo("");
+    }
+  };
   return (
     <>
       <div className="flex gap-3 mt-10 bg-white-100 px-4 py-3 rounded-2xl justify-between shadow-[0px_0px_30px_-10px_rgba(34,60,80,0.38)]">
@@ -46,6 +82,42 @@ export const FiltersHeader = ({
               { value: "14", label: "Qoraqalpog'iston" },
             ]}
           />
+        </div>
+        <div>
+          <div className="flex justify-center mb-2">
+            <Typography className="!text-lg font-semibold">
+              Vaqt bo'yicha{" "}
+            </Typography>
+          </div>
+          <div className="flex items-center gap-2">
+            <div>
+              <DatePicker
+                value={fromDate}
+                onChange={handleFromDateChange}
+                format="YYYY-MM-DD"
+                placeholder="Boshlanish"
+                className="h-10 w-32 rounded-lg text-xl"
+              />
+            </div>
+            <div>
+              <DatePicker
+                value={toDate}
+                onChange={handleToDateChange}
+                format="YYYY-MM-DD"
+                placeholder="Tugash "
+                className="h-10 w-32 rounded-lg text-xl"
+              />
+            </div>
+            <div>
+              <Button
+                type="primary"
+                className="p-2"
+                onClick={handleDateRangeFilter}
+              >
+                Qidirish
+              </Button>
+            </div>
+          </div>
         </div>
         <div>
           <Typography className=" !text-lg ms-3 font-semibold">

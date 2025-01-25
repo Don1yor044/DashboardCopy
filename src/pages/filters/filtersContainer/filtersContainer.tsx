@@ -16,6 +16,10 @@ export const FiltersContainer = () => {
 
   const [currentPage, setCurrentPage] = useState(1);
   const [totalItems, setTotalItems] = useState(0);
+
+  const [dateFrom, setDateFrom] = useState<string>("");
+  const [dateTo, setDateTo] = useState<string>("");
+
   const pageSize = 10;
 
   const navigate = useNavigate();
@@ -84,6 +88,15 @@ export const FiltersContainer = () => {
     fetchData(`/api/admin/pda/item/sort/by/count`);
   };
 
+  const handleDateRangeFilter = () => {
+    if (dateFrom && dateTo) {
+      fetchData(
+        `/api/admin/pda/item/sort/by/date?from=${dateFrom}&to=${dateTo}`
+      );
+    } else {
+      message.warning("Iltimos, sanani kiriting");
+    }
+  };
   useEffect(() => {
     fetchData(`/api/admin/pda/item/sort/by/region/${currentPage}`);
   }, [currentPage]);
@@ -110,6 +123,11 @@ export const FiltersContainer = () => {
         handleRegionChange={handleRegionChange}
         region={region}
         activeButton={activeButton}
+        setDateFrom={setDateFrom}
+        setDateTo={setDateTo}
+        dateTo={dateTo}
+        dateFrom={dateFrom}
+        handleDateRangeFilter={handleDateRangeFilter}
       />
       {loading ? (
         <div className="flex justify-center mt-28 text-4xl">

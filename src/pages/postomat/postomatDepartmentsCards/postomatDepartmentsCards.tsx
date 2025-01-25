@@ -17,9 +17,9 @@ export const PostomatDepartmentsCards = ({
   return (
     <>
       <div
-        className={`rounded-3xl border-2 ${
+        className={`rounded-3xl border-2${
           item.status === 2 ? "border-[#FE5222]" : "border-green-500"
-        } `}
+        }`}
       >
         <div
           className={`${
@@ -42,7 +42,7 @@ export const PostomatDepartmentsCards = ({
               block_number
             </Typography>
             <Typography className="text-xl font-bold text-black">
-              {item.block_number}{" "}
+              {item.block_number}
             </Typography>
           </div>
           <div className="flex items-center border-b-2 justify-between py-2">
@@ -50,19 +50,19 @@ export const PostomatDepartmentsCards = ({
               cell_number
             </Typography>
             <Typography className="text-xl font-bold text-black">
-              {item.cell_number}{" "}
+              {item.cell_number}
             </Typography>
           </div>
           <div className="flex items-center border-b-2 justify-between py-2">
             <Typography className="text-lg font-semibold">status</Typography>
             <Typography className="text-xl font-bold text-black">
-              {item.status}{" "}
+              {item.status}
             </Typography>
           </div>
           <div className="flex justify-between py-2">
             <Typography className="text-lg font-semibold">locker_id</Typography>
             <Typography className="text-xl font-bold text-black">
-              {item.locker_id}{" "}
+              {item.locker_id}
             </Typography>
           </div>
         </div>
