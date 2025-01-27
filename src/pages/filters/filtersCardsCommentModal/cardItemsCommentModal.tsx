@@ -16,7 +16,6 @@ export const CardItemsCommentModal = ({
   const [commentType, setCommentType] = useState<number | null>(null);
   const [commentText, setCommentText] = useState("");
   const [commentPassword, setCommentPassword] = useState("");
-  console.log(commentType, "commentType");
 
   const handleSendComment = async () => {
     const token = localStorage.getItem("token");
@@ -24,12 +23,12 @@ export const CardItemsCommentModal = ({
       console.error("Token is missing or invalid");
       return;
     }
-    if (commentPassword !== "donik") {
+    if (commentType == 7 && "doni") {
       return errorToast("Parol noto'g'ri kiritildi !");
     }
     try {
       await baseURL.put(
-        `api/client/dashboard/filter/${itemId}`,
+        `/api/client/dashboard/filter/${itemId}`,
         {
           comment: commentText,
           status: Number(commentType),
@@ -89,7 +88,7 @@ export const CardItemsCommentModal = ({
           value={commentText}
           onChange={(e) => setCommentText(e.target.value)}
           placeholder="Izoh yozing !"
-          className="!max-h-32 !min-h-32"
+          className="!max-h-32 !min-h-32 font-semibold text-lg"
           rows={4}
         />
         {commentType == 7 && (
@@ -97,7 +96,7 @@ export const CardItemsCommentModal = ({
             <Input
               value={commentPassword}
               placeholder="Parol kiritng !"
-              required={true}
+              className="text-base font-semibold"
               onChange={(e) => setCommentPassword(e.target.value)}
             />
           </>

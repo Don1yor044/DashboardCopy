@@ -2,8 +2,13 @@ import { Input } from "antd";
 import { Header } from "antd/es/layout/layout";
 import { LuSearch } from "react-icons/lu";
 import { observer } from "mobx-react-lite";
+import searchStore from "../../../store/searchStore";
 
-export const FilialsHeaderSearch = observer(() => {
+export const FilterHeaderSearch = observer(() => {
+  const handleChange = (event: string) => {
+    searchStore.setSearchFilter(event);
+  };
+
   return (
     <>
       <Header
@@ -14,9 +19,10 @@ export const FilialsHeaderSearch = observer(() => {
           <LuSearch size={25} color="#FE5222" />
           <Input
             allowClear
-            placeholder="Qidiruv..."
-            className="border-none text-xl "
-            disabled={true}
+            value={searchStore.searchFilter}
+            placeholder="Filterdan qidiruv..."
+            onChange={(e) => handleChange(e.target.value)}
+            className="border-none text-xl"
           />
         </div>
       </Header>

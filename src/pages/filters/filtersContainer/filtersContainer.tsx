@@ -7,8 +7,10 @@ import { FiltersHeader } from "../filtersHeader/filtersHeader";
 import { IfiltersData } from "../../../types/types";
 import { FiltersCards } from "../filtersCards/filtersCards";
 import { paginationStyle } from "../../../components/paginationStyles/paginationStyles";
+import searchStore from "../../../store/searchStore";
+import { observer } from "mobx-react-lite";
 
-export const FiltersContainer = () => {
+export const FiltersContainer = observer(() => {
   const [region, setRegion] = useState<string>("1");
   const [data, setData] = useState<IfiltersData[]>([]);
   const [loading, setLoading] = useState(false);
@@ -45,6 +47,7 @@ export const FiltersContainer = () => {
           },
         }
       );
+      console.log(response.data.data.data, "response");
 
       const dashboard = response.data?.data?.data || [];
       setTotalItems(response.data.data.total);
@@ -76,6 +79,7 @@ export const FiltersContainer = () => {
           },
         }
       );
+      console.log(response.data.data, "response");
 
       const dashboard = response.data?.data || [];
       setTotalItems(response.data.total || dashboard.length);
@@ -126,6 +130,7 @@ export const FiltersContainer = () => {
   };
 
   const handleDateRangeFilter = () => {
+    setActiveButton("dateRage");
     if (dateFrom && dateTo) {
       setCurrentEndpoint(
         `/api/admin/pda/item/sort/by/date?from=${dateFrom}&to=${dateTo}`
@@ -157,6 +162,7 @@ export const FiltersContainer = () => {
 
   return (
     <>
+      {searchStore.searchFilter}
       <FiltersHeader
         handleCountSort={handleCountSort}
         handlePaymeSort={handlePaymeSort}
@@ -198,4 +204,4 @@ export const FiltersContainer = () => {
       )}
     </>
   );
-};
+});

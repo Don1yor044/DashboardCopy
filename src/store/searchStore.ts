@@ -4,6 +4,7 @@ class SearchStore {
   searchDashboard = "";
   searchFilial = "";
   searchArxive = "";
+  searchFilter = "";
 
   constructor() {
     makeAutoObservable(this);
@@ -19,6 +20,9 @@ class SearchStore {
 
   setSearchArxive(query: string) {
     this.searchArxive = query;
+  }
+  setSearchFilter(query: string) {
+    this.searchFilter = query;
   }
 }
 

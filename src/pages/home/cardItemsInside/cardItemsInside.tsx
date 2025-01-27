@@ -130,7 +130,7 @@ export const CardItemsInside = ({
                     case 8:
                       return <FiPhoneOff size={22} />;
                     case 9:
-                      return <LuPhoneCall size={22} />;
+                      return <LuPhoneCall size={23} />;
                     default:
                       return "—";
                   }

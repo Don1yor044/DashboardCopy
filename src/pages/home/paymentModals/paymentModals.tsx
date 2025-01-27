@@ -116,9 +116,9 @@ const PaymentModals: React.FC<PaymentModalProps> = ({
         >
           <Form
             className="mt-10"
-            initialValues={{
-              [config.fieldName]: item[config.fieldName as keyof IDashboards],
-            }}
+            // initialValues={{
+            //   [config.fieldName]: item[config.fieldName as keyof IDashboards],
+            // }}
             onFinish={(values) => handleLocalSave(item.id, values)}
           >
             <Form.Item name={config.fieldName}>
@@ -134,7 +134,7 @@ const PaymentModals: React.FC<PaymentModalProps> = ({
                 />
               ) : config.isTextArea ? (
                 <TextArea
-                  className="max-h-20 !min-h-20"
+                  className="max-h-20 !min-h-20 text-base font-semibold"
                   placeholder={config.placeholder}
                 />
               ) : (

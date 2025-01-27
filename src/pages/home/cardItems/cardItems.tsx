@@ -70,6 +70,7 @@ export const CardItems = observer(
             paid_by_cash: Number(item.paid_by_cash),
             paid_by_payme: Number(item.paid_by_payme),
             discounted_fee: Number(item.discounted_fee),
+            comment: item.comment,
             status: Number(item.status),
           },
           {

@@ -30,45 +30,80 @@ export const FiltersCards = ({ data }: { data: IfiltersData[] }) => {
                     <div className="w-[35%] border-e text-lg bg-yellow-500 rounded-s-lg p-3 text-white space-y-2">
                       <div className="border-b">ID:</div>
                       <div className="border-b">Ism:</div>
-                      <div className="border-b">Telefon raqam:</div>
+                      {item.phone !== undefined && (
+                        <div className="border-b">Telefon raqam:</div>
+                      )}
+
                       <div className="border-b">Manzil:</div>
                       <div className="border-b">Shahar:</div>
-                      <div className="border-b">To'lov:</div>
-                      <div className="border-b">Soni:</div>
-                      <div className="border-b">Comment:</div>
-                      <div className="border-b">Sotib olingan:</div>
-                      <div>Punktga kelgan:</div>
+                      {item.payment_fees !== undefined && (
+                        <div className="border-b">To'lov:</div>
+                      )}
+                      {item.express_nums !== undefined && (
+                        <div className="border-b">Soni:</div>
+                      )}
+                      {item.comment !== undefined && (
+                        <div className="border-b">Comment:</div>
+                      )}
+                      {item.purchase_time !== undefined && (
+                        <div className="border-b">Sotib olingan:</div>
+                      )}
+                      {item.created_at !== undefined && (
+                        <div className={`${item.count && "border-b"} `}>
+                          Punktga kelgan:
+                        </div>
+                      )}
+                      {item.count !== undefined && <div>Soni:</div>}
                     </div>
+
+                    {/* {"2chi qator"} */}
                     <div className="w-[65%] text-lg py-3 px-2 space-y-2">
                       <div className="border-b">{item.user_id || "—"}</div>
                       <div className="border-b">{item.full_name || "—"}</div>
-                      <div className="border-b">{item.phone || "—"}</div>
+                      {item.phone !== undefined && (
+                        <div className="border-b">{item.phone || "—"}</div>
+                      )}
                       <div className="border-b">{item.address || "—"}</div>
                       <div className="border-b">{item.city || "—"}</div>
-                      <div className="border-b">{item.payment_fees || "—"}</div>
-                      <div className="border-b">
-                        {item.express_num || item.express_nums || "—"}
-                      </div>
-                      <div className="border-b flex justify-between items-center">
-                        {item.comment || "—"}
-                        <div
-                          className="bg-[#1677ff] text-white rounded-full p-[4px] cursor-pointer h-8 mt-[-3px]"
-                          onClick={() => openCommentModal(item.user_id)} // O'rnatish
-                        >
-                          <CiEdit size={23} />
+                      {item.payment_fees !== undefined && (
+                        <div className="border-b">
+                          {item.payment_fees || "—"}
                         </div>
-                      </div>
-                      <div className="border-b">
-                        {item.purchase_time || "—"}
-                      </div>
-                      <div>
-                        {item.created_at
-                          ? new Date(item.created_at)
-                              .toISOString()
-                              .replace("T", " ")
-                              .substring(0, 19)
-                          : "—"}
-                      </div>
+                      )}{" "}
+                      {item.express_nums !== undefined && (
+                        <div className="border-b">
+                          {item.express_nums || "—"}
+                        </div>
+                      )}
+                      {item.comment !== undefined && (
+                        <div className="border-b flex justify-between items-center">
+                          {item.comment || "—"}{" "}
+                          <div
+                            className="bg-[#1677ff] text-white rounded-full p-[4px] cursor-pointer h-8 mt-[-3px]"
+                            onClick={() => openCommentModal(item.user_id)}
+                          >
+                            <CiEdit size={23} />
+                          </div>
+                        </div>
+                      )}
+                      {item.purchase_time !== undefined && (
+                        <div className="border-b">
+                          {item.purchase_time || "—"}
+                        </div>
+                      )}
+                      {item.created_at !== undefined && (
+                        <div className={`${item.count && "border-b"} `}>
+                          {item.created_at
+                            ? new Date(item.created_at)
+                                .toISOString()
+                                .replace("T", " ")
+                                .substring(0, 19)
+                            : "—"}
+                        </div>
+                      )}
+                      {item.count !== undefined && (
+                        <div>{item.count || "—"}</div>
+                      )}
                     </div>
                   </div>
                 </div>

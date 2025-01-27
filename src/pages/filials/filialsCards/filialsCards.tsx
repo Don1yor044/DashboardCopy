@@ -4,14 +4,18 @@ import { useEffect, useState } from "react";
 import { observer } from "mobx-react-lite";
 import { useNavigate } from "react-router-dom";
 import { FilialsCardsItems } from "../filialsCardsItems/filialsCardsItems";
+
 export interface IfilialsCardsData {
   id: number;
   name: string;
   payment_fee: number;
+  weight_delivered_by_seller: number;
   paid_payment_fee: number;
   paid_by_card: number;
   paid_by_payme: number;
+  left_weight: number;
   paid_by_cash: number;
+  count_delivered_by_seller: number;
   delivered_item_counts: number;
   received_item_counts: number;
   discounted_fee: number;
@@ -93,7 +97,7 @@ export const FilialsCards = observer(
       <Row gutter={[20, 20]} className="mt-10">
         {dataCourse.map((item, index) => (
           <Col
-            xl={8}
+            xl={9}
             span={12}
             key={index}
             onClick={() => navigate("/discounted")}

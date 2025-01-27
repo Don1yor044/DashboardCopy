@@ -5,8 +5,9 @@ import { RiBuilding4Line, RiHistoryFill, RiHome6Line } from "react-icons/ri";
 import { LuFilter, LuUserRound } from "react-icons/lu";
 import { TbLogout2 } from "react-icons/tb";
 import { PiBuildingsLight } from "react-icons/pi";
-import { DashboardHeaderSearch, FilialsHeaderSearch } from "../headers";
+import { DashboardHeaderSearch } from "../headers";
 import { ArxiveHeaderSearch } from "../headers/arxiveHeaderSearch";
+import { FilterHeaderSearch } from "../headers/filterHeaderSearch";
 
 const { Sider, Content } = AntLayout;
 
@@ -160,8 +161,8 @@ export const Layout = ({
           />
         ) : location.pathname === "/arxiv" ? (
           <ArxiveHeaderSearch />
-        ) : location.pathname === "/filials" ? ( // Fixed: add this condition
-          <FilialsHeaderSearch />
+        ) : location.pathname === "/filters" ? (
+          <FilterHeaderSearch />
         ) : (
           <></>
         )}

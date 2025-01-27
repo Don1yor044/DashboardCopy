@@ -17,7 +17,7 @@ export const PostomatDepartmentsCards = ({
   return (
     <>
       <div
-        className={`rounded-3xl border-2${
+        className={`rounded-3xl border-2 ${
           item.status === 2 ? "border-[#FE5222]" : "border-green-500"
         }`}
       >

@@ -58,7 +58,7 @@ export const FiltersHeader = ({
   };
   return (
     <>
-      <div className="flex gap-3 mt-10 bg-white-100 px-4 py-3 rounded-2xl justify-between shadow-[0px_0px_30px_-10px_rgba(34,60,80,0.38)]">
+      <div className="flex gap-3 bg-white-100 px-4 py-3 rounded-2xl justify-between shadow-[0px_0px_30px_-10px_rgba(34,60,80,0.38)]">
         <div className="px-5">
           <Typography className=" !text-lg font-semibold">
             Viloyat bo'yicha

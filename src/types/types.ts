@@ -28,6 +28,7 @@ export interface IDashboards {
 export interface IfiltersData {
   id: string;
   user_id: number;
+  count: number;
   comment: string;
   created_at: string;
   full_name: string;

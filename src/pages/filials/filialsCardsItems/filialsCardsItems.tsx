@@ -99,7 +99,7 @@ export const FilialsCardsItems = ({ item }: { item: IfilialsCardsData }) => {
                 <span className="text-xl text-[#797979]">so'm</span>
               </Typography>
             </div>{" "}
-            <div className="flex border-b-2 justify-between py-2 mt-4">
+            <div className="flex border-b-2 justify-between py-2 mt-3">
               <div className="flex gap-3 items-center">
                 <div className="bg-[#FE5222] h-9 w-9 rounded-full flex justify-center items-center">
                   <CiDeliveryTruck size={22} color="white" />
@@ -112,7 +112,7 @@ export const FilialsCardsItems = ({ item }: { item: IfilialsCardsData }) => {
                 {kgFormatter(item.delivered_weight)}{" "}
               </Typography>
             </div>{" "}
-            <div className="flex  justify-between py-2">
+            <div className="flex justify-between py-2">
               <div className="flex gap-3 items-center">
                 <div className="bg-[#FE5222] h-9 w-9 rounded-full flex justify-center items-center">
                   <BsBoxSeam size={20} color="white" />
@@ -126,8 +126,8 @@ export const FilialsCardsItems = ({ item }: { item: IfilialsCardsData }) => {
               </Typography>
             </div>
           </div>
-          <div className="my-5">
-            <div className="flex justify-between items-center py-1">
+          <div className="my-3">
+            <div className="flex border-b-2 justify-between items-center py-2">
               <div className="flex gap-3 items-center">
                 <div className="bg-[#FE5222] h-9 w-9 rounded-full flex justify-center items-center">
                   <CiDeliveryTruck size={25} color="white" />
@@ -143,7 +143,7 @@ export const FilialsCardsItems = ({ item }: { item: IfilialsCardsData }) => {
                 ta
               </Typography>
             </div>
-            <div className="flex justify-between items-center">
+            <div className="flex justify-between items-center py-2">
               <div className="flex gap-3 items-center">
                 <div className="bg-[#FE5222] h-9 w-9 rounded-full flex justify-center items-center">
                   <BsBoxSeam size={22} color="white" />
@@ -159,6 +159,52 @@ export const FilialsCardsItems = ({ item }: { item: IfilialsCardsData }) => {
                 ta
               </Typography>
             </div>
+          </div>
+          <div className="my-3">
+            <div className="flex border-b-2  justify-between items-center py-2">
+              <div className="flex gap-3 items-center ">
+                <div className="bg-[#FE5222] h-9 w-9 rounded-full flex justify-center items-center">
+                  {/* <CiDeliveryTruck size={25} color="white" /> */}
+                </div>
+                <Typography className="text-lg font-semibold">
+                  Sotuvchi orqali yetkazilgan
+                </Typography>
+              </div>
+              <Typography className="text-3xl font-bold text-black">
+                <span className="text-[#FE5222]">
+                  {kgFormatter(item.weight_delivered_by_seller) || "0"}
+                </span>{" "}
+              </Typography>
+            </div>
+            <div className="flex  justify-between items-center py-2">
+              <div className="flex gap-3 items-center">
+                <div className="bg-[#FE5222] h-9 w-9 rounded-full flex justify-center items-center">
+                  {/* <BsBoxSeam size={22} color="white" /> */}
+                </div>
+                <Typography className="text-lg font-semibold">
+                  Sotuvchi orqali yetkazilgan
+                </Typography>
+              </div>
+              <Typography className="text-3xl font-bold text-black">
+                <span className="text-[#FE5222]">
+                  {item.count_delivered_by_seller || "0"}
+                </span>{" "}
+                ta
+              </Typography>
+            </div>
+          </div>
+          <div className="flex justify-between py-2">
+            <div className="flex gap-3 items-center">
+              <div className="bg-[#FE5222] h-9 w-9 rounded-full flex justify-center items-center">
+                {/* <MdOutlineDiscount size={22} color="white" /> */}
+              </div>
+              <Typography className="text-lg font-semibold">
+                Punkdagi mavjud kg
+              </Typography>
+            </div>
+            <Typography className="text-4xl font-bold text-green-500">
+              {kgFormatter(item.left_weight)}{" "}
+            </Typography>
           </div>
         </div>
       </div>
