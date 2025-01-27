@@ -58,7 +58,7 @@ export const Arxive = observer(() => {
         const dashboards = res.data.data.data?.dashboards;
 
         setData(Array.isArray(dashboards) ? dashboards : []);
-        setTotalItems(res.data.data.total_items);
+        setTotalItems(res.data.data.total_pages);
       } else {
         setData([]);
         setTotalItems(0);
