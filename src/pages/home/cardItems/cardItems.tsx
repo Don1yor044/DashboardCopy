@@ -10,9 +10,9 @@ export type ModalType =
   | "card"
   | "cash"
   | "payme"
-  | "comment"
   | "discounted_fee"
-  | "status";
+  | "status"
+  | "comment";
 
 export const CardItems = observer(
   ({
@@ -66,12 +66,11 @@ export const CardItems = observer(
         const response = await baseURL.put(
           `/api/client/dashboard/${id}`,
           {
-            paid_by_card: item.paid_by_card,
-            paid_by_cash: item.paid_by_cash,
-            paid_by_payme: item.paid_by_payme,
-            discounted_fee: item.discounted_fee,
-            comment: item.comment,
-            status: item.status,
+            paid_by_card: Number(item.paid_by_card),
+            paid_by_cash: Number(item.paid_by_cash),
+            paid_by_payme: Number(item.paid_by_payme),
+            discounted_fee: Number(item.discounted_fee),
+            status: Number(item.status),
           },
           {
             headers: {

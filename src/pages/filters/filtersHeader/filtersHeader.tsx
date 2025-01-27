@@ -15,6 +15,7 @@ export const FiltersHeader = ({
   handleDateRangeFilter,
   dateFrom,
   dateTo,
+  handleUser,
 }: {
   handleCountSort: () => void;
   handlePaymeSort: () => void;
@@ -28,6 +29,7 @@ export const FiltersHeader = ({
   handleDateRangeFilter: () => void;
   dateFrom: string;
   dateTo: string;
+  handleUser: () => void;
 }) => {
   const [fromDate, setFromDate] = useState<Dayjs | null>(
     dateFrom ? dayjs(dateFrom) : null
@@ -143,6 +145,15 @@ export const FiltersHeader = ({
             </Button>
           </div>
         </div>
+        <div>
+          <Typography className=" !text-lg mb-2 font-semibold">User</Typography>
+          <Button
+            className={activeButton === "user" ? "bg-green-500 text-white" : ""}
+            onClick={handleUser}
+          >
+            User
+          </Button>
+        </div>{" "}
         <div>
           <Typography className=" !text-lg mb-2 font-semibold">
             Kargo puli bo'yicha

@@ -27,10 +27,15 @@ export interface IDashboards {
 }
 export interface IfiltersData {
   id: string;
-  user_id: string;
+  user_id: number;
+  comment: string;
+  created_at: string;
   full_name: string;
+  express_nums?: string;
+  phone: number;
   address: string;
   city: string;
+  payment_fees?: string;
   express_num: string;
   purchase_time: string;
 }

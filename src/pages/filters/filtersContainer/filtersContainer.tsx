@@ -76,6 +76,38 @@ export const FiltersContainer = () => {
     fetchData(`/api/admin/pda/item/sort/by/date/asc`);
   };
 
+  const handleUser = async () => {
+    setActiveButton("user");
+    setCurrentPage(1);
+    setLoading(true);
+    const token = localStorage.getItem("token");
+    if (!token) {
+      console.error("Token is missing");
+      navigate("/");
+      return;
+    }
+
+    try {
+      const response = await baseURL.get(`api/client/dashboard/filter/users/`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+
+      console.log(response.data);
+
+      const dashboard = response.data?.data || [];
+      // console.log(dashboard, "User data");
+
+      setData(dashboard);
+    } catch (error) {
+      console.error("API Error:", error);
+      message.error("Failed to fetch data. Please try again.");
+      setData([]);
+    } finally {
+      setLoading(false);
+    }
+  };
   const handlePaymeSort = () => {
     setActiveButton("payme");
     setCurrentPage(1);
@@ -128,6 +160,7 @@ export const FiltersContainer = () => {
         dateTo={dateTo}
         dateFrom={dateFrom}
         handleDateRangeFilter={handleDateRangeFilter}
+        handleUser={handleUser}
       />
       {loading ? (
         <div className="flex justify-center mt-28 text-4xl">

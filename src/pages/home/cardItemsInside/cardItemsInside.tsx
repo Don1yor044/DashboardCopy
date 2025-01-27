@@ -2,12 +2,14 @@ import { Button } from "antd";
 import { BsCheckLg, BsCurrencyDollar } from "react-icons/bs";
 import { priceFormatter } from "../../../components/priceFormat/priceFormat";
 import { HiOutlineCreditCard } from "react-icons/hi";
-import { MdOutlineDiscount } from "react-icons/md";
+import { MdOutlineDiscount, MdOutlineEmail } from "react-icons/md";
 import { IDashboards } from "../../../types/types";
 import { ModalType } from "../cardItems/cardItems";
 import { CiDeliveryTruck, CiEdit } from "react-icons/ci";
 import { kgFormatter } from "../../../components";
-
+import { HiOutlineBuildingStorefront } from "react-icons/hi2";
+import { FiPhoneOff } from "react-icons/fi";
+import { LuPhoneCall } from "react-icons/lu";
 export const CardItemsInside = ({
   item,
   isSelected,
@@ -95,15 +97,44 @@ export const CardItemsInside = ({
                     return "Kuryer orqali yetkazildi";
                   case 6:
                     return "Yandex orqali yetkazildi";
+                  case 7:
+                    return "Sotuvchi tomonidan berildi";
+                  case 8:
+                    return "Aloqaga chiqmadi";
+                  case 9:
+                    return "Gaplashilgan";
                   default:
                     return "—";
                 }
               })()}
               <div
-                className="bg-[#1677ff] text-white rounded-full p-[4px] cursor-pointer h-8 mt-[-3px]"
+                className="bg-[#1677ff] text-white rounded-full p-[4px] cursor-pointer mt-[-3px]"
                 onClick={() => openModal(item, "status")}
               >
-                <CiDeliveryTruck size={23} />
+                {(() => {
+                  switch (item.status) {
+                    case 1:
+                      return <HiOutlineBuildingStorefront size={22} />;
+                    case 2:
+                      return <HiOutlineBuildingStorefront size={22} />;
+                    case 3:
+                      return <MdOutlineEmail size={22} />;
+                    case 4:
+                      return <CiDeliveryTruck size={22} />;
+                    case 5:
+                      return <CiDeliveryTruck size={22} />;
+                    case 6:
+                      return <CiDeliveryTruck size={22} />;
+                    case 7:
+                      return <HiOutlineBuildingStorefront size={22} />;
+                    case 8:
+                      return <FiPhoneOff size={22} />;
+                    case 9:
+                      return <LuPhoneCall size={22} />;
+                    default:
+                      return "—";
+                  }
+                })()}
               </div>
             </div>
             <div className="border-b">{item.express_num || "—"}</div>
@@ -184,7 +215,7 @@ export const CardItemsInside = ({
             </Button>
           </div>
         )}
-      </div>
+      </div>{" "}
     </>
   );
 };
