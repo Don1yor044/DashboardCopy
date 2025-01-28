@@ -132,6 +132,7 @@ export const Cards = observer(
         headers: getHeaders(token),
         timeout: 10000,
       });
+      console.log(response.data.data.dashboards, "Dashboard data");
 
       setDataCourse(response.data.data.dashboards);
       setTotalItems(response.data.total_items ?? 0);

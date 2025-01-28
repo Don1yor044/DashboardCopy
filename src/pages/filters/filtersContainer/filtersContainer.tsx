@@ -7,7 +7,6 @@ import { FiltersHeader } from "../filtersHeader/filtersHeader";
 import { IfiltersData } from "../../../types/types";
 import { FiltersCards } from "../filtersCards/filtersCards";
 import { paginationStyle } from "../../../components/paginationStyles/paginationStyles";
-import searchStore from "../../../store/searchStore";
 import { observer } from "mobx-react-lite";
 
 export const FiltersContainer = observer(() => {
@@ -162,7 +161,6 @@ export const FiltersContainer = observer(() => {
 
   return (
     <>
-      {searchStore.searchFilter}
       <FiltersHeader
         handleCountSort={handleCountSort}
         handlePaymeSort={handlePaymeSort}

@@ -1,4 +1,4 @@
-import { Form, Modal, Radio, RadioChangeEvent, Typography } from "antd";
+import { Form, Input, Modal, Radio, RadioChangeEvent, Typography } from "antd";
 import baseURL from "../../../utils/api";
 import { toast } from "react-toastify";
 import { useEffect, useState } from "react";
@@ -17,7 +17,7 @@ export const SearchPaymeInput: React.FC<SearchPaymeInputProps> = ({
 }) => {
   const [totalPaid, setTotalPaid] = useState(0);
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [value, setValue] = useState(1);
+  const [radioValue, setRadioValue] = useState(1);
 
   const notifySuccess = () => successToast("Muvaffaqiyatli saqlandi !");
   const notifyError = () => errorToast("Xatolik qaytadan urinib ko'ring !");
@@ -71,6 +71,9 @@ export const SearchPaymeInput: React.FC<SearchPaymeInputProps> = ({
       const paidByPayme: number = form.getFieldValue("paymeTolov");
       const discountedFee: number = form.getFieldValue("chegirmaTolov");
 
+      if (radioValue === 7 && form.getFieldValue("password") !== "17abu17") {
+        return errorToast("Parol noto'g'ri kiritildi !");
+      }
       try {
         const idToUse = userId === 0 ? searchId : userId;
         const response = await baseURL.put(
@@ -81,7 +84,7 @@ export const SearchPaymeInput: React.FC<SearchPaymeInputProps> = ({
             total_paid_by_payme: Number(paidByPayme),
             total_discounted_fee: Number(discountedFee),
             total_dashboard_ids: isSelected,
-            status: value,
+            status: radioValue,
           },
           {
             headers: {
@@ -137,7 +140,7 @@ export const SearchPaymeInput: React.FC<SearchPaymeInputProps> = ({
   };
 
   const onChange = (e: RadioChangeEvent) => {
-    setValue(e.target.value);
+    setRadioValue(e.target.value);
     console.log(e.target.value, "Radio number");
   };
   return (
@@ -165,7 +168,7 @@ export const SearchPaymeInput: React.FC<SearchPaymeInputProps> = ({
         >
           <Radio.Group
             onChange={onChange}
-            value={value}
+            value={radioValue}
             style={{
               display: "flex",
               flexDirection: "column",
@@ -224,8 +227,28 @@ export const SearchPaymeInput: React.FC<SearchPaymeInputProps> = ({
                   </div>
                 ),
               },
+              {
+                value: 7,
+                label: (
+                  <div className="flex justify-between gap-5 ps-5 w-full items-center">
+                    <Typography className="text-xl">
+                      Sotuvchi tomonidan berildi
+                    </Typography>
+                  </div>
+                ),
+              },
             ]}
           />
+          {radioValue === 7 && (
+            <Form.Item className="mt-5">
+              <Input.Password
+                name="password"
+                visibilityToggle={true}
+                placeholder="parol kiritng !"
+                className="text-semibold text-base"
+              />
+            </Form.Item>
+          )}
         </Modal>
       </Form>
     </>

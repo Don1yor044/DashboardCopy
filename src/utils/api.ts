@@ -1,6 +1,6 @@
 import axios from "axios";
 const baseURL = axios.create({
-  baseURL: "https://mubashshir3767.jprq.site",
+  baseURL: "https://api.abusahiy.app",
   headers: {
     "Content-Type": "application/json",
   },
