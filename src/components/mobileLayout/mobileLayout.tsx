@@ -23,7 +23,7 @@ export const MobileLayout = () => {
           )}`}
           onClick={() => navigate("/dashboard")}
         >
-          <RiHome6Line size={27} />
+          <RiHome6Line size={25} />
           <div className="mt-2">Dashboard</div>
         </div>
         <div
@@ -32,7 +32,7 @@ export const MobileLayout = () => {
           )}`}
           onClick={() => navigate("/filials")}
         >
-          <PiBuildings size={27} />
+          <PiBuildings size={25} />
           <div className="mt-2">Filiallar</div>
         </div>
         <div
@@ -41,7 +41,7 @@ export const MobileLayout = () => {
           )}`}
           onClick={() => navigate("/filters")}
         >
-          <LuFilter size={27} />
+          <LuFilter size={25} />
           <div className="mt-2">Filter</div>
         </div>
         <div
@@ -50,7 +50,7 @@ export const MobileLayout = () => {
           )}`}
           onClick={() => navigate("/postomat")}
         >
-          <RiBuilding4Line size={27} />
+          <RiBuilding4Line size={25} />
           <div className="mt-2">Postomat</div>
         </div>
       </div>

@@ -58,7 +58,6 @@ export const FiltersHeader = ({
       setDateTo("");
     }
   };
-  // <Menu className="bg-white shadow-lg rounded-lg p-4 w-52 text-center space-y-4"></Menu>;
   const menuItems = [
     {
       key: "1",
@@ -69,6 +68,10 @@ export const FiltersHeader = ({
           </Typography.Text>
           <Select
             value={region}
+            onClick={(e) => {
+              // Prevent the click event from bubbling up to the Dropdown
+              e.stopPropagation();
+            }}
             onChange={(value) => {
               handleRegionChange(value);
               setOpen(false);
@@ -304,7 +307,7 @@ export const FiltersHeader = ({
           </Button>
         </div>
       </div>
-      <div className="md:hidden block px-2">
+      <div className="md:hidden block px-2 mt-20 pt-4">
         <div>
           <div className="flex justify-center mb-2">
             <Typography className="!text-lg font-semibold">
@@ -350,6 +353,7 @@ export const FiltersHeader = ({
               // getPopupContainer={(trigger) =>
               //   trigger.parentElement || document.body
               // }
+
               menu={{
                 items: menuItems,
                 className:

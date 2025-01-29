@@ -33,7 +33,7 @@ export const FilialsHeader = ({
   };
 
   return (
-    <div className="flex justify-between items-center mt-24 md:mt-10">
+    <div className="flex justify-between items-center mt-20 md:mt-10">
       <Row className="h-14 w-full">
         <Col xl={4} span={12} className="p-3 md:flex gap-5 items-center ">
           <Typography className="text-2xl">Dan</Typography>

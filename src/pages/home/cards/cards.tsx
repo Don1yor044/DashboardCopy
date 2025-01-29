@@ -275,12 +275,12 @@ export const Cards = observer(
                     setUserId={setUserId}
                   />
                 </div>
-                <div className="block md:hidden">
+                <div className="block md:hidden px-1">
                   <CardItemsMobile dataCourse={dataCourse} />
                 </div>
 
                 <div
-                  className="flex justify-center md:mb-0 mb-20 mt-5 "
+                  className="flex justify-center md:mb-0 mb-24 mt-5 "
                   css={paginationStyle}
                 >
                   <Pagination

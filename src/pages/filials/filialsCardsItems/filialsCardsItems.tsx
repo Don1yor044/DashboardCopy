@@ -177,8 +177,8 @@ export const FilialsCardsItems = ({ item }: { item: IfilialsCardsData }) => {
                       0 <span className="text-black">kg</span>
                     </div>
                   ) : (
-                    kgFormatter(Number(item.weight_delivered_by_seller))
-                  )}
+                    kgFormatter(item.weight_delivered_by_seller)
+                  )}{" "}
                 </span>{" "}
               </Typography>
             </div>

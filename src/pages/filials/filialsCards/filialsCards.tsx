@@ -87,19 +87,21 @@ export const FilialsCards = observer(
     }
 
     return (
-      <Row gutter={[20, 20]} className="mt-16 md:mt-10 mb-20">
-        {dataCourse.map((item, index) => (
-          <Col
-            xl={9}
-            span={24}
-            key={index}
-            onClick={() => navigate("/discounted")}
-            className="cursor-pointer"
-          >
-            <FilialsCardsItems item={item} />
-          </Col>
-        ))}
-      </Row>
+      <div className="px-2">
+        <Row gutter={[20, 20]} className="mt-16 md:mt-10 mb-24">
+          {dataCourse.map((item, index) => (
+            <Col
+              xl={9}
+              span={24}
+              key={index}
+              onClick={() => navigate("/discounted")}
+              className="cursor-pointer"
+            >
+              <FilialsCardsItems item={item} />
+            </Col>
+          ))}
+        </Row>
+      </div>
     );
   }
 );

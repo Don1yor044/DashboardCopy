@@ -19,7 +19,7 @@ export const FiltersCards = ({ data }: { data: IfiltersData[] }) => {
   };
 
   return (
-    <>
+    <div className="px-2">
       <Row gutter={[20, 10]} className="mt-5">
         {Array.isArray(data) &&
           data.map((item, index) => (
@@ -121,6 +121,6 @@ export const FiltersCards = ({ data }: { data: IfiltersData[] }) => {
         onClose={closeCommentModal}
         itemId={selectedUserId} // Tanlangan `user_id` ni uzatish
       />
-    </>
+    </div>
   );
 };
