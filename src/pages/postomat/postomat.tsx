@@ -44,9 +44,13 @@ export const Postomat = () => {
           ))}
         </Row>
       ) : (
-        <div className="flex justify-center p-8">
+        <div className="flex justify-center p-8 mt-10">
           <div className="mt-10 w-full ">
-            <Empty image={Empty.PRESENTED_IMAGE_SIMPLE} className="text-xl" />
+            <Empty
+              image={Empty.PRESENTED_IMAGE_SIMPLE}
+              description="Tez kunda"
+              className="text-xl"
+            />
           </div>
         </div>
       )}

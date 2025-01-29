@@ -8,6 +8,8 @@ import { PiBuildingsLight } from "react-icons/pi";
 import { DashboardHeaderSearch } from "../headers";
 import { ArxiveHeaderSearch } from "../headers/arxiveHeaderSearch";
 import { FilterHeaderSearch } from "../headers/filterHeaderSearch";
+import { MobileLayout } from "../mobileLayout/mobileLayout";
+import { MobileTopBar } from "../mobileTopBar";
 
 const { Sider, Content } = AntLayout;
 
@@ -55,12 +57,18 @@ export const Layout = ({
 
   return (
     <AntLayout style={{ minHeight: "100vh" }}>
+      <div className="block md:hidden relative">
+        <MobileLayout />
+      </div>{" "}
+      <div className="block md:hidden relative">
+        <MobileTopBar />
+      </div>
       <Sider
         trigger={null}
         collapsible
         collapsed={collapsed}
         width={330}
-        className="!bg-[#FAFBFF] ps-5 relative"
+        className="!bg-[#FAFBFF] ps-5 relative hidden md:block"
       >
         <div className="demo-logo-vertical" />
         <div
@@ -77,7 +85,7 @@ export const Layout = ({
         <Menu
           className="mt-20 bg-[#FAFBFF] space-y-10"
           mode="inline"
-          selectedKeys={[selectedKey]} // Dynamically change the selected key
+          selectedKeys={[selectedKey]}
           items={[
             {
               key: "1",
@@ -167,14 +175,7 @@ export const Layout = ({
           <></>
         )}
 
-        <Content
-          className="overflow-auto"
-          style={{
-            padding: "24px 20px",
-            minHeight: 280,
-            background: "#FAFBFF",
-          }}
-        >
+        <Content className="overflow-auto p-1 md:p-5 bg-[#FAFBFF]">
           <Outlet />
         </Content>
       </AntLayout>

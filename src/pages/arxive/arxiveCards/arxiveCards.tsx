@@ -54,6 +54,12 @@ export const ArxiveCards = ({ item }: { item: IDashboards }) => {
                       return "Kuryer orqali yetkazildi";
                     case 6:
                       return "Yandex orqali yetkazildi";
+                    case 7:
+                      return "Sotuvchi tomonidan berildi";
+                    case 8:
+                      return "Aloqaga chiqmadi";
+                    case 9:
+                      return "Gaplashilgan";
                     default:
                       return "—";
                   }

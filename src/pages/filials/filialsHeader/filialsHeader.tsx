@@ -1,4 +1,4 @@
-import { DatePicker, Typography } from "antd";
+import { Col, DatePicker, Row, Typography } from "antd";
 import dayjs, { Dayjs } from "dayjs";
 import { useState } from "react";
 
@@ -33,27 +33,27 @@ export const FilialsHeader = ({
   };
 
   return (
-    <div className="flex justify-between items-center mt-10">
-      <div className="flex gap-5 h-14">
-        <div className="p-3 pe-10 flex gap-5 items-center border-e">
+    <div className="flex justify-between items-center mt-24 md:mt-10">
+      <Row className="h-14 w-full">
+        <Col xl={4} span={12} className="p-3 md:flex gap-5 items-center ">
           <Typography className="text-2xl">Dan</Typography>
           <DatePicker
             value={fromDate}
             onChange={handleFromDateChange}
-            format="YYYY-MM-DD HH:mm:ss"
-            className="h-12 w-48 rounded-lg text-xl"
+            format="YYYY-MM-DD"
+            className="h-12 w-36 rounded-lg text-xl font-semibold md:mt-0 mt-2"
           />
-        </div>
-        <div className="p-3 flex gap-5 items-center">
+        </Col>
+        <Col xl={4} span={12} className="p-3 md:flex gap-5 items-center">
           <Typography className="text-2xl">gacha</Typography>
           <DatePicker
             value={toDate}
             onChange={handleToDateChange}
-            format="YYYY-MM-DD HH:mm:ss"
-            className="h-12 w-48 rounded-lg text-xl"
+            format="YYYY-MM-DD "
+            className="h-12 w-36 rounded-lg text-xl font-semibold md:mt-0 mt-2"
           />
-        </div>
-      </div>
+        </Col>
+      </Row>
     </div>
   );
 };

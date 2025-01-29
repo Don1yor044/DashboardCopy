@@ -23,7 +23,7 @@ export const DashboardHeaderSearch = observer(
       <>
         <Header
           style={{ padding: "0px 40px 15px 15px", background: "#FAFBFF " }}
-          className="h-28 flex items-end justify-between gap-5 "
+          className="h-28 items-end justify-between gap-5 hidden md:flex"
         >
           <div className="bg-white flex gap-2 items-center rounded-full w-full mb-1 h-14 px-5 shadow-[0px_0px_30px_-10px_rgba(34,60,80,0.38)]">
             <LuSearch size={25} color="#FE5222" />

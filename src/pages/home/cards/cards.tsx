@@ -8,10 +8,11 @@ import { observer } from "mobx-react-lite";
 import { IDashboards } from "../../../types/types";
 import { SearchPaymeInput } from "../searchPaymeInput/searchPaymeInput";
 import { useNavigate } from "react-router-dom";
-import { priceFormatter } from "../../../components/priceFormat/priceFormat";
-import { paginationStyle } from "../../../components/paginationStyles/paginationStyles";
 import { handleSelect } from "../../../utils/dashboardFunctions/selectUtils";
 import { resetTotals } from "../../../utils/dashboardFunctions/totalUtils";
+import { CardItemsMobile } from "../cardItemsMobile/cardItemsMobile";
+import { DashboardHeaderMobile } from "../../../components/headers";
+import { paginationStyle, priceFormatter } from "../../../components";
 
 export const Cards = observer(
   ({
@@ -205,42 +206,47 @@ export const Cards = observer(
 
     return (
       <>
-        {isHeaderInput ? (
-          <>
-            <SearchPaymeInput
-              isSelected={selectedItems}
-              setSelectedItems={setSelectedItems}
-              userId={userId}
-              searchId={search}
-              fetchData={fetchData}
-              dataCourse={dataCourse}
-              residual={residual}
-            />
-          </>
-        ) : (
-          <>
-            <div className="flex gap-3 items-center bg-white rounded-xl p-4 shadow-[0px_0px_30px_-10px_rgba(34,60,80,0.38)]">
-              <div className="w-[33%] text-2xl font-bold ps-5 border-r flex gap-10">
-                <div>Karta orqali to'lovlar</div>
-                <div className="border-s ps-5">
-                  {priceFormatter(totalPaidByCard)}
+        <div className="block md:hidden pt-2">
+          <DashboardHeaderMobile />
+        </div>
+        <div className="hidden md:block">
+          {isHeaderInput ? (
+            <>
+              <SearchPaymeInput
+                isSelected={selectedItems}
+                setSelectedItems={setSelectedItems}
+                userId={userId}
+                searchId={search}
+                fetchData={fetchData}
+                dataCourse={dataCourse}
+                residual={residual}
+              />
+            </>
+          ) : (
+            <>
+              <div className="hidden md:flex gap-3 items-center bg-white rounded-xl p-4 shadow-[0px_0px_30px_-10px_rgba(34,60,80,0.38)]">
+                <div className="w-[33%] text-2xl font-bold ps-5 border-r flex gap-10">
+                  <div>Karta orqali to'lovlar</div>
+                  <div className="border-s ps-5">
+                    {priceFormatter(totalPaidByCard)}
+                  </div>
+                </div>
+                <div className="w-[33%] text-2xl font-bold ps-5 border-r flex gap-10">
+                  <div>Naqd orqali to'lovlar</div>
+                  <div className="border-s ps-5">
+                    {priceFormatter(totalPaidByCash)}
+                  </div>
+                </div>
+                <div className="w-[33%] text-2xl font-bold ps-5 flex gap-10">
+                  <div>Payme orqali to'lovlar</div>
+                  <div className="border-s ps-5">
+                    {priceFormatter(totalPaidByPayme)}
+                  </div>
                 </div>
               </div>
-              <div className="w-[33%] text-2xl font-bold ps-5 border-r flex gap-10">
-                <div>Naqd orqali to'lovlar</div>
-                <div className="border-s ps-5">
-                  {priceFormatter(totalPaidByCash)}
-                </div>
-              </div>
-              <div className="w-[33%] text-2xl font-bold ps-5 flex gap-10">
-                <div>Payme orqali to'lovlar</div>
-                <div className="border-s ps-5">
-                  {priceFormatter(totalPaidByPayme)}
-                </div>
-              </div>
-            </div>
-          </>
-        )}
+            </>
+          )}
+        </div>
         {loading ? (
           <div className="flex justify-center mt-10">
             <Spin size="large" />
@@ -248,17 +254,19 @@ export const Cards = observer(
         ) : (
           <>
             {!dataCourse || dataCourse.length === 0 ? (
-              <div className="flex justify-center p-8">
-                <div className="mt-10 w-full">
-                  <Empty
-                    image={Empty.PRESENTED_IMAGE_SIMPLE}
-                    className="text-xl"
-                  />
+              <>
+                <div className="flex justify-center p-8">
+                  <div className="mt-10 w-full">
+                    <Empty
+                      image={Empty.PRESENTED_IMAGE_SIMPLE}
+                      className="text-xl"
+                    />
+                  </div>
                 </div>
-              </div>
+              </>
             ) : (
               <>
-                <div className="mt-10 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
+                <div className="mt-5 hidden md:grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 gap-5 ">
                   <CardItems
                     dataCourse={dataCourse}
                     fetchData={fetchData}
@@ -267,8 +275,14 @@ export const Cards = observer(
                     setUserId={setUserId}
                   />
                 </div>
+                <div className="block md:hidden">
+                  <CardItemsMobile dataCourse={dataCourse} />
+                </div>
 
-                <div className="flex justify-center mt-5" css={paginationStyle}>
+                <div
+                  className="flex justify-center md:mb-0 mb-20 mt-5 "
+                  css={paginationStyle}
+                >
                   <Pagination
                     defaultCurrent={1}
                     current={currentPage}

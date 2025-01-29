@@ -9,7 +9,7 @@ export interface IDashboards {
   express_num?: string;
   full_name?: string;
   id: number;
-  order_id: number;
+  order_id?: number;
   paid_at?: null | number;
   paid_by_card?: null | number;
   paid_by_cash?: null | number;

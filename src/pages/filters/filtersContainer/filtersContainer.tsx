@@ -183,7 +183,10 @@ export const FiltersContainer = observer(() => {
       ) : data && data.length > 0 ? (
         <>
           <FiltersCards data={data} />
-          <div className="flex justify-center mt-5" css={paginationStyle}>
+          <div
+            className="flex justify-center mb-20 mt-10 md:mb-0 md:mt-5"
+            css={paginationStyle}
+          >
             <Pagination
               current={currentPage}
               total={totalItems}

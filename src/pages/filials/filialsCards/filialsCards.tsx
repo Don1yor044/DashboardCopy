@@ -28,12 +28,10 @@ export const FilialsCards = observer(
     const navigate = useNavigate();
     const [dataCourse, setDataCourse] = useState<IfilialsCardsData[]>([]);
     const [isLoading, setIsLoading] = useState(true);
-    const [error, setError] = useState<string | null>(null);
 
     const fetchData = async () => {
       const token = localStorage.getItem("token");
       if (!token) {
-        setError("Token is missing or invalid");
         setIsLoading(false);
         navigate("/");
         return;
@@ -61,7 +59,6 @@ export const FilialsCards = observer(
           setDataCourse([]);
         }
       } catch (error) {
-        setError("Error fetching data");
         console.error(error);
       } finally {
         setIsLoading(false);
@@ -73,14 +70,10 @@ export const FilialsCards = observer(
 
     if (isLoading) {
       return (
-        <div className="flex justify-center p-8">
+        <div className="flex justify-center mt-20 md:mt-10">
           <Spin size="large" />
         </div>
       );
-    }
-
-    if (error) {
-      return <div className="text-red-500 p-4">{error}</div>;
     }
 
     if (!dataCourse || dataCourse.length === 0) {
@@ -94,11 +87,11 @@ export const FilialsCards = observer(
     }
 
     return (
-      <Row gutter={[20, 20]} className="mt-10">
+      <Row gutter={[20, 20]} className="mt-16 md:mt-10 mb-20">
         {dataCourse.map((item, index) => (
           <Col
             xl={9}
-            span={12}
+            span={24}
             key={index}
             onClick={() => navigate("/discounted")}
             className="cursor-pointer"

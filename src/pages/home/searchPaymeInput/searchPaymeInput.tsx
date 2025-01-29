@@ -71,7 +71,10 @@ export const SearchPaymeInput: React.FC<SearchPaymeInputProps> = ({
       const paidByPayme: number = form.getFieldValue("paymeTolov");
       const discountedFee: number = form.getFieldValue("chegirmaTolov");
 
-      if (radioValue === 7 && form.getFieldValue("password") !== "17abu17") {
+      const password = form.getFieldValue("password");
+      if (radioValue === 7 && password !== "17abu17") {
+        console.log(password);
+
         return errorToast("Parol noto'g'ri kiritildi !");
       }
       try {
@@ -240,12 +243,12 @@ export const SearchPaymeInput: React.FC<SearchPaymeInputProps> = ({
             ]}
           />
           {radioValue === 7 && (
-            <Form.Item className="mt-5">
+            <Form.Item className="mt-5" name={"password"}>
               <Input.Password
                 name="password"
                 visibilityToggle={true}
                 placeholder="parol kiritng !"
-                className="text-semibold text-base"
+                className="font-semibold text-base"
               />
             </Form.Item>
           )}
