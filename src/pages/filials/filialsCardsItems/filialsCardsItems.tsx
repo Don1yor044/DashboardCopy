@@ -172,13 +172,13 @@ export const FilialsCardsItems = ({ item }: { item: IfilialsCardsData }) => {
               </div>
               <Typography className="text-2xl md:text-3xl font-bold text-black">
                 <span className="text-[#FE5222]">
-                  {isNaN(kgFormatter(item.weight_delivered_by_seller)) ? (
+                  {isNaN(Number(item.weight_delivered_by_seller)) ? (
                     <div>
                       0 <span className="text-black">kg</span>
                     </div>
                   ) : (
-                    kgFormatter(item.weight_delivered_by_seller)
-                  )}{" "}
+                    kgFormatter(Number(item.weight_delivered_by_seller))
+                  )}
                 </span>{" "}
               </Typography>
             </div>
@@ -209,7 +209,7 @@ export const FilialsCardsItems = ({ item }: { item: IfilialsCardsData }) => {
               </Typography>
             </div>
             <Typography className="text-3xl font-bold text-green-500">
-              {isNaN(kgFormatter(item.left_weight))
+              {isNaN(Number(item.left_weight))
                 ? 0 + " kg"
                 : kgFormatter(item.left_weight)}{" "}
             </Typography>
