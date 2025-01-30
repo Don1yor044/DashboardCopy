@@ -208,7 +208,7 @@ export const FilialsCardsItems = ({ item }: { item: IfilialsCardsData }) => {
                 Punkdagi mavjud kg
               </Typography>
             </div>
-            <Typography className="text-3xl font-bold text-green-500">
+            <Typography className="text-2xl md:text-4xl font-bold text-green-500">
               {isNaN(Number(item.left_weight))
                 ? 0 + " kg"
                 : kgFormatter(item.left_weight)}{" "}

@@ -175,7 +175,7 @@ export const Layout = ({
           <></>
         )}
 
-        <Content className="overflow-auto p-1 md:p-5 bg-[#FAFBFF]">
+        <Content className="overflow-y-auto scroll-smooth overscroll-contain p-1 md:p-5 bg-[#FAFBFF]">
           <Outlet />
         </Content>
       </AntLayout>
