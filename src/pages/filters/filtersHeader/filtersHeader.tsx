@@ -1,7 +1,8 @@
-import { Button, DatePicker, Dropdown, Select, Typography } from "antd";
+import { Button, Select, Typography } from "antd";
 import dayjs, { Dayjs } from "dayjs";
 import { useState } from "react";
-import { BiFilterAlt } from "react-icons/bi";
+import { FilterHeaderDestop } from "./filterHeaderDesktop/filterHeaderDestop";
+import { FilterHeaderMobile } from "./filterHeaderMobile/filterHeaderMobile";
 
 export const FiltersHeader = ({
   handleCountSort,
@@ -58,7 +59,14 @@ export const FiltersHeader = ({
       setDateTo("");
     }
   };
-  const menuItems = [
+  interface MenuItem {
+    key: string;
+    label: React.ReactNode;
+  }
+
+  type MenuItems = MenuItem[];
+
+  const menuItems: MenuItems = [
     {
       key: "1",
       label: (
@@ -181,196 +189,31 @@ export const FiltersHeader = ({
 
   return (
     <>
-      <div className="hidden md:flex gap-3 bg-white-100 px-4 py-3 rounded-2xl justify-between shadow-[0px_0px_30px_-10px_rgba(34,60,80,0.38)]">
-        <div className="px-5">
-          <Typography className=" !text-lg font-semibold">
-            Viloyat bo'yicha
-          </Typography>
-          <Select
-            defaultValue="Region"
-            value={region}
-            className="mt-2 min-w-[130px]"
-            onChange={handleRegionChange}
-            options={[
-              { value: "1", label: "Toshkent" },
-              { value: "2", label: "Andijon" },
-              { value: "3", label: "Namangan" },
-              { value: "4", label: "Farg'ona" },
-              { value: "5", label: "Sirdaryo" },
-              { value: "6", label: "Samarqand" },
-              { value: "7", label: "Navoiy" },
-              { value: "8", label: "Jizzax" },
-              { value: "9", label: "Xorazm" },
-              { value: "10", label: "Toshkent viloyati" },
-              { value: "11", label: "Surxondaryo" },
-              { value: "12", label: "Qashqadaryo" },
-              { value: "13", label: "Buxoro" },
-              { value: "14", label: "Qoraqalpog'iston" },
-            ]}
-          />
-        </div>
-        <div>
-          <div className="flex justify-center mb-2">
-            <Typography className="!text-lg font-semibold">
-              Vaqt bo'yicha{" "}
-            </Typography>
-          </div>
-          <div className="flex items-center gap-2">
-            <div>
-              <DatePicker
-                value={fromDate}
-                onChange={handleFromDateChange}
-                format="YYYY-MM-DD"
-                placeholder="Boshlanish"
-                className="h-10 w-32 rounded-lg text-xl"
-              />
-            </div>
-            <div>
-              <DatePicker
-                value={toDate}
-                onChange={handleToDateChange}
-                format="YYYY-MM-DD"
-                placeholder="Tugash "
-                className="h-10 w-32 rounded-lg text-xl"
-              />
-            </div>
-            <div>
-              <Button
-                type="primary"
-                className="p-2"
-                onClick={handleDateRangeFilter}
-              >
-                Qidirish
-              </Button>
-            </div>
-          </div>
-        </div>
-        <div>
-          <Typography className=" !text-lg ms-3 font-semibold">
-            Vaqt bo'yicha{" "}
-          </Typography>
-          <div className="flex gap-4 mt-2">
-            <Button
-              className={
-                activeButton === "desc" ? "bg-green-500 text-white " : ""
-              }
-              onClick={handleDateDesc}
-            >
-              Yangi
-            </Button>
-            <Button
-              className={
-                activeButton === "asc" ? "bg-green-500 text-white" : ""
-              }
-              onClick={handleDateAsc}
-            >
-              Eski
-            </Button>
-          </div>
-        </div>
-        <div>
-          <Typography className=" !text-lg mb-2 font-semibold">
-            Telefon qilish
-          </Typography>
-          <Button
-            className={activeButton === "user" ? "bg-green-500 text-white" : ""}
-            onClick={handleUser}
-          >
-            Telefon qilish
-          </Button>
-        </div>{" "}
-        <div>
-          <Typography className=" !text-lg mb-2 font-semibold">
-            Kargo puli bo'yicha
-          </Typography>
-          <Button
-            className={
-              activeButton === "payme" ? "bg-green-500 text-white" : ""
-            }
-            onClick={handlePaymeSort}
-          >
-            Kargo puli
-          </Button>
-        </div>
-        <div>
-          <Typography className="!text-lg mb-2 font-semibold">
-            Sanog'i bo'yicha
-          </Typography>
-          <Button
-            className={
-              activeButton === "count" ? "bg-green-500 text-white" : ""
-            }
-            onClick={handleCountSort}
-          >
-            Sanog'i
-          </Button>
-        </div>
-      </div>
-      <div className="md:hidden block px-2 pt-4">
-        <div>
-          <div className="flex justify-center mb-2">
-            <Typography className="!text-lg font-semibold">
-              Vaqt bo'yicha{" "}
-            </Typography>
-          </div>
-          <div className="flex items-center gap-2">
-            <div>
-              <DatePicker
-                value={fromDate}
-                onChange={handleFromDateChange}
-                format="YYYY-MM-DD"
-                placeholder="Boshlanish"
-                className="h-10 rounded-lg text-xl"
-              />
-            </div>
-            <div>
-              <DatePicker
-                value={toDate}
-                onChange={handleToDateChange}
-                format="YYYY-MM-DD"
-                placeholder="Tugash"
-                className="h-10  rounded-lg text-xl"
-              />
-            </div>
-
-            <div>
-              <Button
-                type="primary"
-                className="p-2"
-                onClick={handleDateRangeFilter}
-              >
-                Qidirish
-              </Button>
-            </div>
-          </div>
-          <div className="flex justify-between">
-            <div></div>
-            <Dropdown
-              open={open}
-              onOpenChange={setOpen}
-              trigger={["click"]}
-              // getPopupContainer={(trigger) =>
-              //   trigger.parentElement || document.body
-              // }
-
-              menu={{
-                items: menuItems,
-                className:
-                  "bg-white shadow-lg rounded-lg p-4 w-52 text-center ",
-              }}
-            >
-              <div className="flex justify-end">
-                <Button
-                  className="mt-2 rounded-full w-10 h-10 p-0 border-2 border-gray-300"
-                  onClick={() => setOpen(!open)}
-                >
-                  <BiFilterAlt size={20} className="text-gray-700" />
-                </Button>
-              </div>
-            </Dropdown>
-          </div>
-        </div>
-      </div>
+      <FilterHeaderDestop
+        region={region}
+        handleRegionChange={handleRegionChange}
+        fromDate={fromDate}
+        handleFromDateChange={handleFromDateChange}
+        toDate={toDate}
+        handleToDateChange={handleToDateChange}
+        handleDateRangeFilter={handleDateRangeFilter}
+        activeButton={activeButton}
+        handleDateDesc={handleDateDesc}
+        handleDateAsc={handleDateAsc}
+        handleUser={handleUser}
+        handlePaymeSort={handlePaymeSort}
+        handleCountSort={handleCountSort}
+      />
+      <FilterHeaderMobile
+        open={open}
+        setOpen={setOpen}
+        menuItems={menuItems}
+        fromDate={fromDate}
+        handleFromDateChange={handleFromDateChange}
+        toDate={toDate}
+        handleToDateChange={handleToDateChange}
+        handleDateRangeFilter={handleDateRangeFilter}
+      />
     </>
   );
 };

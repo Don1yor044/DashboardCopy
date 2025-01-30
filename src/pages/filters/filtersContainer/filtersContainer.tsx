@@ -184,7 +184,7 @@ export const FiltersContainer = observer(() => {
         <>
           <FiltersCards data={data} />
           <div
-            className="flex justify-center mb-56 mt-10 md:mb-0 md:mt-5"
+            className="flex justify-center  mb-56 mt-10 md:mb-0 md:mt-5"
             css={paginationStyle}
           >
             <Pagination

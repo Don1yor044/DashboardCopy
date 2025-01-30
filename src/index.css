@@ -1,3 +1,24 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+::-webkit-scrollbar {
+  width: 1vw;
+  cursor: pointer !important;
+}
+
+@media screen and (max-width: 768px) {
+  ::-webkit-scrollbar {
+    width: 2vw;
+  }
+}
+
+::-webkit-scrollbar-track {
+  background-color: #ffffff;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: #fe5222;
+  border: 0.3vw solid #ffffff;
+  border-radius: 5vw;
+  cursor: pointer !important;
+}

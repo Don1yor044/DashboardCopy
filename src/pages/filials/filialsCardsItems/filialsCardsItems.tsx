@@ -163,9 +163,7 @@ export const FilialsCardsItems = ({ item }: { item: IfilialsCardsData }) => {
           <div className="md:my-3">
             <div className="flex border-b-2 justify-between items-center py-2">
               <div className="flex gap-3 items-center ">
-                <div className="bg-[#FE5222] h-9 w-9 rounded-full flex justify-center items-center">
-                  {/* <CiDeliveryTruck size={25} color="white" /> */}
-                </div>
+                <div className="bg-[#FE5222] h-9 w-9 rounded-full flex justify-center items-center"></div>
                 <Typography className="text-base md:text-lg font-semibold">
                   Sotuvchi orqali yetkazilgan
                 </Typography>
