@@ -201,9 +201,7 @@ export const FilialsCardsItems = ({ item }: { item: IfilialsCardsData }) => {
           </div>
           <div className="flex justify-between py-2">
             <div className="flex gap-3 items-center">
-              <div className="bg-[#FE5222] h-9 w-9 rounded-full flex justify-center items-center">
-                {/* <MdOutlineDiscount size={22} color="white" /> */}
-              </div>
+              <div className="bg-[#FE5222] h-9 w-9 rounded-full flex justify-center items-center"></div>
               <Typography className="text-base md:text-lg font-semibold">
                 Punkdagi mavjud kg
               </Typography>

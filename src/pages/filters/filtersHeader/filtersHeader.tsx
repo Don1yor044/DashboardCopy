@@ -69,7 +69,6 @@ export const FiltersHeader = ({
           <Select
             value={region}
             onClick={(e) => {
-              // Prevent the click event from bubbling up to the Dropdown
               e.stopPropagation();
             }}
             onChange={(value) => {
@@ -307,7 +306,7 @@ export const FiltersHeader = ({
           </Button>
         </div>
       </div>
-      <div className="md:hidden block px-2 mt-20 pt-4">
+      <div className="md:hidden block px-2 pt-4">
         <div>
           <div className="flex justify-center mb-2">
             <Typography className="!text-lg font-semibold">

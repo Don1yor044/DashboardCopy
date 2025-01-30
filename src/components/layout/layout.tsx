@@ -59,9 +59,6 @@ export const Layout = ({
     <AntLayout style={{ minHeight: "100vh" }}>
       <div className="block md:hidden relative">
         <MobileLayout />
-      </div>{" "}
-      <div className="block md:hidden relative">
-        <MobileTopBar />
       </div>
       <Sider
         trigger={null}
@@ -160,6 +157,7 @@ export const Layout = ({
           </div>
         </div>
       </Sider>
+
       <AntLayout style={{ height: "100vh" }}>
         {location.pathname === "/dashboard" ? (
           <DashboardHeaderSearch
@@ -174,7 +172,9 @@ export const Layout = ({
         ) : (
           <></>
         )}
-
+        <div className="block md:hidden ">
+          <MobileTopBar />
+        </div>
         <Content className="overflow-y-auto scroll-smooth overscroll-contain p-1 md:p-5 bg-[#FAFBFF]">
           <Outlet />
         </Content>

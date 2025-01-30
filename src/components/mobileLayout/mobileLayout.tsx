@@ -9,21 +9,19 @@ export const MobileLayout = () => {
   const location = useLocation();
 
   const getActiveClass = (path: string) => {
-    return location.pathname === path
-      ? "bg-[#FE5222] text-white shadow-[0px_0px_10px_#FE5222]"
-      : "bg-gray-200";
+    return location.pathname === path ? "!text-[#FE5222]" : "text-black";
   };
 
   return (
-    <div className="fixed bottom-0 w-full bg-gray-100 z-10 rounded-t-lg">
-      <div className="flex justify-between gap-2 p-2">
+    <div className="fixed bottom-0 w-full bg-white rounded-t-xl z-10 ">
+      <div className="flex justify-between gap-2 px-2">
         <div
           className={`flex flex-col items-center justify-center rounded-lg p-2 w-20 cursor-pointer ${getActiveClass(
             "/dashboard"
           )}`}
           onClick={() => navigate("/dashboard")}
         >
-          <RiHome6Line size={25} />
+          <RiHome6Line size={23} />
           <div className="mt-2">Dashboard</div>
         </div>
         <div
@@ -32,7 +30,7 @@ export const MobileLayout = () => {
           )}`}
           onClick={() => navigate("/filials")}
         >
-          <PiBuildings size={25} />
+          <PiBuildings size={23} />
           <div className="mt-2">Filiallar</div>
         </div>
         <div
@@ -41,7 +39,7 @@ export const MobileLayout = () => {
           )}`}
           onClick={() => navigate("/filters")}
         >
-          <LuFilter size={25} />
+          <LuFilter size={23} />
           <div className="mt-2">Filter</div>
         </div>
         <div
@@ -50,7 +48,7 @@ export const MobileLayout = () => {
           )}`}
           onClick={() => navigate("/postomat")}
         >
-          <RiBuilding4Line size={25} />
+          <RiBuilding4Line size={23} />
           <div className="mt-2">Postomat</div>
         </div>
       </div>

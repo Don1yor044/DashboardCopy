@@ -44,7 +44,7 @@ export const Postomat = () => {
           ))}
         </Row>
       ) : (
-        <div className="flex justify-center p-8 mt-10">
+        <div className="flex justify-center">
           <div className="mt-10 w-full ">
             <Empty
               image={Empty.PRESENTED_IMAGE_SIMPLE}

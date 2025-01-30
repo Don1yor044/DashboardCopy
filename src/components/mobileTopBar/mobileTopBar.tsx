@@ -21,7 +21,7 @@ export const MobileTopBar = observer(() => {
   const location = useLocation();
 
   return (
-    <div className="fixed top-0 z-10 pt-5 rounded-b-3xl px-3 w-[100%] bg-gradient-to-r from-[#FF5024] to-[#FE914E] min-h-20">
+    <div className="pt-3 rounded-b-3xl px-3 bg-gradient-to-r from-[#FF5024] to-[#FE914E] max-h-16">
       {location.pathname === "/dashboard" ? (
         <>
           <div className="flex gap-4 items-center">
@@ -50,7 +50,7 @@ export const MobileTopBar = observer(() => {
         </>
       ) : (
         <div className="flex justify-center">
-          <Typography className="text-white text-2xl font-bold">
+          <Typography className="text-white text-lg mb-1 font-bold">
             {location.pathname === "/filials" ? <>Filiallar</> : <></>}
             {location.pathname === "/filters" ? <>Filter</> : <></>}
             {location.pathname === "/postomat" ? <>Postomat</> : <></>}
