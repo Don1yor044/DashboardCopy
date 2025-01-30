@@ -21,10 +21,11 @@ export const FilialsHeader = ({
   };
 
   const handleToDateChange = (date: Dayjs | null) => {
-    if (date) {
-      const updatedDate = date.add(3, "hour");
+    const originalDate = date ? date : toDate;
+    if (originalDate) {
+      const updatedDate = originalDate.add(3, "hour").add(1, "day");
       const formattedDate = updatedDate.format("YYYY-MM-DD HH:mm:ss");
-      setToDate(updatedDate);
+      setToDate(originalDate);
       setDateTo(formattedDate);
     } else {
       setToDate(null);
@@ -49,7 +50,7 @@ export const FilialsHeader = ({
           <DatePicker
             value={toDate}
             onChange={handleToDateChange}
-            format="YYYY-MM-DD "
+            format="YYYY-MM-DD"
             className="h-12 w-36 rounded-lg text-xl font-semibold md:mt-0 mt-2"
           />
         </Col>
