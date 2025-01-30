@@ -280,7 +280,7 @@ export const Cards = observer(
                 </div>
 
                 <div
-                  className="flex justify-center md:mb-0 mb-24 mt-5 "
+                  className="flex justify-center md:mb-0 mb-56 mt-5 "
                   css={paginationStyle}
                 >
                   <Pagination

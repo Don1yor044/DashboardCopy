@@ -88,7 +88,7 @@ export const FilialsCards = observer(
 
     return (
       <div className="px-2">
-        <Row gutter={[20, 20]} className="mt-16 md:mt-10 mb-24">
+        <Row gutter={[20, 20]} className="mt-16 md:mt-10 mb-56">
           {dataCourse.map((item, index) => (
             <Col
               xl={9}

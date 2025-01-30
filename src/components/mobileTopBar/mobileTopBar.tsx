@@ -21,7 +21,7 @@ export const MobileTopBar = observer(() => {
   const location = useLocation();
 
   return (
-    <div className="pt-3 rounded-b-3xl px-3 bg-gradient-to-r from-[#FF5024] to-[#FE914E] max-h-16 pt-safe">
+    <div className="rounded-b-3xl px-3 bg-gradient-to-r from-[#FF5024] to-[#FE914E] max-h-16 pt-safe">
       {location.pathname === "/dashboard" ? (
         <>
           <div className="flex gap-4 items-center">
