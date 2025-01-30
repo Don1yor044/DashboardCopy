@@ -20,8 +20,13 @@ export const MobileTopBar = observer(() => {
   };
   const location = useLocation();
 
+  const handleKeyPress = (event: React.KeyboardEvent) => {
+    if (event.key === "Enter") {
+      handleClick();
+    }
+  };
   return (
-    <div className="rounded-b-3xl px-3 bg-gradient-to-r from-[#FF5024] to-[#FE914E] max-h-16 pt-safe">
+    <div className="pt-safe rounded-b-3xl px-3 bg-gradient-to-r from-[#FF5024] to-[#FE914E] max-h-16">
       {location.pathname === "/dashboard" ? (
         <>
           <div className="flex gap-4 items-center">
@@ -37,12 +42,14 @@ export const MobileTopBar = observer(() => {
                 value={search}
                 onChange={handleChange}
                 onClear={handleClear}
+                onKeyDown={handleKeyPress}
                 className="border-none text-xl bg-gray-50"
               />
               <LuSearch
                 size={25}
                 color="#FE5222"
                 onClick={handleClick}
+                tabIndex={0}
                 className="cursor-pointer"
               />
             </div>
