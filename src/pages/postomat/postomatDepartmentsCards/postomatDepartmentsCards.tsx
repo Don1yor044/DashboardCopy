@@ -24,19 +24,18 @@ export const PostomatDepartmentsCards = ({
         <div
           className={`${
             item.status === 2 ? "bg-[#FE5222]" : "bg-green-500"
-          }  p-5 rounded-t-3xl`}
+          }  p-4 md:p-5 rounded-t-3xl`}
         >
-          <Typography.Title level={2} className="!text-white">
-            {item.name || ""}
-          </Typography.Title>
-          <div className="flex justify-between">
+          <div className="flex justify-between items-center">
             <Typography className="text-xl font-bold text-white">
-              Name
+              0 {item.id}
             </Typography>
-            <Typography className="text-xl font-bold text-white">01</Typography>
+            <Typography className="text-sm font-bold text-gray-100">
+              0{item.id} / 8
+            </Typography>
           </div>
         </div>
-        <div className="p-5 bg-white rounded-b-3xl">
+        <div className="p-2 md:p-5 bg-white rounded-b-3xl">
           <div className="flex border-b-2 justify-between items-center py-2">
             <Typography className="text-lg font-semibold">
               block_number

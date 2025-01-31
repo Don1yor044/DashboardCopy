@@ -8,8 +8,8 @@ export const MobileLayout = () => {
 
   const location = useLocation();
 
-  const getActiveClass = (path: string) => {
-    return location.pathname === path ? "!text-[#FE5222]" : "text-black";
+  const getActiveClass = (paths: string[]) => {
+    return paths.includes(location.pathname) ? "!text-[#FE5222]" : "text-black";
   };
 
   return (
@@ -17,7 +17,7 @@ export const MobileLayout = () => {
       <div className="flex justify-between gap-2 px-2">
         <div
           className={`flex flex-col items-center justify-center rounded-lg p-2 w-20 cursor-pointer ${getActiveClass(
-            "/dashboard"
+            ["/dashboard"]
           )}`}
           onClick={() => navigate("/dashboard")}
         >
@@ -26,7 +26,7 @@ export const MobileLayout = () => {
         </div>
         <div
           className={`flex flex-col items-center justify-center rounded-lg p-2 w-20 cursor-pointer ${getActiveClass(
-            "/filials"
+            ["/filials"]
           )}`}
           onClick={() => navigate("/filials")}
         >
@@ -35,7 +35,7 @@ export const MobileLayout = () => {
         </div>
         <div
           className={`flex flex-col items-center justify-center rounded-lg p-2 w-20 cursor-pointer ${getActiveClass(
-            "/filters"
+            ["/filters"]
           )}`}
           onClick={() => navigate("/filters")}
         >
@@ -44,7 +44,7 @@ export const MobileLayout = () => {
         </div>
         <div
           className={`flex flex-col items-center justify-center rounded-lg p-2 w-20 cursor-pointer ${getActiveClass(
-            "/postomat"
+            ["/postomat", "/departments"]
           )}`}
           onClick={() => navigate("/postomat")}
         >

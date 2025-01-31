@@ -94,8 +94,8 @@ export const FilialsCards = observer(
               xl={9}
               span={24}
               key={index}
-              onClick={() => navigate("/discounted")}
-              className="cursor-pointer"
+              // onClick={() => navigate("/discounted")}
+              // className="cursor-pointer"
             >
               <FilialsCardsItems item={item} />
             </Col>
