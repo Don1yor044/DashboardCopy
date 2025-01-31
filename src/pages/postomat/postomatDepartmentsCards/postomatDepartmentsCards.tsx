@@ -16,22 +16,20 @@ export const PostomatDepartmentsCards = ({
 }) => {
   return (
     <>
-      <div
-        className={`rounded-lg border-2 ${
-          item.status === 2 ? "border-[#FE5222]" : "border-green-500"
-        }`}
-      >
+      <div className="rounded-lg border-2 border-gray-600 ">
         <div
-          className={`${
-            item.status === 2 ? "bg-[#FE5222]" : "bg-green-500"
-          }  p-4 md:p-5 rounded-lg`}
+          className={`${item.status === 2 ? "bg-[#FE5222]" : "bg-gray-300"} ${
+            [1, 2, 9, 10, 19, 20, 21, 22].includes(item.id)
+              ? "p-10"
+              : "p-4 md:p-5"
+          } rounded-lg`}
         >
           <div className="flex justify-between items-center">
             <Typography className="text-xl font-bold text-white">
               {item.id}
             </Typography>
             <Typography className="text-sm font-bold text-gray-100">
-              {item.id} / 12
+              {item.id} / 24
             </Typography>
           </div>
         </div>
