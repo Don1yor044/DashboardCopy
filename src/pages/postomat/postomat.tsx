@@ -55,7 +55,7 @@ export const Postomat = () => {
           {dataCourse.map((item) => (
             <Col
               xl={6}
-              span={12}
+              span={24}
               key={item.id}
               className="cursor-pointer"
               onClick={() => navigate("/departments")}

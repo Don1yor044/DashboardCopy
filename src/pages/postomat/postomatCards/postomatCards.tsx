@@ -8,13 +8,13 @@ interface PostomatCardsProps {
 export const PostomatCards = ({ item }: { item: PostomatCardsProps }) => {
   return (
     <>
-      <div className="rounded-3xl border-2 border-gray-300 hover:border-[#FE5222]">
-        <div className="bg-[#FE5222] p-3 md:p-5 rounded-t-3xl">
+      <div className="rounded-xl border-2 border-gray-300 hover:border-[#FE5222]">
+        <div className="bg-[#FE5222] p-3 md:p-5 rounded-xl text-center">
           <Typography className="text-xl font-bold text-white">
             {item.name}
           </Typography>
         </div>
-        <div className="p-2 md:p-3 bg-white rounded-b-3xl">
+        {/* <div className="p-2 md:p-3 bg-white rounded-b-3xl">
           <div>
             <div className="flex border-b-2 justify-between items-center py-2">
               <div className="flex gap-3 items-center">
@@ -47,7 +47,7 @@ export const PostomatCards = ({ item }: { item: PostomatCardsProps }) => {
               </Typography>
             </div>
           </div>
-        </div>
+        </div> */}
       </div>
     </>
   );

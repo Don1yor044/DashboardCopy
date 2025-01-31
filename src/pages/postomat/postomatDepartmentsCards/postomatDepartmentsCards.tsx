@@ -17,25 +17,25 @@ export const PostomatDepartmentsCards = ({
   return (
     <>
       <div
-        className={`rounded-3xl border-2 ${
+        className={`rounded-lg border-2 ${
           item.status === 2 ? "border-[#FE5222]" : "border-green-500"
         }`}
       >
         <div
           className={`${
             item.status === 2 ? "bg-[#FE5222]" : "bg-green-500"
-          }  p-4 md:p-5 rounded-t-3xl`}
+          }  p-4 md:p-5 rounded-lg`}
         >
           <div className="flex justify-between items-center">
             <Typography className="text-xl font-bold text-white">
-              0 {item.id}
+              {item.id}
             </Typography>
             <Typography className="text-sm font-bold text-gray-100">
-              0{item.id} / 8
+              {item.id} / 12
             </Typography>
           </div>
         </div>
-        <div className="p-2 md:p-5 bg-white rounded-b-3xl">
+        {/* <div className="p-2 md:p-5 bg-white rounded-b-3xl">
           <div className="flex border-b-2 justify-between items-center py-2">
             <Typography className="text-lg font-semibold">
               block_number
@@ -64,7 +64,7 @@ export const PostomatDepartmentsCards = ({
               {item.locker_id}
             </Typography>
           </div>
-        </div>
+        </div> */}
       </div>
     </>
   );
