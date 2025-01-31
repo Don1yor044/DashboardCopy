@@ -19,9 +19,9 @@ export const PostomatDepartmentsCards = ({
       <div className="rounded-lg border-2 border-gray-600 ">
         <div
           className={`${item.status === 2 ? "bg-[#FE5222]" : "bg-gray-300"} ${
-            [1, 2, 9, 10, 19, 20, 21, 22].includes(item.id)
-              ? "p-10"
-              : "p-4 md:p-5"
+            [1, 12].includes(item.id) ? "p-10" : "p-4 md:p-5"
+          }   ${
+            [10, 11, 20, 21].includes(item.id) ? "p-7" : "p-4 md:p-5"
           } rounded-lg`}
         >
           <div className="flex justify-between items-center">

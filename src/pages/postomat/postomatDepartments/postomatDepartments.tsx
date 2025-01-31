@@ -160,20 +160,6 @@ export const PostomatDepartments = () => {
       cell_number: 22,
       locker_id: 22,
     },
-    {
-      id: 23,
-      status: 1,
-      block_number: 1,
-      cell_number: 23,
-      locker_id: 23,
-    },
-    {
-      id: 24,
-      status: 1,
-      block_number: 1,
-      cell_number: 24,
-      locker_id: 24,
-    },
   ];
   const data2 = [
     {
@@ -331,20 +317,6 @@ export const PostomatDepartments = () => {
       cell_number: 22,
       locker_id: 22,
     },
-    {
-      id: 23,
-      status: 1,
-      block_number: 2,
-      cell_number: 23,
-      locker_id: 23,
-    },
-    {
-      id: 24,
-      status: 1,
-      block_number: 2,
-      cell_number: 24,
-      locker_id: 24,
-    },
   ];
   const [activeBlock, setActiveBlock] = useState(1);
 
@@ -419,14 +391,21 @@ export const PostomatDepartments = () => {
         </>
       ) : dataCourse.length > 0 ? (
         <>
-          <Row gutter={[10, 10]} className="mt-0 md:mt-10 mb-40 md:mb-0">
-            {dataCourse.map((item) => (
-              <Col xl={6} span={12} key={item.id}>
-                <div className="p-1">
+          <Row gutter={[0, 0]} className="mt-0 md:mt-10 mb-40 md:mb-0">
+            <Col xl={12} span={12}>
+              {dataCourse.slice(0, 11).map((item) => (
+                <div key={item.id} className="p-1">
                   <PostomatDepartmentsCards item={item} />
                 </div>
-              </Col>
-            ))}
+              ))}
+            </Col>
+            <Col xl={12} span={12}>
+              {dataCourse.slice(11).map((item) => (
+                <div key={item.id} className="p-1">
+                  <PostomatDepartmentsCards item={item} />
+                </div>
+              ))}
+            </Col>
           </Row>
         </>
       ) : (
