@@ -1,4 +1,4 @@
-import { Form, Input, Modal, Radio, RadioChangeEvent, Typography } from "antd";
+import { Form, Modal, Radio, RadioChangeEvent, Typography } from "antd";
 import baseURL from "../../../utils/api";
 import { toast } from "react-toastify";
 import { useEffect, useState } from "react";
@@ -71,12 +71,10 @@ export const SearchPaymeInput: React.FC<SearchPaymeInputProps> = ({
       const paidByPayme: number = form.getFieldValue("paymeTolov");
       const discountedFee: number = form.getFieldValue("chegirmaTolov");
 
-      const password = form.getFieldValue("password");
-      if (radioValue === 7 && password !== "17abu17") {
-        console.log(password);
-
-        return errorToast("Parol noto'g'ri kiritildi !");
-      }
+      // const password = form.getFieldValue("password");
+      // if (radioValue === 7 && password !== "17abu17") {
+      //   return errorToast("Parol noto'g'ri kiritildi !");
+      // }
       try {
         const idToUse = userId === 0 ? searchId : userId;
         const response = await baseURL.put(
@@ -230,19 +228,19 @@ export const SearchPaymeInput: React.FC<SearchPaymeInputProps> = ({
                   </div>
                 ),
               },
-              {
-                value: 7,
-                label: (
-                  <div className="flex justify-between gap-5 ps-5 w-full items-center">
-                    <Typography className="text-xl">
-                      Sotuvchi tomonidan berildi
-                    </Typography>
-                  </div>
-                ),
-              },
+              // {
+              //   value: 7,
+              //   label: (
+              //     <div className="flex justify-between gap-5 ps-5 w-full items-center">
+              //       <Typography className="text-xl">
+              //         Sotuvchi tomonidan berildi
+              //       </Typography>
+              //     </div>
+              //   ),
+              // },
             ]}
           />
-          {radioValue === 7 && (
+          {/* {radioValue === 7 && (
             <Form.Item className="mt-5" name={"password"}>
               <Input.Password
                 name="password"
@@ -251,7 +249,7 @@ export const SearchPaymeInput: React.FC<SearchPaymeInputProps> = ({
                 className="font-semibold text-base"
               />
             </Form.Item>
-          )}
+          )} */}
         </Modal>
       </Form>
     </>

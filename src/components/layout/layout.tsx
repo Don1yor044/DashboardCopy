@@ -7,7 +7,6 @@ import { TbLogout2 } from "react-icons/tb";
 import { PiBuildingsLight } from "react-icons/pi";
 import { DashboardHeaderSearch } from "../headers";
 import { ArxiveHeaderSearch } from "../headers/arxiveHeaderSearch";
-import { FilterHeaderSearch } from "../headers/filterHeaderSearch";
 import { MobileLayout } from "../mobileLayout/mobileLayout";
 import { MobileTopBar } from "../mobileTopBar";
 
@@ -167,9 +166,10 @@ export const Layout = ({
           />
         ) : location.pathname === "/arxiv" ? (
           <ArxiveHeaderSearch />
-        ) : location.pathname === "/filters" ? (
-          <FilterHeaderSearch />
         ) : (
+          // : location.pathname === "/filters" ? (
+          //   <FilterHeaderSearch />
+          // ) :
           <></>
         )}
         <div className="block md:hidden ">
