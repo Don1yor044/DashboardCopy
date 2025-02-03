@@ -391,15 +391,18 @@ export const PostomatDepartments = () => {
         </>
       ) : dataCourse.length > 0 ? (
         <>
-          <Row gutter={[0, 0]} className="mt-0 md:mt-10 mb-40 md:mb-0">
-            <Col xl={12} span={12}>
+          <Row
+            gutter={[0, 0]}
+            className="mt-0 md:mt-10 mb-40 md:mb-0 md:flex  justify-center "
+          >
+            <Col xl={8} span={12}>
               {dataCourse.slice(0, 11).map((item) => (
                 <div key={item.id} className="p-1">
                   <PostomatDepartmentsCards item={item} />
                 </div>
               ))}
             </Col>
-            <Col xl={12} span={12}>
+            <Col xl={8} span={12}>
               {dataCourse.slice(11).map((item) => (
                 <div key={item.id} className="p-1">
                   <PostomatDepartmentsCards item={item} />

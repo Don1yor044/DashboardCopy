@@ -19,6 +19,7 @@ export const CardItemsCommentModal = ({
 
   const handleSendComment = async () => {
     const token = localStorage.getItem("token");
+    const serviceId = localStorage.getItem("serviceId");
     if (!token) {
       console.error("Token is missing or invalid");
       return;
@@ -32,6 +33,7 @@ export const CardItemsCommentModal = ({
         {
           comment: commentText,
           status: Number(commentType),
+          service_user_id: serviceId,
         },
         {
           headers: {

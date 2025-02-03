@@ -61,6 +61,8 @@ export const SearchPaymeInput: React.FC<SearchPaymeInputProps> = ({
 
   const handleSubmit = async () => {
     const token = localStorage.getItem("token");
+    const serviceId = localStorage.getItem("serviceId");
+
     if (!token) {
       console.error("Token is missing or invalid");
       return;
@@ -86,6 +88,7 @@ export const SearchPaymeInput: React.FC<SearchPaymeInputProps> = ({
             total_discounted_fee: Number(discountedFee),
             total_dashboard_ids: isSelected,
             status: radioValue,
+            service_user_id: serviceId,
           },
           {
             headers: {

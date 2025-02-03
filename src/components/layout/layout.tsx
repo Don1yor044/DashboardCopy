@@ -9,6 +9,7 @@ import { DashboardHeaderSearch } from "../headers";
 import { ArxiveHeaderSearch } from "../headers/arxiveHeaderSearch";
 import { MobileLayout } from "../mobileLayout/mobileLayout";
 import { MobileTopBar } from "../mobileTopBar";
+import { BsWallet } from "react-icons/bs";
 
 const { Sider, Content } = AntLayout;
 
@@ -51,6 +52,8 @@ export const Layout = ({
       setSelectedKey("2");
     } else if (path === "/departments") {
       setSelectedKey("3");
+    } else if (path === "/categories") {
+      setSelectedKey("6");
     }
   }, [location]);
 
@@ -135,6 +138,16 @@ export const Layout = ({
               className:
                 selectedKey === "5"
                   ? "!text-[#FE5222] font-medium text-[25px] !bg-transparent"
+                  : "font-medium text-[25px] !text-[#797979]",
+            },
+            {
+              key: "6",
+              icon: <BsWallet size={25} />,
+              label: "Categories",
+              onClick: () => navigate("/categories"),
+              className:
+                selectedKey === "6"
+                  ? "!text-[#FE5222] font-medium text-[25px] !bg-transparent "
                   : "font-medium text-[25px] !text-[#797979]",
             },
           ]}

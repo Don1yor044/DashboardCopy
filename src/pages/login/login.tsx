@@ -49,6 +49,7 @@ export const LoginPage = () => {
       if (response.data.service_user.name) {
         localStorage.setItem("User_Name", response.data.service_user.name);
         localStorage.setItem("Role", response.data.service_user.role);
+        localStorage.setItem("serviceId", response.data.service_user.id);
       }
 
       if (response.data?.access_token) {

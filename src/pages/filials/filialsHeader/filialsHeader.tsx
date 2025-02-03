@@ -15,9 +15,14 @@ export const FilialsHeader = ({
   const [toDate, setToDate] = useState<Dayjs | null>(dayjs().endOf("day"));
 
   const handleFromDateChange = (date: Dayjs | null) => {
-    const formattedDate = date ? date.format("YYYY-MM-DD HH:mm:ss") : "";
-    setFromDate(date);
-    setDateFrom(formattedDate);
+    if (date) {
+      const formattedDate = date.add(3, "hour").format("YYYY-MM-DD HH:mm:ss");
+      setFromDate(date);
+      setDateFrom(formattedDate);
+    } else {
+      setFromDate(null);
+      setDateFrom("");
+    }
   };
 
   const handleToDateChange = (date: Dayjs | null) => {
@@ -36,22 +41,24 @@ export const FilialsHeader = ({
   return (
     <div className="flex justify-between items-center md:mt-10">
       <Row className="h-14 w-full">
-        <Col xl={4} span={12} className="p-3 md:flex gap-5 items-center ">
+        <Col xl={6} span={12} className="p-3 md:flex gap-5 items-center ">
           <Typography className="text-2xl">Dan</Typography>
           <DatePicker
             value={fromDate}
             onChange={handleFromDateChange}
-            format="YYYY-MM-DD"
-            className="h-12 w-36 rounded-lg text-xl font-semibold md:mt-0 mt-2"
+            format="YYYY-MM-DD HH:mm:ss"
+            showTime
+            className="h-12 w-48 rounded-lg text-xl font-semibold md:mt-0 mt-2"
           />
         </Col>
-        <Col xl={4} span={12} className="p-3 md:flex gap-5 items-center">
+        <Col xl={6} span={12} className="p-3 md:flex gap-5 items-center">
           <Typography className="text-2xl">gacha</Typography>
           <DatePicker
             value={toDate}
             onChange={handleToDateChange}
-            format="YYYY-MM-DD"
-            className="h-12 w-36 rounded-lg text-xl font-semibold md:mt-0 mt-2"
+            format="YYYY-MM-DD HH:mm:ss"
+            showTime
+            className="h-12 w-48 rounded-lg text-xl font-semibold md:mt-0 mt-2"
           />
         </Col>
       </Row>

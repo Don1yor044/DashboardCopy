@@ -57,6 +57,8 @@ export const CardItems = observer(
       if (!item) return;
 
       const token = localStorage.getItem("token");
+      const serviceId = localStorage.getItem("serviceId");
+
       if (!token) {
         console.error("Token is missing or invalid");
         return;
@@ -72,6 +74,7 @@ export const CardItems = observer(
             discounted_fee: Number(item.discounted_fee),
             comment: item.comment,
             status: Number(item.status),
+            service_user_id: serviceId,
           },
           {
             headers: {

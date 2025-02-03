@@ -1,6 +1,7 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import {
   Arxive,
+  Categories,
   Discounted,
   Filials,
   Filters,
@@ -57,6 +58,7 @@ const App = () => {
               <Route path="/discounted" element={<Discounted />} />
               <Route path="/postomat" element={<Postomat />} />{" "}
               <Route path="/departments" element={<PostomatDepartments />} />
+              <Route path="/categories" element={<Categories />} />
             </Route>
           </Routes>
         </Router>
