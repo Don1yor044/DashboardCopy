@@ -61,6 +61,7 @@ export const MobileTopBar = observer(() => {
             {location.pathname === "/filials" ? <>Filiallar</> : <></>}
             {location.pathname === "/filters" ? <>Filter</> : <></>}
             {location.pathname === "/postomat" ? <>Postomat</> : <></>}
+            {location.pathname === "/payme" ? <>Payme</> : <></>}
           </Typography>
         </div>
       )}

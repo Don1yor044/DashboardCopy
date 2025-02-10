@@ -32,7 +32,7 @@ export const FilterHeaderDestop = ({
 }) => {
   return (
     <>
-      <div className="hidden md:flex gap-3 bg-white-100 px-4 py-3 rounded-2xl justify-between shadow-[0px_0px_30px_-10px_rgba(34,60,80,0.38)]">
+      <div className="hidden md:flex gap-3 bg-white-100 px-4 py-2 rounded-2xl justify-between shadow-[0px_0px_30px_-10px_rgba(34,60,80,0.38)]">
         <div className="px-5">
           <Typography className=" !text-lg font-semibold">
             Viloyat bo'yicha
@@ -71,18 +71,20 @@ export const FilterHeaderDestop = ({
               <DatePicker
                 value={fromDate}
                 onChange={handleFromDateChange}
-                format="YYYY-MM-DD"
+                format="YYYY-MM-DD HH:mm:ss"
                 placeholder="Boshlanish"
-                className="h-10 w-32 rounded-lg text-xl"
+                showTime
+                className="h-10 w-44 rounded-lg text-xl"
               />
             </div>
             <div>
               <DatePicker
                 value={toDate}
                 onChange={handleToDateChange}
-                format="YYYY-MM-DD"
+                format="YYYY-MM-DD HH:mm:ss"
                 placeholder="Tugash "
-                className="h-10 w-32 rounded-lg text-xl"
+                showTime
+                className="h-10 w-44 rounded-lg text-xl"
               />
             </div>
             <div>

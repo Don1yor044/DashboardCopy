@@ -13,5 +13,5 @@ export const infoToast = (message: string) => {
 };
 
 export const warningToast = (message: string) => {
-  toast.warn(message);
+  toast.warn(message, { className: "text-xl w-full px-5" });
 };

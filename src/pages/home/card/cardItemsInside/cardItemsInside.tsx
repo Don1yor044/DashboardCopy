@@ -1,15 +1,14 @@
 import { Button } from "antd";
 import { BsCheckLg, BsCurrencyDollar } from "react-icons/bs";
-import { priceFormatter } from "../../../components/priceFormat/priceFormat";
 import { HiOutlineCreditCard } from "react-icons/hi";
 import { MdOutlineDiscount, MdOutlineEmail } from "react-icons/md";
-import { IDashboards } from "../../../types/types";
-import { ModalType } from "../cardItems/cardItems";
 import { CiDeliveryTruck, CiEdit } from "react-icons/ci";
-import { kgFormatter } from "../../../components";
 import { HiOutlineBuildingStorefront } from "react-icons/hi2";
 import { FiPhoneOff } from "react-icons/fi";
 import { LuPhoneCall } from "react-icons/lu";
+import { IDashboards } from "../../../../types/types";
+import { ModalType } from "../cardItems/cardItems";
+import { kgFormatter, priceFormatter } from "../../../../components";
 export const CardItemsInside = ({
   item,
   isSelected,
@@ -70,7 +69,7 @@ export const CardItemsInside = ({
             <div className="border-b">Chegirma:</div>
             <div className="border-b">Avto Kargo:</div>
             <div className="border-b">Izoh:</div>
-            <div className="border-b">Xarid vaqt:</div>
+            <div className="border-b">Xarid vaqti:</div>
             <div>Miqdori:</div>
           </div>
           <div className="w-[65%] text-lg py-3 px-2 space-y-2">

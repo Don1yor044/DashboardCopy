@@ -1,11 +1,15 @@
 import React, { useState, useEffect } from "react";
-import { IDashboards } from "../../../types/types";
+import { IDashboards } from "../../../../types/types";
 import { toast } from "react-toastify";
-import baseURL from "../../../utils/api";
-import PaymentModals from "../paymentModals/paymentModals";
+import baseURL from "../../../../utils/api";
+import PaymentModals from "../../paymentModals/paymentModals";
 import { observer } from "mobx-react-lite";
-import { CardItemsInside } from "../cardItemsInside/cardItemsInside";
-import { errorToast, successToast } from "../../../components/toastManager";
+import {
+  errorToast,
+  successToast,
+  warningToast,
+} from "../../../../components/toastManager";
+import { CardItemsInside } from "../cardItemsInside";
 export type ModalType =
   | "card"
   | "cash"
@@ -33,6 +37,8 @@ export const CardItems = observer(
     }>({});
     const [localData, setLocalData] = useState<IDashboards[]>(dataCourse);
     const [changedItems, setChangedItems] = useState<Set<number>>(new Set());
+    const [isChange, setIsChange] = useState<boolean>(false);
+    const [password, setPassword] = useState<string>("");
 
     useEffect(() => {
       setLocalData(dataCourse);
@@ -63,7 +69,9 @@ export const CardItems = observer(
         console.error("Token is missing or invalid");
         return;
       }
-
+      if (isChange && password !== "17abu17") {
+        return warningToast("Parol qaytadan kiring!");
+      }
       try {
         const response = await baseURL.put(
           `/api/client/dashboard/${id}`,
@@ -74,7 +82,8 @@ export const CardItems = observer(
             discounted_fee: Number(item.discounted_fee),
             comment: item.comment,
             status: Number(item.status),
-            service_user_id: serviceId,
+            service_user_id: Number(serviceId),
+            is_changed: isChange,
           },
           {
             headers: {
@@ -88,6 +97,8 @@ export const CardItems = observer(
           notifyError();
         } else if (response.data.ret === 0) {
           notifySuccess();
+          setIsChange(false);
+          setPassword("");
           setChangedItems((prev) => {
             const newSet = new Set(prev);
             newSet.delete(id);
@@ -145,6 +156,10 @@ export const CardItems = observer(
               modalOpen={modalOpen}
               closeModal={closeModal}
               handleLocalSave={handleLocalSave}
+              isChange={isChange}
+              setIsChange={setIsChange}
+              password={password}
+              setPassword={setPassword}
             />
           </React.Fragment>
         ))}

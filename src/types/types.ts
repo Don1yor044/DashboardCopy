@@ -1,6 +1,7 @@
 import { Dispatch, SetStateAction } from "react";
 
 export interface IDashboards {
+  id: number;
   address?: string;
   city?: string;
   comment?: null | string;
@@ -8,7 +9,6 @@ export interface IDashboards {
   express_line?: string;
   express_num?: string;
   full_name?: string;
-  id: number;
   order_id?: number;
   paid_at?: null | number;
   paid_by_card?: null | number;
@@ -26,7 +26,7 @@ export interface IDashboards {
   weight?: number | null;
 }
 export interface IfiltersData {
-  id: string;
+  id: string | number;
   user_id: number;
   count: number;
   comment: string;

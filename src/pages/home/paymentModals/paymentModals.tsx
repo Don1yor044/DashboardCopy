@@ -1,7 +1,7 @@
-import React from "react";
-import { Modal, Form, Input, Button, Typography, Radio } from "antd";
+import React, { Dispatch, SetStateAction } from "react";
+import { Modal, Form, Input, Button, Typography, Radio, Checkbox } from "antd";
 import { IDashboards } from "../../../types/types";
-import { ModalType } from "../cardItems/cardItems";
+import { ModalType } from "../card";
 
 const { TextArea } = Input;
 
@@ -10,6 +10,10 @@ interface PaymentModalProps {
   modalOpen: { [key: number]: { type: ModalType; open: boolean } };
   closeModal: (id: number) => void;
   handleLocalSave: (id: number, values: Partial<IDashboards>) => void;
+  setIsChange: (e: boolean) => void;
+  isChange: boolean;
+  password: string;
+  setPassword: Dispatch<SetStateAction<string>>;
 }
 
 const PaymentModals: React.FC<PaymentModalProps> = ({
@@ -17,6 +21,10 @@ const PaymentModals: React.FC<PaymentModalProps> = ({
   modalOpen,
   closeModal,
   handleLocalSave,
+  isChange,
+  setIsChange,
+  setPassword,
+  password,
 }) => {
   const modalsConfig = [
     {
@@ -141,7 +149,31 @@ const PaymentModals: React.FC<PaymentModalProps> = ({
                 <Input type="number" placeholder={config.placeholder} />
               )}
             </Form.Item>
-            <Form.Item className="flex justify-end">
+
+            {isChange ? (
+              <div className="mt-3">
+                <Input
+                  name="password"
+                  placeholder="parol kiritng !"
+                  className="font-semibold text-base"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                />
+              </div>
+            ) : null}
+            <div className="mt-3 rounded-md p-2 bg-gray-200">
+              <Checkbox
+                checked={isChange}
+                onChange={() => setIsChange(!isChange)}
+                className="font-semibold"
+              >
+                <Typography className="text-lg ms-3">
+                  O'zgarishni tasdiqlash
+                </Typography>
+              </Checkbox>
+            </div>
+
+            <Form.Item className="flex justify-end mt-5 mb-0">
               <Button type="primary" htmlType="submit" className="p-4 text-lg">
                 ok
               </Button>

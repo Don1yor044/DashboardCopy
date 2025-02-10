@@ -1,6 +1,6 @@
 /** @jsxImportSource @emotion/react */
 import { useState, useEffect } from "react";
-import { Empty, Pagination, Spin, message } from "antd";
+import { Empty, Pagination, Segmented, message } from "antd";
 import { useNavigate } from "react-router-dom";
 import baseURL from "../../../utils/api";
 import { FiltersHeader } from "../filtersHeader/filtersHeader";
@@ -8,6 +8,10 @@ import { IfiltersData } from "../../../types/types";
 import { FiltersCards } from "../filtersCards/filtersCards";
 import { paginationStyle } from "../../../components/paginationStyles/paginationStyles";
 import { observer } from "mobx-react-lite";
+import { FiltersLists } from "../filtersLists/filtersLists";
+import { HiMiniBars3 } from "react-icons/hi2";
+import { AiOutlineAppstore } from "react-icons/ai";
+import { Loader } from "../../../components";
 
 export const FiltersContainer = observer(() => {
   const [region, setRegion] = useState<string>("1");
@@ -23,6 +27,19 @@ export const FiltersContainer = observer(() => {
 
   const [dateFrom, setDateFrom] = useState<string>("");
   const [dateTo, setDateTo] = useState<string>("");
+  const [segmentValue, setSegmentValue] = useState(
+    window.innerWidth <= 768 ? "app" : "list"
+  );
+  useEffect(() => {
+    const handleResize = () => {
+      setSegmentValue(window.innerWidth <= 768 ? "app" : "list");
+    };
+
+    window.addEventListener("resize", handleResize);
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
 
   const pageSize = 10;
 
@@ -46,7 +63,7 @@ export const FiltersContainer = observer(() => {
           },
         }
       );
-      console.log(response.data.data.data, "response");
+      console.log(response.data.data, "response");
 
       const dashboard = response.data?.data?.data || [];
       setTotalItems(response.data.data.total);
@@ -151,14 +168,6 @@ export const FiltersContainer = observer(() => {
     setCurrentPage(page);
   };
 
-  if (loading) {
-    return (
-      <div className="flex justify-center mt-28 text-4xl">
-        <Spin size="large" />
-      </div>
-    );
-  }
-
   return (
     <>
       <FiltersHeader
@@ -176,15 +185,44 @@ export const FiltersContainer = observer(() => {
         handleDateRangeFilter={handleDateRangeFilter}
         handleUser={handleUser}
       />
+      <div className="hidden md:flex justify-end my-5">
+        <Segmented
+          value={segmentValue}
+          className="p-2 bg-gray-100"
+          onChange={(e) => setSegmentValue(e)}
+          options={[
+            {
+              value: "list",
+              icon: <HiMiniBars3 size={18} className="mt-1" />,
+            },
+            {
+              value: "app",
+              icon: <AiOutlineAppstore size={18} className="mt-1" />,
+            },
+          ]}
+        />
+      </div>
       {loading ? (
-        <div className="flex justify-center mt-28 text-4xl">
-          <Spin size="large" />
+        <div className="flex justify-center mt-10 text-4xl">
+          <Loader />
         </div>
       ) : data && data.length > 0 ? (
         <>
-          <FiltersCards data={data} />
+          {segmentValue === "list" ? (
+            <>
+              <FiltersLists
+                data={data}
+                activeButton={activeButton}
+                fetchUserData={fetchUserData}
+              />
+            </>
+          ) : (
+            <>
+              <FiltersCards data={data} />
+            </>
+          )}
           <div
-            className="flex justify-center  mb-56 mt-10 md:mb-0 md:mt-5"
+            className="flex justify-center mb-56 mt-10 md:mb-0 md:mt-5"
             css={paginationStyle}
           >
             <Pagination

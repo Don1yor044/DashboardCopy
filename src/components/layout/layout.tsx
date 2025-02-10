@@ -1,15 +1,16 @@
 import { useState, useEffect } from "react";
-import { Layout as AntLayout, Button, Menu, Typography } from "antd";
+import { Layout as AntLayout, Menu, Typography } from "antd";
 import { Outlet, useLocation, useNavigate } from "react-router-dom";
 import { RiBuilding4Line, RiHistoryFill, RiHome6Line } from "react-icons/ri";
 import { LuFilter, LuUserRound } from "react-icons/lu";
-import { TbLogout2 } from "react-icons/tb";
 import { PiBuildingsLight } from "react-icons/pi";
 import { DashboardHeaderSearch } from "../headers";
 import { ArxiveHeaderSearch } from "../headers/arxiveHeaderSearch";
 import { MobileLayout } from "../mobileLayout/mobileLayout";
 import { MobileTopBar } from "../mobileTopBar";
 import { BsWallet } from "react-icons/bs";
+import { LogOutButton } from "../logOutButton";
+import { TbLogout2 } from "react-icons/tb";
 
 const { Sider, Content } = AntLayout;
 
@@ -30,9 +31,11 @@ export const Layout = ({
   const UserRole = localStorage.getItem("Role");
 
   const ClearStoreg = () => {
+    navigate("/");
     localStorage.removeItem("token");
     localStorage.removeItem("User_Name");
     localStorage.removeItem("Role");
+    localStorage.removeItem("serviceId");
     window.location.reload();
   };
 
@@ -52,7 +55,7 @@ export const Layout = ({
       setSelectedKey("2");
     } else if (path === "/departments") {
       setSelectedKey("3");
-    } else if (path === "/categories") {
+    } else if (path === "/payme") {
       setSelectedKey("6");
     }
   }, [location]);
@@ -143,8 +146,8 @@ export const Layout = ({
             {
               key: "6",
               icon: <BsWallet size={25} />,
-              label: "Categories",
-              onClick: () => navigate("/categories"),
+              label: "Payme",
+              onClick: () => navigate("/payme"),
               className:
                 selectedKey === "6"
                   ? "!text-[#FE5222] font-medium text-[25px] !bg-transparent "
@@ -154,18 +157,29 @@ export const Layout = ({
         />
         <div className="absolute bottom-5 mx-8 border-t h-52 w-44">
           <div className="mt-10 space-y-6 ">
-            <Button type="text" className="text-2xl text-[#FE5222] flex gap-3">
+            <LogOutButton
+              name={LocalStoregUserName}
+              icon={<LuUserRound size={25} />}
+            />
+
+            {/* <Button
+              type="text"
+              className="text-2xl text-[#FE5222] flex gap-3 shadow-[2px_2px_10px_rgba(0,0,0,0.199)] !py-5 rounded-full"
+            >
               <LuUserRound />
               {LocalStoregUserName || "User yo'q"}
-            </Button>
-            <Button
+            </Button> */}
+            <div onClick={ClearStoreg}>
+              <LogOutButton name="Chiqish" icon={<TbLogout2 size={25} />} />
+            </div>
+            {/* <Button
               type="text"
               className="text-2xl text-[#FE5222] flex gap-3"
               onClick={ClearStoreg}
             >
               <TbLogout2 />
               Chiqish
-            </Button>
+            </Button> */}
           </div>
         </div>
       </Sider>

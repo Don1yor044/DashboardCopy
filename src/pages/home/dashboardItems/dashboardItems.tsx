@@ -1,7 +1,6 @@
 /** @jsxImportSource @emotion/react */
-import { Empty, Pagination, Spin } from "antd";
+import { Empty, Pagination, Segmented } from "antd";
 import { Dispatch, SetStateAction, useEffect, useState } from "react";
-import { CardItems } from "../cardItems/cardItems";
 import baseURL from "../../../utils/api";
 import searchStore from "../../../store/searchStore";
 import { observer } from "mobx-react-lite";
@@ -10,11 +9,14 @@ import { SearchPaymeInput } from "../searchPaymeInput/searchPaymeInput";
 import { useNavigate } from "react-router-dom";
 import { handleSelect } from "../../../utils/dashboardFunctions/selectUtils";
 import { resetTotals } from "../../../utils/dashboardFunctions/totalUtils";
-import { CardItemsMobile } from "../cardItemsMobile/cardItemsMobile";
 import { DashboardHeaderMobile } from "../../../components/headers";
-import { paginationStyle, priceFormatter } from "../../../components";
+import { Loader, paginationStyle, priceFormatter } from "../../../components";
+import { HiMiniBars3 } from "react-icons/hi2";
+import { AiOutlineAppstore } from "react-icons/ai";
+import { CardItems, CardItemsMobile } from "../card";
+import { ListItems } from "../list";
 
-export const Cards = observer(
+export const DashboardItems = observer(
   ({
     setTotalPaymentFee,
     setTotalPrice,
@@ -35,6 +37,8 @@ export const Cards = observer(
     const [selectedItems, setSelectedItems] = useState<number[]>([]);
     const [isHeaderInput, setIsHeaderInput] = useState(true);
     const [userId, setUserId] = useState<number>(0);
+    const [segmentValue, setSegmentValue] = useState("list");
+
     const search = searchStore?.searchDashboard;
 
     const navigate = useNavigate();
@@ -133,7 +137,7 @@ export const Cards = observer(
         headers: getHeaders(token),
         timeout: 10000,
       });
-      console.log(response.data.data.dashboards, "Dashboard data");
+      console.log(response.data.data, "Dashboard data");
 
       setDataCourse(response.data.data.dashboards);
       setTotalItems(response.data.total_items ?? 0);
@@ -243,13 +247,30 @@ export const Cards = observer(
                     {priceFormatter(totalPaidByPayme)}
                   </div>
                 </div>
+                <div>
+                  <Segmented
+                    value={segmentValue}
+                    className="p-1"
+                    onChange={(e) => setSegmentValue(e)}
+                    options={[
+                      {
+                        value: "list",
+                        icon: <HiMiniBars3 size={18} className="mt-1" />,
+                      },
+                      {
+                        value: "app",
+                        icon: <AiOutlineAppstore size={18} className="mt-1" />,
+                      },
+                    ]}
+                  />
+                </div>
               </div>
             </>
           )}
         </div>
         {loading ? (
           <div className="flex justify-center mt-10">
-            <Spin size="large" />
+            <Loader />
           </div>
         ) : (
           <>
@@ -266,15 +287,30 @@ export const Cards = observer(
               </>
             ) : (
               <>
-                <div className="mt-5 hidden md:grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 gap-5 ">
-                  <CardItems
-                    dataCourse={dataCourse}
-                    fetchData={fetchData}
-                    isSelected={selectedItems}
-                    onSelect={handleItemsSelect}
-                    setUserId={setUserId}
-                  />
-                </div>
+                {segmentValue === "list" ? (
+                  <div className="hidden md:block">
+                    <ListItems
+                      dataCourse={dataCourse}
+                      isSelected={selectedItems}
+                      onSelect={handleItemsSelect}
+                      setUserId={setUserId}
+                      fetchData={fetchData}
+                    />
+                  </div>
+                ) : (
+                  <>
+                    <div className="mt-5 hidden md:grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 gap-5 ">
+                      <CardItems
+                        dataCourse={dataCourse}
+                        fetchData={fetchData}
+                        isSelected={selectedItems}
+                        onSelect={handleItemsSelect}
+                        setUserId={setUserId}
+                      />
+                    </div>
+                  </>
+                )}
+
                 <div className="block md:hidden px-1">
                   <CardItemsMobile dataCourse={dataCourse} />
                 </div>

@@ -68,6 +68,7 @@ export const SearchPaymeInputItems = ({
             />
           </Form.Item>
         </div>
+
         <div className="flex gap-2 border border-red-500 p-3 rounded-lg items-center">
           <div className="border-e px-2">
             <Typography className="text-lg font-semibold">

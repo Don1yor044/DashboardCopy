@@ -1,9 +1,10 @@
-import { Col, Empty, Row, Spin } from "antd";
+import { Col, Empty, Row } from "antd";
 import baseURL from "../../../utils/api";
 import { useEffect, useState } from "react";
 import { observer } from "mobx-react-lite";
 import { useNavigate } from "react-router-dom";
 import { FilialsCardsItems } from "../filialsCardsItems/filialsCardsItems";
+import { Loader } from "../../../components";
 
 export interface IfilialsCardsData {
   id: number;
@@ -24,7 +25,13 @@ export interface IfilialsCardsData {
 }
 
 export const FilialsCards = observer(
-  ({ dateFrom, dateTo }: { dateFrom: string; dateTo: string }) => {
+  ({
+    dateFrom,
+    dateTo,
+  }: {
+    dateFrom: string | undefined;
+    dateTo: string | undefined;
+  }) => {
     const navigate = useNavigate();
     const [dataCourse, setDataCourse] = useState<IfilialsCardsData[]>([]);
     const [isLoading, setIsLoading] = useState(true);
@@ -49,7 +56,7 @@ export const FilialsCards = observer(
             },
           }
         );
-        console.log(response.data.data, "FilialDAta");
+        console.log(response.data, "FilialDAta");
 
         if (Array.isArray(response.data.data)) {
           setDataCourse(response.data.data);
@@ -71,7 +78,7 @@ export const FilialsCards = observer(
     if (isLoading) {
       return (
         <div className="flex justify-center mt-20 md:mt-10">
-          <Spin size="large" />
+          <Loader />
         </div>
       );
     }
@@ -90,13 +97,7 @@ export const FilialsCards = observer(
       <div className="px-2">
         <Row gutter={[20, 20]} className="mt-16 md:mt-10 md:mb-0 mb-56">
           {dataCourse.map((item, index) => (
-            <Col
-              xl={9}
-              span={24}
-              key={index}
-              // onClick={() => navigate("/discounted")}
-              // className="cursor-pointer"
-            >
+            <Col xl={9} span={24} key={index}>
               <FilialsCardsItems item={item} />
             </Col>
           ))}

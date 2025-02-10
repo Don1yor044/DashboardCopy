@@ -1,8 +1,14 @@
 import { Button, Select, Typography } from "antd";
 import dayjs, { Dayjs } from "dayjs";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { FilterHeaderDestop } from "./filterHeaderDesktop/filterHeaderDestop";
 import { FilterHeaderMobile } from "./filterHeaderMobile/filterHeaderMobile";
+interface MenuItem {
+  key: string;
+  label: React.ReactNode;
+}
+
+type MenuItems = MenuItem[];
 
 export const FiltersHeader = ({
   handleCountSort,
@@ -34,37 +40,31 @@ export const FiltersHeader = ({
   handleUser: () => void;
 }) => {
   const [fromDate, setFromDate] = useState<Dayjs | null>(
-    dateFrom ? dayjs(dateFrom) : null
+    dateFrom ? dayjs(dateFrom, "YYYY-MM-DD HH:mm:ss") : null
   );
   const [toDate, setToDate] = useState<Dayjs | null>(
-    dateTo ? dayjs(dateTo).subtract(1, "day") : null
+    dateTo ? dayjs(dateTo, "YYYY-MM-DD HH:mm:ss") : null
   );
   const [open, setOpen] = useState(false);
 
+  useEffect(() => {
+    if (activeButton !== "dateRage") {
+      setDateFrom("");
+      setDateTo("");
+      setFromDate(null);
+      setToDate(null);
+    }
+  }, [activeButton, setDateFrom, setDateTo]);
+
   const handleFromDateChange = (date: Dayjs | null) => {
-    const formattedDate = date ? date.format("YYYY-MM-DD HH:mm:ss") : "";
     setFromDate(date);
-    setDateFrom(formattedDate);
+    setDateFrom(date ? date.format("YYYY-MM-DD HH:mm:ss") : "");
   };
 
   const handleToDateChange = (date: Dayjs | null) => {
-    if (date) {
-      const updatedDate = date.add(1, "day").add(3, "hour");
-      const displayDate = date;
-      const formattedDate = updatedDate.format("YYYY-MM-DD HH:mm:ss");
-      setToDate(displayDate);
-      setDateTo(formattedDate);
-    } else {
-      setToDate(null);
-      setDateTo("");
-    }
+    setToDate(date);
+    setDateTo(date ? date.format("YYYY-MM-DD HH:mm:ss") : "");
   };
-  interface MenuItem {
-    key: string;
-    label: React.ReactNode;
-  }
-
-  type MenuItems = MenuItem[];
 
   const menuItems: MenuItems = [
     {

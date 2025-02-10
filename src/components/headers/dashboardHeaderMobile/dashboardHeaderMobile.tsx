@@ -61,15 +61,12 @@ export const DashboardHeaderMobile = observer(() => {
 
       if (data.paid_payment_fee) {
         setDailyAmount(data.paid_payment_fee);
-        console.log(data.paid_payment_fee);
       }
       if (data.delivered_weight) {
         setDailyWeight(data.delivered_weight);
-        console.log(data.delivered_weight);
       }
       if (data.received_weight) {
         setDailyStay(data.received_weight);
-        console.log(data.received_weight);
       }
     } catch (error) {
       console.error(error);

@@ -7,8 +7,11 @@ import { HiOutlineCreditCard } from "react-icons/hi";
 import { IfilialsCardsData } from "../filialsCards/filialsCards";
 import { BsBoxSeam } from "react-icons/bs";
 import { kgFormatter } from "../../../components";
+import { useNavigate } from "react-router-dom";
 
 export const FilialsCardsItems = ({ item }: { item: IfilialsCardsData }) => {
+  const navigate = useNavigate();
+
   return (
     <>
       <div className="rounded-3xl border-2 border-gray-300 hover:border-red-500">
@@ -37,9 +40,14 @@ export const FilialsCardsItems = ({ item }: { item: IfilialsCardsData }) => {
             </div>
           </div>
         </div>
-        <div className="p-2 md:p-5 bg-white rounded-b-3xl">
-          <div>
-            <div className="flex border-b-2 justify-between items-center py-2">
+        <div className="p-2 md:p-2 bg-white rounded-b-3xl ">
+          <div className="space-y-1">
+            <div
+              className="flex justify-between py-2 cursor-pointer border rounded-lg border-[#FE5222] hover:shadow-lg hover:border-2 px-2"
+              onClick={() =>
+                navigate("/discounted", { state: { type: "card" } })
+              }
+            >
               <div className="flex gap-3 items-center">
                 <div className="bg-[#FE5222] h-9 w-9 rounded-full flex justify-center items-center">
                   <HiOutlineCreditCard size={22} color="white" />
@@ -53,7 +61,12 @@ export const FilialsCardsItems = ({ item }: { item: IfilialsCardsData }) => {
                 <span className="text-lg md:text-xl text-[#797979]">so'm</span>
               </Typography>
             </div>
-            <div className="flex border-b-2 justify-between py-2">
+            <div
+              className="flex justify-between py-2 cursor-pointer border rounded-lg border-[#FE5222] hover:shadow-lg hover:border-2 px-2"
+              onClick={() =>
+                navigate("/discounted", { state: { type: "payme" } })
+              }
+            >
               <div className="flex gap-3 items-center">
                 <div className="bg-[#FE5222] h-9 w-9 rounded-full flex justify-center items-center">
                   <img
@@ -71,7 +84,12 @@ export const FilialsCardsItems = ({ item }: { item: IfilialsCardsData }) => {
                 <span className="text-lg md:text-xl text-[#797979]">so'm</span>
               </Typography>
             </div>
-            <div className="flex border-b-2 justify-between py-2">
+            <div
+              className="flex justify-between py-2 cursor-pointer border rounded-lg border-[#FE5222] hover:shadow-lg hover:border-2 px-2"
+              onClick={() =>
+                navigate("/discounted", { state: { type: "cash" } })
+              }
+            >
               <div className="flex gap-3 items-center">
                 <div className="bg-[#FE5222] h-9 w-9 rounded-full flex justify-center items-center">
                   <TbCashBanknote size={22} color="white" />
@@ -85,7 +103,12 @@ export const FilialsCardsItems = ({ item }: { item: IfilialsCardsData }) => {
                 <span className="text-lg md:text-xl text-[#797979]">so'm</span>
               </Typography>
             </div>
-            <div className="flex justify-between py-2">
+            <div
+              className="flex justify-between py-2 cursor-pointer border rounded-lg border-[#FE5222] hover:shadow-lg hover:border-2 px-2"
+              onClick={() =>
+                navigate("/discounted", { state: { type: "discounted" } })
+              }
+            >
               <div className="flex gap-3 items-center">
                 <div className="bg-[#FE5222] h-9 w-9 rounded-full flex justify-center items-center">
                   <MdOutlineDiscount size={22} color="white" />
@@ -127,7 +150,12 @@ export const FilialsCardsItems = ({ item }: { item: IfilialsCardsData }) => {
             </div>
           </div>
           <div className="md:my-3">
-            <div className="flex border-b-2 justify-between items-center py-2">
+            <div
+              className="flex justify-between items-center py-2 cursor-pointer border rounded-lg border-[#FE5222] hover:shadow-lg hover:border-2 px-2"
+              onClick={() =>
+                navigate("/discounted", { state: { type: "delivered" } })
+              }
+            >
               <div className="flex gap-3 items-center">
                 <div className="bg-[#FE5222] h-9 w-9 rounded-full flex justify-center items-center">
                   <CiDeliveryTruck size={25} color="white" />

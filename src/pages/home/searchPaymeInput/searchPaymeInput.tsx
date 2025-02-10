@@ -1,8 +1,20 @@
-import { Form, Modal, Radio, RadioChangeEvent, Typography } from "antd";
+import {
+  Checkbox,
+  Form,
+  Input,
+  Modal,
+  Radio,
+  RadioChangeEvent,
+  Typography,
+} from "antd";
 import baseURL from "../../../utils/api";
 import { toast } from "react-toastify";
 import { useEffect, useState } from "react";
-import { errorToast, successToast } from "../../../components/toastManager";
+import {
+  errorToast,
+  successToast,
+  warningToast,
+} from "../../../components/toastManager";
 import { SearchPaymeInputItems } from "../searchPaymeInputItems/searchPaymeInputItems";
 import { SearchPaymeInputProps } from "../../../types/types";
 
@@ -15,9 +27,16 @@ export const SearchPaymeInput: React.FC<SearchPaymeInputProps> = ({
   residual,
   searchId,
 }) => {
+  console.log(isSelected, "datalar");
+  console.log(userId, "datalar");
+  console.log(dataCourse, "datalar");
+  console.log(searchId, "datalar");
+
   const [totalPaid, setTotalPaid] = useState(0);
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [radioValue, setRadioValue] = useState(1);
+  const [radioValue, setRadioValue] = useState<number>(1);
+  const [password, setPassword] = useState<string>("");
+  const [isChange, setIsChange] = useState<boolean>(false);
 
   const notifySuccess = () => successToast("Muvaffaqiyatli saqlandi !");
   const notifyError = () => errorToast("Xatolik qaytadan urinib ko'ring !");
@@ -55,6 +74,7 @@ export const SearchPaymeInput: React.FC<SearchPaymeInputProps> = ({
       naqdTolov: "",
       paymeTolov: "",
       chegirmaTolov: "",
+      weight: "",
     });
     setTotalPaid(0);
   }, [form]);
@@ -72,11 +92,14 @@ export const SearchPaymeInput: React.FC<SearchPaymeInputProps> = ({
       const paidByCash: number = form.getFieldValue("naqdTolov");
       const paidByPayme: number = form.getFieldValue("paymeTolov");
       const discountedFee: number = form.getFieldValue("chegirmaTolov");
+      const weight: number = form.getFieldValue("weight");
 
-      // const password = form.getFieldValue("password");
-      // if (radioValue === 7 && password !== "17abu17") {
-      //   return errorToast("Parol noto'g'ri kiritildi !");
-      // }
+      console.log(weight);
+
+      if (isChange && password !== "17abu17") {
+        return warningToast("Parol qaytadan kiring!");
+      }
+
       try {
         const idToUse = userId === 0 ? searchId : userId;
         const response = await baseURL.put(
@@ -88,7 +111,8 @@ export const SearchPaymeInput: React.FC<SearchPaymeInputProps> = ({
             total_discounted_fee: Number(discountedFee),
             total_dashboard_ids: isSelected,
             status: radioValue,
-            service_user_id: serviceId,
+            service_user_id: Number(serviceId),
+            is_changed: isChange,
           },
           {
             headers: {
@@ -101,6 +125,9 @@ export const SearchPaymeInput: React.FC<SearchPaymeInputProps> = ({
         } else if (response.data.msg === "SUCCESS") {
           notifySuccess();
           form.resetFields();
+          setRadioValue(1);
+          setIsChange(false);
+          setPassword("");
           setSelectedItems([]);
           setTimeout(() => {
             fetchData();
@@ -141,6 +168,9 @@ export const SearchPaymeInput: React.FC<SearchPaymeInputProps> = ({
 
   const handleCancel = () => {
     setIsModalOpen(false);
+    setRadioValue(1);
+    setIsChange(false);
+    setPassword("");
   };
 
   const onChange = (e: RadioChangeEvent) => {
@@ -253,6 +283,29 @@ export const SearchPaymeInput: React.FC<SearchPaymeInputProps> = ({
               />
             </Form.Item>
           )} */}
+          {isChange ? (
+            <div className="mt-3">
+              <Input
+                name="password"
+                placeholder="parol kiritng !"
+                className="font-semibold text-base"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+              />
+            </div>
+          ) : null}
+          <div className="mt-3 rounded-md p-2 bg-gray-200">
+            <Checkbox
+              checked={isChange}
+              onChange={() => setIsChange(!isChange)}
+              className="font-semibold"
+            >
+              <Typography className="text-lg ms-3">
+                O'zgarishni tasdiqlash
+              </Typography>
+            </Checkbox>
+            {/* <Button onClick={IsChange}>O'zgarishni tasdiqlash</Button> */}
+          </div>
         </Modal>
       </Form>
     </>

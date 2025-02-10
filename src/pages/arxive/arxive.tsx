@@ -1,5 +1,5 @@
 /** @jsxImportSource @emotion/react */
-import { Col, Empty, Row, Spin, Pagination } from "antd";
+import { Col, Empty, Row, Pagination, Segmented, DatePicker } from "antd";
 import { useEffect, useState } from "react";
 import baseURL from "../../utils/api";
 import { IDashboards } from "../../types/types";
@@ -8,20 +8,51 @@ import { useNavigate } from "react-router-dom";
 import { ArxiveCards } from "./arxiveCards/arxiveCards";
 import searchStore from "../../store/searchStore";
 import { paginationStyle } from "../../components/paginationStyles/paginationStyles";
+import { HiMiniBars3 } from "react-icons/hi2";
+import { AiOutlineAppstore } from "react-icons/ai";
+import { ArxiveList } from "./arxiveList/arxiveList";
+import dayjs from "dayjs";
+import { Loader } from "../../components";
+const { RangePicker } = DatePicker;
 
 export const Arxive = observer(() => {
   const [data, setData] = useState<IDashboards[]>([]);
   const [isLoading, setIsloading] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
   const [totalItems, setTotalItems] = useState(0);
+  const [segmentValue, setSegmentValue] = useState("list");
+  const [dates, setDates] = useState<[dayjs.Dayjs, dayjs.Dayjs]>([
+    dayjs().startOf("day"),
+    dayjs().endOf("day"),
+  ]);
+
   const search = searchStore.searchArxive;
   const navigate = useNavigate();
 
+  const handleDateChange = (
+    value: [dayjs.Dayjs | null, dayjs.Dayjs | null] | null
+  ) => {
+    if (value && value[0] && value[1]) {
+      setDates([value[0], value[1]]);
+      fetchData(
+        currentPage,
+        value[0].format("YYYY-MM-DD HH:mm:ss"),
+        value[1].format("YYYY-MM-DD HH:mm:ss")
+      );
+    }
+  };
+
   useEffect(() => {
-    fetchData(currentPage);
+    const startDate = dates[0].format("YYYY-MM-DD HH:mm:ss");
+    const endDate = dates[1].format("YYYY-MM-DD HH:mm:ss");
+    fetchData(currentPage, startDate, endDate);
   }, [search, currentPage]);
 
-  const fetchData = async (page: number) => {
+  const fetchData = async (
+    page: number,
+    startDate: string,
+    endDate: string
+  ) => {
     setIsloading(true);
     const token = localStorage.getItem("token");
     if (!token) {
@@ -32,10 +63,8 @@ export const Arxive = observer(() => {
     let res;
     try {
       if (search) {
-        console.log(search);
-
         res = await baseURL.get(
-          `/api/client/dashboard/all/delivered/archive/${search}?page=${page}`,
+          `/api/client/dashboard/all/delivered/archive/${search}?page=${page}&from=${startDate}&to=${endDate}`,
           {
             headers: {
               Authorization: `Bearer ${token}`,
@@ -44,7 +73,7 @@ export const Arxive = observer(() => {
         );
       } else {
         res = await baseURL.get(
-          `/api/client/dashboard/all/delivered/archive?page=${page}`,
+          `/api/client/dashboard/all/delivered/archive?page=${page}&from=${startDate}&to=${endDate}`,
           {
             headers: {
               Authorization: `Bearer ${token}`,
@@ -76,9 +105,38 @@ export const Arxive = observer(() => {
 
   return (
     <>
+      <div className="flex justify-between items-center mb-5 ">
+        <div>
+          <RangePicker
+            value={dates}
+            onChange={handleDateChange}
+            placeholder={["Boshalanishi", "Tugashi"]}
+            className="p-2 text-xl"
+            format="YYYY-MM-DD HH:mm:ss"
+            showTime
+          />
+        </div>
+        <div>
+          <Segmented
+            value={segmentValue}
+            className="p-2 bg-gray-100"
+            onChange={(e) => setSegmentValue(e)}
+            options={[
+              {
+                value: "list",
+                icon: <HiMiniBars3 size={20} className="mt-1" />,
+              },
+              {
+                value: "app",
+                icon: <AiOutlineAppstore size={20} className="mt-1" />,
+              },
+            ]}
+          />
+        </div>
+      </div>
       <Row gutter={[20, 20]} className="flex justify-center items-center">
         {isLoading ? (
-          <Spin size="large" />
+          <Loader />
         ) : (
           <>
             {data.length === 0 ? (
@@ -90,11 +148,19 @@ export const Arxive = observer(() => {
               </div>
             ) : (
               <>
-                {data.map((item) => (
-                  <Col span={8} key={item.id}>
-                    <ArxiveCards item={item} />
-                  </Col>
-                ))}
+                {segmentValue === "list" ? (
+                  <>
+                    <ArxiveList data={data} />
+                  </>
+                ) : (
+                  <>
+                    {data.map((item) => (
+                      <Col span={8} key={item.id}>
+                        <ArxiveCards item={item} />
+                      </Col>
+                    ))}
+                  </>
+                )}
               </>
             )}
           </>

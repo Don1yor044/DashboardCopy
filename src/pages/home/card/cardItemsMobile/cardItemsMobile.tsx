@@ -1,6 +1,6 @@
 import { Col, Row } from "antd";
-import { priceFormatter } from "../../../components/priceFormat/priceFormat";
-import { IDashboards } from "../../../types/types";
+import { IDashboards } from "../../../../types/types";
+import { priceFormatter } from "../../../../components";
 
 export const CardItemsMobile = ({
   dataCourse,

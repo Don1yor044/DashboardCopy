@@ -1,5 +1,5 @@
 import { Dispatch, SetStateAction } from "react";
-import { Cards } from "./cards/cards";
+import { DashboardItems } from "./dashboardItems/dashboardItems";
 
 export const Home = ({
   setTotalPaymentFee,
@@ -12,7 +12,7 @@ export const Home = ({
 }) => {
   return (
     <>
-      <Cards
+      <DashboardItems
         setTotalPaymentFee={setTotalPaymentFee}
         setTotalPrice={setTotalPrice}
         residual={residual}

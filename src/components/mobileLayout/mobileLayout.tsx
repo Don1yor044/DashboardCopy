@@ -26,7 +26,7 @@ export const MobileLayout = () => {
         </div>
         <div
           className={`flex flex-col items-center justify-center rounded-lg p-2 w-20 cursor-pointer ${getActiveClass(
-            ["/filials"]
+            ["/filials", "/discounted"]
           )}`}
           onClick={() => navigate("/filials")}
         >
@@ -50,6 +50,15 @@ export const MobileLayout = () => {
         >
           <RiBuilding4Line size={23} />
           <div className="mt-2">Postomat</div>
+        </div>{" "}
+        <div
+          className={`flex flex-col items-center justify-center rounded-lg p-2 w-20 cursor-pointer ${getActiveClass(
+            ["/payme"]
+          )}`}
+          onClick={() => navigate("/payme")}
+        >
+          <RiBuilding4Line size={23} />
+          <div className="mt-2">Payme</div>
         </div>
       </div>
     </div>
