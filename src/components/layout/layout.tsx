@@ -10,7 +10,7 @@ import { MobileLayout } from "../mobileLayout/mobileLayout";
 import { MobileTopBar } from "../mobileTopBar";
 import { BsWallet } from "react-icons/bs";
 import { LogOutButton } from "../logOutButton";
-import { TbLogout2 } from "react-icons/tb";
+import { TbLogout2, TbReportAnalytics } from "react-icons/tb";
 
 const { Sider, Content } = AntLayout;
 
@@ -57,6 +57,10 @@ export const Layout = ({
       setSelectedKey("3");
     } else if (path === "/payme") {
       setSelectedKey("6");
+    } else if (path === "/report") {
+      setSelectedKey("7");
+    } else if (path === "/callCenter") {
+      setSelectedKey("8");
     }
   }, [location]);
 
@@ -85,7 +89,7 @@ export const Layout = ({
           </Typography>
         </div>
         <Menu
-          className="mt-20 bg-[#FAFBFF] space-y-10"
+          className="mt-12 bg-[#FAFBFF] space-y-8"
           mode="inline"
           selectedKeys={[selectedKey]}
           items={[
@@ -96,6 +100,16 @@ export const Layout = ({
               onClick: () => navigate("/dashboard"),
               className:
                 selectedKey === "1"
+                  ? "!text-[#FE5222] font-medium text-[25px] !bg-transparent"
+                  : "font-medium text-[25px] !text-[#797979]",
+            },
+            {
+              key: "2",
+              icon: <RiHome6Line size={27} />,
+              label: "CallCenter",
+              onClick: () => navigate("/callCenter"),
+              className:
+                selectedKey === "2"
                   ? "!text-[#FE5222] font-medium text-[25px] !bg-transparent"
                   : "font-medium text-[25px] !text-[#797979]",
             },
@@ -113,16 +127,20 @@ export const Layout = ({
                   },
                 ]
               : []),
-            {
-              key: "3",
-              icon: <RiBuilding4Line size={27} />,
-              label: "Postomat",
-              onClick: () => navigate("/postomat"),
-              className:
-                selectedKey === "3"
-                  ? "!text-[#FE5222] font-medium text-[25px] !bg-transparent"
-                  : "font-medium text-[25px] !text-[#797979]",
-            },
+            ...(UserRole !== "30"
+              ? [
+                  {
+                    key: "3",
+                    icon: <RiBuilding4Line size={27} />,
+                    label: "Postomat",
+                    onClick: () => navigate("/postomat"),
+                    className:
+                      selectedKey === "3"
+                        ? "!text-[#FE5222] font-medium text-[25px] !bg-transparent"
+                        : "font-medium text-[25px] !text-[#797979]",
+                  },
+                ]
+              : []),
             {
               key: "4",
               icon: <RiHistoryFill size={27} />,
@@ -143,14 +161,42 @@ export const Layout = ({
                   ? "!text-[#FE5222] font-medium text-[25px] !bg-transparent"
                   : "font-medium text-[25px] !text-[#797979]",
             },
+            ...(UserRole !== "30"
+              ? [
+                  {
+                    key: "6",
+                    icon: <BsWallet size={24} />,
+                    label: "Payme",
+                    onClick: () => navigate("/payme"),
+                    className:
+                      selectedKey === "6"
+                        ? "!text-[#FE5222] font-medium text-[25px] !bg-transparent "
+                        : "font-medium text-[25px] !text-[#797979]",
+                  },
+                ]
+              : []),
+            ...(UserRole !== "30"
+              ? [
+                  {
+                    key: "7",
+                    icon: <TbReportAnalytics size={28} />,
+                    label: "Report",
+                    onClick: () => navigate("/report"),
+                    className:
+                      selectedKey === "7"
+                        ? "!text-[#FE5222] font-medium text-[25px] !bg-transparent "
+                        : "font-medium text-[25px] !text-[#797979]",
+                  },
+                ]
+              : []),
             {
-              key: "6",
-              icon: <BsWallet size={25} />,
-              label: "Payme",
-              onClick: () => navigate("/payme"),
+              key: "8",
+              icon: <LuFilter size={25} />,
+              label: "Call center",
+              onClick: () => navigate("/callCenter"),
               className:
-                selectedKey === "6"
-                  ? "!text-[#FE5222] font-medium text-[25px] !bg-transparent "
+                selectedKey === "8"
+                  ? "!text-[#FE5222] font-medium text-[25px] !bg-transparent"
                   : "font-medium text-[25px] !text-[#797979]",
             },
           ]}

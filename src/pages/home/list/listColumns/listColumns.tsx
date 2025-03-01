@@ -3,6 +3,7 @@ import { IDashboards } from "../../../../types/types";
 import { BsCheckLg } from "react-icons/bs";
 import { CiEdit } from "react-icons/ci";
 import { priceFormatter } from "../../../../components";
+const UserRole = localStorage.getItem("Role");
 
 export const ListColumns = (
   isSelected: number[],
@@ -42,6 +43,7 @@ export const ListColumns = (
             onClick={() => {
               showDrawer(record);
             }}
+            disabled={UserRole === "30" && true}
           >
             <CiEdit size={22} />
           </Button>
@@ -179,12 +181,23 @@ export const ListColumns = (
     },
     {
       title: (
+        <span className="text-lg font-semibold text-gray-500">
+          Track Number
+        </span>
+      ),
+      dataIndex: "express_num",
+      key: "express_num",
+      className: "text-base border-e w-[150px]",
+    },
+    {
+      title: (
         <span className="text-lg font-semibold text-gray-500">Manzil</span>
       ),
       dataIndex: "address",
       key: "address",
       className: "text-base border-e",
     },
+
     {
       title: (
         <span className="text-lg font-semibold text-gray-500">Shahar</span>
@@ -229,16 +242,7 @@ export const ListColumns = (
         </div>
       ),
     },
-    {
-      title: (
-        <span className="text-lg font-semibold text-gray-500">
-          Track Number
-        </span>
-      ),
-      dataIndex: "express_num",
-      key: "express_num",
-      className: "text-base border-e w-[150px]",
-    },
+
     {
       title: (
         <span className="text-lg font-semibold text-gray-500">

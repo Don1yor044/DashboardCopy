@@ -1,10 +1,13 @@
-import { Button, Col, Empty, Row } from "antd";
+import { Button, Col, Empty, Grid, Row } from "antd";
 import { PostomatDepartmentsCards } from "../postomatDepartmentsCards/postomatDepartmentsCards";
 import { useEffect, useState } from "react";
 import { IoMdArrowRoundBack } from "react-icons/io";
 import { useNavigate } from "react-router-dom";
 import { Loader } from "../../../components";
 import baseURL from "../../../utils/api";
+
+const { useBreakpoint } = Grid;
+
 export const PostomatDepartments = () => {
   const [activeBlock, setActiveBlock] = useState("01");
   const [originalDataCourse, setOriginalDataCourse] = useState([]);
@@ -12,6 +15,7 @@ export const PostomatDepartments = () => {
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
 
+  const screens = useBreakpoint();
   useEffect(() => {
     fetchData();
   }, []);
@@ -86,18 +90,23 @@ export const PostomatDepartments = () => {
           <Loader />
         </div>
       ) : dataCourse.length > 0 ? (
-        <Row
-          gutter={[0, 5]}
-          className="mt-0 md:mt-10 mb-40 md:mb-0 md:flex justify-center"
-        >
-          {dataCourse.map((item, index) => (
-            <Col xl={6} span={12} key={index}>
-              <div className="p-1">
-                <PostomatDepartmentsCards item={item} dataCourse={dataCourse} />
-              </div>
-            </Col>
-          ))}
-        </Row>
+        <div className="px-1 md:px-5">
+          <Row
+            gutter={screens.md ? [50, 10] : [0, 10]}
+            className="mt-0 md:mt-10 mb-40 md:mb-0 md:flex justify-center"
+          >
+            {dataCourse.map((item, index) => (
+              <Col span={12} md={10} key={index}>
+                <div className="p-1">
+                  <PostomatDepartmentsCards
+                    item={item}
+                    dataCourse={dataCourse}
+                  />
+                </div>
+              </Col>
+            ))}
+          </Row>
+        </div>
       ) : (
         <div className="flex justify-center p-8">
           <div className="mt-10 w-full ">

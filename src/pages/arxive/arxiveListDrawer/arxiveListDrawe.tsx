@@ -10,18 +10,18 @@ import {
   Typography,
 } from "antd";
 import { useEffect, useState } from "react";
-import { IDashboards } from "../../../../types/types";
 import TextArea from "antd/es/input/TextArea";
-import { priceFormatter, SendButton } from "../../../../components";
-import {
-  errorToast,
-  successToast,
-  warningToast,
-} from "../../../../components/toastManager";
-import baseURL from "../../../../utils/api";
 import { toast } from "react-toastify";
+import { IDashboards } from "../../../types/types";
+import baseURL from "../../../utils/api";
+import { priceFormatter, SendButton } from "../../../components";
+import {
+  successToast,
+  errorToast,
+  warningToast,
+} from "../../../components/toastManager";
 
-export const ListDrawer = ({
+export const ArxiveListDrawe = ({
   open,
   onClose,
   selectedUser,
@@ -66,8 +66,6 @@ export const ListDrawer = ({
     weight: number;
     comment: string;
   }) => {
-    console.log("onfishish ishladi");
-
     const token = localStorage.getItem("token");
     if (!token) {
       console.error("Token is missing or invalid");
@@ -263,8 +261,15 @@ export const ListDrawer = ({
             </Typography>
           </Checkbox>
         </div>
+        {/* <Button
+          type="primary"
+          htmlType="submit"
+          className="bg-[#FE5222] font-bold p-4 hover:!bg-[#ff6c43]"
+        >
+          Olib ketish
+        </Button> */}
         <Button type="text" htmlType="submit" className="!p-0">
-          <SendButton text="Olib ketish" />
+          <SendButton text="O'zgartirish" />
         </Button>
       </Form>
     </Drawer>

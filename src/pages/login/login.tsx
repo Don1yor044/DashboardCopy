@@ -77,7 +77,7 @@ export const LoginPage = () => {
               src="/abuSahiy.png"
               alt="abuSahiy"
               preview={false}
-              className="mb-4"
+              className="mb-4 max-h-48"
             />
           </div>
           <Form
@@ -99,7 +99,7 @@ export const LoginPage = () => {
               <Input
                 prefix={<UserOutlined />}
                 placeholder="Iltimos Telefon Nomerizni kiritng"
-                className="rounded-lg"
+                className="rounded-lg py-2"
               />
             </Form.Item>
 
@@ -112,7 +112,7 @@ export const LoginPage = () => {
               <Input.Password
                 prefix={<LockOutlined />}
                 placeholder="Iltimos kodingizni kiritng"
-                className="rounded-lg"
+                className="rounded-lg py-2"
               />
             </Form.Item>
             <Form.Item>

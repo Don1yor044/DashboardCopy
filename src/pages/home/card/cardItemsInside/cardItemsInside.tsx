@@ -169,7 +169,6 @@ export const CardItemsInside = ({
               {item.paid_by_payme === null || item.paid_by_payme === 0
                 ? "—"
                 : `${priceFormatter(Number(item.paid_by_payme))} so'm`}
-
               <Button
                 type="primary"
                 onClick={() => openModal(item, "payme")}

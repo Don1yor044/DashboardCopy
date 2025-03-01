@@ -1,6 +1,8 @@
+import { BsWallet } from "react-icons/bs";
 import { LuFilter } from "react-icons/lu";
 import { PiBuildings } from "react-icons/pi";
 import { RiBuilding4Line, RiHome6Line } from "react-icons/ri";
+import { TbReportAnalytics } from "react-icons/tb";
 import { useLocation, useNavigate } from "react-router-dom";
 
 export const MobileLayout = () => {
@@ -21,7 +23,7 @@ export const MobileLayout = () => {
           )}`}
           onClick={() => navigate("/dashboard")}
         >
-          <RiHome6Line size={23} />
+          <RiHome6Line size={24} />
           <div className="mt-2">Dashboard</div>
         </div>
         <div
@@ -44,7 +46,7 @@ export const MobileLayout = () => {
         </div>
         <div
           className={`flex flex-col items-center justify-center rounded-lg p-2 w-20 cursor-pointer ${getActiveClass(
-            ["/postomat", "/departments"]
+            ["/postomat", "/departments", "/DepartmentsCardsProduct"]
           )}`}
           onClick={() => navigate("/postomat")}
         >
@@ -57,8 +59,17 @@ export const MobileLayout = () => {
           )}`}
           onClick={() => navigate("/payme")}
         >
-          <RiBuilding4Line size={23} />
+          <BsWallet size={21} />
           <div className="mt-2">Payme</div>
+        </div>
+        <div
+          className={`flex flex-col items-center justify-center rounded-lg p-2 w-20 cursor-pointer ${getActiveClass(
+            ["/report"]
+          )}`}
+          onClick={() => navigate("/report")}
+        >
+          <TbReportAnalytics size={25} />
+          <div className="mt-2">Report</div>
         </div>
       </div>
     </div>

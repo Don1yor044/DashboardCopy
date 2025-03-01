@@ -3,6 +3,7 @@ import { BsCurrencyDollar } from "react-icons/bs";
 import { HiOutlineCreditCard } from "react-icons/hi";
 import { MdOutlineDiscount } from "react-icons/md";
 import { priceFormatter } from "../../../components/priceFormat/priceFormat";
+import { SendButton } from "../../../components";
 
 export const SearchPaymeInputItems = ({
   handleSelectAll,
@@ -81,21 +82,21 @@ export const SearchPaymeInputItems = ({
             </Typography>
           </div>
         </div>
-        <div className="flex gap-3">
+        <div className="flex gap-2 items-center">
           <Button
             onClick={handleSelectAll}
-            className="text-sm bg-green-500 p-4 text-white"
+            className="text-base font-semibold bg-green-500 p-4  text-white !rounded-xl"
           >
             All
           </Button>
           <Button
-            type="primary"
+            type="text"
+            className="!p-0"
             onClick={showModal}
-            className="text-sm p-2"
             disabled={UserRole === "30" && true}
           >
-            Olib ketish
-          </Button>{" "}
+            <SendButton text="Olib ketish" />
+          </Button>
         </div>
       </div>
     </>

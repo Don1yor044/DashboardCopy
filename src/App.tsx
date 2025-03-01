@@ -9,13 +9,15 @@ import {
   LoginPage,
   Postomat,
   PostomatDepartments,
+  Report,
+  CallCenter,
 } from "./pages";
 import { ErrorBoundarayContainer, Layout, NotFound } from "./components";
 import { Provider } from "mobx-react";
 import { useEffect, useState } from "react";
 import { ToastContainer } from "react-toastify";
 import searchStore from "./store/searchStore";
-
+import { DepartmentsCardsProduct } from "./pages/postomat/departmentsCardsProduct/departmentsCardsProduct";
 const App = () => {
   const [totalPaymentFee, setTotalPaymentFee] = useState(0);
   const [totalPrice, setTotalPrice] = useState(0);
@@ -58,6 +60,12 @@ const App = () => {
               <Route path="/postomat" element={<Postomat />} />{" "}
               <Route path="/departments" element={<PostomatDepartments />} />
               <Route path="/payme" element={<Payme />} />
+              <Route path="/report" element={<Report />} />
+              <Route
+                path="/DepartmentsCardsProduct/:id"
+                element={<DepartmentsCardsProduct />}
+              />
+              <Route path="/callCenter" element={<CallCenter />} />
             </Route>
           </Routes>
         </Router>

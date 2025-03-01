@@ -50,6 +50,7 @@ export const CardItems = observer(
       toast.warning(`To'lanadigan summa miqdori: ${data} so'm `, {
         className: "text-lg w-[400px]",
       });
+
     const handleLocalSave = (id: number, values: Partial<IDashboards>) => {
       setLocalData((prevData) =>
         prevData.map((item) => (item.id === id ? { ...item, ...values } : item))

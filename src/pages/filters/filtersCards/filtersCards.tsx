@@ -27,7 +27,7 @@ export const FiltersCards = ({ data }: { data: IfiltersData[] }) => {
               <div className="bg-white rounded-xl border-2">
                 <div className="rounded-lg shadow-[0px_0px_30px_-10px_rgba(34,60,80,0.38)] relative">
                   <div className="flex gap-2 w-full">
-                    <div className="w-[35%] border-e text-base bg-yellow-500 rounded-s-lg p-3 text-white space-y-2">
+                    <div className="w-[35%] border-e text-base bg-[#FE5222] rounded-s-lg p-3 text-white space-y-2">
                       <div className="border-b">ID:</div>
                       <div className="border-b">Ism:</div>
                       {item.phone !== undefined && (

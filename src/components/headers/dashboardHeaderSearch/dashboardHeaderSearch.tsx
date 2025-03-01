@@ -23,9 +23,9 @@ export const DashboardHeaderSearch = observer(
       <>
         <Header
           style={{ padding: "0px 40px 15px 15px", background: "#FAFBFF " }}
-          className="h-28 items-end justify-between gap-5 hidden md:flex"
+          className="h-28 items-end justify-between gap-4 hidden md:flex"
         >
-          <div className="bg-white flex gap-2 items-center rounded-full w-full mb-1 h-14 px-5 shadow-[0px_0px_30px_-10px_rgba(34,60,80,0.38)]">
+          <div className="bg-white flex gap-2 items-center rounded-full w-full h-14 px-5 shadow-[0px_0px_30px_-10px_rgba(34,60,80,0.38)]">
             <LuSearch size={25} color="#FE5222" />
             <Input
               allowClear
@@ -34,7 +34,7 @@ export const DashboardHeaderSearch = observer(
               onChange={(e) => handleChange(e.target.value)}
               className="border-none text-xl"
             />
-          </div>
+          </div>{" "}
           <div className="bg-white rounded-2xl p-3 px-4 text-lg font-bold w-full flex gap-10 h-14 shadow-[0px_0px_30px_-10px_rgba(34,60,80,0.38)]">
             <div>Kargo to’lovlar </div>
             <div className="border-s ps-5 ">

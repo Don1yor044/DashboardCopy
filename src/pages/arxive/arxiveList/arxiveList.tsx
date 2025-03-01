@@ -1,8 +1,25 @@
-import { Table } from "antd";
+import { Button, Table } from "antd";
 import { IDashboards } from "../../../types/types";
 import { priceFormatter } from "../../../components";
+import { CiEdit } from "react-icons/ci";
+import { ArxiveListDrawe } from "../arxiveListDrawer/arxiveListDrawe";
+import { useState } from "react";
 
-export const ArxiveList = ({ data }: { data: IDashboards[] }) => {
+export const ArxiveList = ({
+  data,
+  fetchData,
+}: {
+  data: IDashboards[];
+  fetchData: (
+    page?: number,
+    startDate?: string,
+    endDate?: string
+  ) => Promise<void>;
+}) => {
+  const [selectedUser, setSelectedUser] = useState<IDashboards | null>(null);
+  const [open, setOpen] = useState(false);
+  const UserRole = localStorage.getItem("Role");
+
   const columns = [
     {
       title: "#",
@@ -10,6 +27,24 @@ export const ArxiveList = ({ data }: { data: IDashboards[] }) => {
       key: "index",
       className: "text-base border-e w-10",
       render: (_: string, __: IDashboards, index: number) => index + 1,
+    },
+    {
+      title: "Action",
+      className: "text-base border-e !w-10  !p-3",
+      key: "dataCourse",
+      render: (record: IDashboards) => (
+        <div className="flex gap-2 m-0 justify-center">
+          <Button
+            className="p-1"
+            onClick={() => {
+              showDrawer(record);
+            }}
+            disabled={UserRole === "30" && true}
+          >
+            <CiEdit size={22} />
+          </Button>
+        </div>
+      ),
     },
     {
       title: (
@@ -207,6 +242,15 @@ export const ArxiveList = ({ data }: { data: IDashboards[] }) => {
       className: "text-base border-e w-[100px] text-center",
     },
   ];
+  const showDrawer = (record: IDashboards) => {
+    setSelectedUser(record);
+    setOpen(true);
+  };
+
+  const onClose = () => {
+    setOpen(false);
+  };
+
   return (
     <div className="overflow-auto shadow-[0px_0px_30px_-10px_rgba(34,60,80,0.38)] rounded-t-xl mx-2">
       <Table
@@ -219,6 +263,12 @@ export const ArxiveList = ({ data }: { data: IDashboards[] }) => {
         pagination={false}
         className=""
         scroll={{ x: 3100 }}
+      />
+      <ArxiveListDrawe
+        open={open}
+        onClose={onClose}
+        selectedUser={selectedUser}
+        fetchData={fetchData}
       />
     </div>
   );

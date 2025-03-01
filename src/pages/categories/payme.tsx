@@ -1,10 +1,10 @@
-import { PaymeHeader } from "./paymeHeader/paymeHeader";
+// import { PaymeHeader } from "./paymeHeader/paymeHeader";
 import { PaymeTable } from "./paymeTable/paymeTable";
 
 export const Payme = () => {
   return (
     <>
-      <PaymeHeader />
+      {/* <PaymeHeader /> */}
       <div className="mt-10">
         <PaymeTable />
       </div>

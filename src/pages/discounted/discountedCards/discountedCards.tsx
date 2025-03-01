@@ -5,7 +5,7 @@ import { kgFormatter } from "../../../components";
 
 export const DiscountedCards = ({ data }: { data: IDashboards[] }) => {
   return (
-    <>
+    <div className="px-2">
       <Row gutter={[20, 10]} className="mt-10 mb-32 md:mb-0">
         {data.map((item, index) => (
           <Col xl={8} span={24} key={index}>
@@ -63,6 +63,6 @@ export const DiscountedCards = ({ data }: { data: IDashboards[] }) => {
           </Col>
         ))}
       </Row>
-    </>
+    </div>
   );
 };

@@ -49,9 +49,9 @@ export const Arxive = observer(() => {
   }, [search, currentPage]);
 
   const fetchData = async (
-    page: number,
-    startDate: string,
-    endDate: string
+    page?: number,
+    startDate?: string,
+    endDate?: string
   ) => {
     setIsloading(true);
     const token = localStorage.getItem("token");
@@ -81,11 +81,9 @@ export const Arxive = observer(() => {
           }
         );
       }
-
       console.log(res.data.data, "Arxive Data");
       if (res?.data?.data.data?.dashboards) {
         const dashboards = res.data.data.data?.dashboards;
-
         setData(Array.isArray(dashboards) ? dashboards : []);
         setTotalItems(res.data.data.total_pages);
       } else {
@@ -105,7 +103,7 @@ export const Arxive = observer(() => {
 
   return (
     <>
-      <div className="flex justify-between items-center mb-5 ">
+      <div className="flex justify-between items-center mb-5">
         <div>
           <RangePicker
             value={dates}
@@ -150,7 +148,7 @@ export const Arxive = observer(() => {
               <>
                 {segmentValue === "list" ? (
                   <>
-                    <ArxiveList data={data} />
+                    <ArxiveList data={data} fetchData={fetchData} />
                   </>
                 ) : (
                   <>
@@ -166,7 +164,6 @@ export const Arxive = observer(() => {
           </>
         )}
       </Row>
-
       <div className="flex justify-center mt-5" css={paginationStyle}>
         <Pagination
           current={currentPage}

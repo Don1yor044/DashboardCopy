@@ -8,3 +8,4 @@ export * from "./mobileLayout";
 export * from "./mobileTopBar";
 export * from "./loading";
 export * from "./logOutButton";
+export * from "./sendAnimationButton";

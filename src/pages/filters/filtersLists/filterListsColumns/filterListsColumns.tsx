@@ -3,6 +3,7 @@ import { IfiltersData } from "../../../../types/types";
 import { CiEdit } from "react-icons/ci";
 import { Button } from "antd";
 import { Dispatch, SetStateAction } from "react";
+const UserRole = localStorage.getItem("Role");
 
 export const FiltersListsColumns = (
   activeButton: string,
@@ -10,8 +11,8 @@ export const FiltersListsColumns = (
   setItemId: Dispatch<SetStateAction<string | number | null>>
 ): ColumnProps<IfiltersData>[] => {
   const handleButtonClick = (userId: string | number) => {
-    setItemId(userId); // Set the selected user_id
-    setOpen(true); // Open the drawer
+    setItemId(userId);
+    setOpen(true);
   };
   if (
     activeButton === "region" ||
@@ -107,7 +108,8 @@ export const FiltersListsColumns = (
         render: (_: string, record: IfiltersData) => (
           <Button
             className="bg-[#1677ff] text-white rounded-lg p-2 cursor-pointer"
-            onClick={() => handleButtonClick(record.user_id)} // Pass the user_id when button is clicked
+            onClick={() => handleButtonClick(record.user_id)}
+            disabled={UserRole === "30" && true}
           >
             <CiEdit size={23} />
           </Button>

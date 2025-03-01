@@ -7,6 +7,8 @@ import { useLocation } from "react-router-dom";
 
 export const MobileTopBar = observer(() => {
   const [search, setSearch] = useState<string>("");
+  const location = useLocation();
+  const type = location.state?.type;
 
   const handleClick = () => {
     searchStore.setSearchDashboard(search);
@@ -18,7 +20,6 @@ export const MobileTopBar = observer(() => {
     setSearch("");
     searchStore.setSearchDashboard("");
   };
-  const location = useLocation();
 
   const handleKeyPress = (event: React.KeyboardEvent) => {
     if (event.key === "Enter") {
@@ -29,7 +30,7 @@ export const MobileTopBar = observer(() => {
     <div className="pt-safe rounded-b-3xl px-3 bg-gradient-to-r from-[#FF5024] to-[#FE914E] max-h-16">
       {location.pathname === "/dashboard" ? (
         <>
-          <div className="flex gap-4 items-center">
+          <div className="flex gap-4 items-center pt-1">
             <img
               src="./Abu Sahiy Logo.png"
               alt="abuSahiy"
@@ -62,6 +63,24 @@ export const MobileTopBar = observer(() => {
             {location.pathname === "/filters" ? <>Filter</> : <></>}
             {location.pathname === "/postomat" ? <>Postomat</> : <></>}
             {location.pathname === "/payme" ? <>Payme</> : <></>}
+            {location.pathname === "/report" ? <>Report</> : <></>}
+            {location.pathname === "/discounted" ? (
+              <>
+                {type === "card"
+                  ? "Karta orqali to'varlar"
+                  : type === "payme"
+                  ? "Payme orqali to'lovlar"
+                  : type === "cash"
+                  ? "Naqt orqali to'lovlar"
+                  : type === "discounted"
+                  ? "Chegirma orqali to'lovlar"
+                  : type === "delivered"
+                  ? "Yetkazilgan tovarlar"
+                  : ""}
+              </>
+            ) : (
+              <></>
+            )}
           </Typography>
         </div>
       )}
