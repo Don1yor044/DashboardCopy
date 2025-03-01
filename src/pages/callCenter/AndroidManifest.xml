@@ -7,5 +7,5 @@
         android:host="app.abusahiy.uz" />
     <data
         android:scheme="https"
-        android:host="abusahiy-alternate.app.link" />
+        android:host="https://app.abusahiy.uz/GoodsDetailView/" />
 </intent-filter>
