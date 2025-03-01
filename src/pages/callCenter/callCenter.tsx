@@ -138,17 +138,8 @@ export const CallCenter = () => {
     }
   };
   const handleAppOpen = () => {
-    const appUrl = "myapp://open"; // Ilovani ochish uchun custom URL
-    // const playStoreUrl =
-    //   "https://play.google.com/store/apps/details?id=com.abusahiy.shop&hl=ru"; // Google Play Market havolasi
-
-    // Ilovani ochishga urinish
+    const appUrl = "https://app.abusahiy.uz";
     window.location.href = appUrl;
-
-    // Agar ilova ochilmasa, 1 sekund kutib, Google Play-ga yo'naltirish
-    // setTimeout(() => {
-    //   window.location.href = playStoreUrl;
-    // }, 1000); // 1 sekund kutish
   };
 
   const handleIos = () => {
