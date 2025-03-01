@@ -37,9 +37,9 @@ export const MobileLayout = () => {
         </div>
         <div
           className={`flex flex-col items-center justify-center rounded-lg p-2 w-20 cursor-pointer ${getActiveClass(
-            ["/filters"]
+            ["/callCenter"]
           )}`}
-          onClick={() => navigate("/filters")}
+          onClick={() => navigate("/callCenter")}
         >
           <LuFilter size={23} />
           <div className="mt-2">Filter</div>

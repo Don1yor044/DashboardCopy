@@ -103,16 +103,7 @@ export const Layout = ({
                   ? "!text-[#FE5222] font-medium text-[25px] !bg-transparent"
                   : "font-medium text-[25px] !text-[#797979]",
             },
-            {
-              key: "2",
-              icon: <RiHome6Line size={27} />,
-              label: "CallCenter",
-              onClick: () => navigate("/callCenter"),
-              className:
-                selectedKey === "2"
-                  ? "!text-[#FE5222] font-medium text-[25px] !bg-transparent"
-                  : "font-medium text-[25px] !text-[#797979]",
-            },
+
             ...(UserRole !== "30"
               ? [
                   {
