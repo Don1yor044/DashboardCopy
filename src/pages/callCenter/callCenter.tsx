@@ -138,7 +138,8 @@ export const CallCenter = () => {
     }
   };
   const handleAppOpen = () => {
-    const appUrl = "https://app.abusahiy.uz";
+    const appUrl =
+      "https://app.abusahiy.uz/GoodsDetailView/https://detail.1688.com/offer/662702561373.html";
     window.location.href = appUrl;
   };
 
