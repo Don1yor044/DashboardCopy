@@ -7,5 +7,5 @@
         android:host="app.abusahiy.uz" />
     <data
         android:scheme="https"
-        android:host="https://app.abusahiy.uz/GoodsDetailView/https://detail.1688.com/offer/662702561373.html" />
+        android:host="app.abusahiy.uz/GoodsDetailView/https://detail.1688.com/offer/662702561373.html" />
 </intent-filter>
